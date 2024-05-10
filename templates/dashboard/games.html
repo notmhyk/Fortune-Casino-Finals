@@ -1,0 +1,60 @@
+{% extends "dashboard/base-dashboard.html" %}
+
+{% block title %}Games{% endblock %}
+
+{% block body %}
+<section id="play-game-section">
+    <div class="games-container">
+        <div class="containersss"><img src="static/images/play-game-poster.png" alt=""></div>
+    </div>
+</section>
+
+<div class="below-container">
+    <span class="text">Play the game, don't let the game play you</span>
+</div>
+
+<section id="games-menu">
+    <div class="top-container"><span class="text">TOP GAMES</span></div>
+    <div class="games-wrapper">
+        <div class="first-container">
+            <img src="static/images/roll-poster.png" alt="Roll em' Die Image" onclick="window.location.href='#'">
+        </div>
+        <div class="second-container">
+            <img src="static/images/blackjack-poster.png" alt="Blackjack Image" onclick="window.location.href='#'">
+        </div>
+        <div class="third-container">
+            <img src="static/images/spin-the-wheel-poster.png" alt="Spin the Wheel Image" onclick="window.location.href='#'">
+        </div>
+        <div class="fourth-container">
+            <img src="static/images/slot-machine-poster.png" alt="Slot Machine Image" onclick="window.location.href='#'">
+        </div>
+        <div class="fifth-container">
+            <img src="static/images/color-poster.png" alt="Color Game Image" onclick="window.location.href='#'">
+        </div>
+        <div class="sixth-container">
+            <img src="static/images/sic-bo-poster.png" alt="Color Game Image" onclick="window.location.href='#'">
+        </div>
+    </div>
+</section>
+
+<section id="other-games">
+    <div class="other-game-top-container"><span class="text">OTHER GAMES</span></div>
+    <div class="other-games-wrapper">
+        <div class="seventh-container">
+            <img src="static/images/higher-lower-poster.png" alt="">
+        </div>
+        <div class="eighth-container">
+            <img src="static/images/beat-the-dealer-poster.png" alt="">
+        </div>
+        <div class="nineth-container">
+            <img src="static/images/coin-flip-poster.png" alt="">
+        </div>
+        <div class="tenth-container">
+            <img src="static/images/dont-let-them-hang-the-dealer-poster.png" alt="">
+        </div>
+        <div class="vip-games-container">
+            <img src="static/images/vip-10-games-poster.png" alt="">
+        </div>
+    </div>
+</section>
+{% endblock %}

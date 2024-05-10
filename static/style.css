@@ -1,0 +1,849 @@
+/* <------------------------ LANDING-PAGE --------------------------> */
+.navbar-landing {
+    display: flex;
+    padding: 3px;
+    align-items: center;
+    background-color: orange;
+    font-weight: 600;
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    z-index: 1000;
+}
+  
+.nav-landing {
+flex: 1;
+    position: relative;
+    text-align: right;
+}
+
+.nav-landing ul {
+    display: inline-block;
+    list-style-type: none;
+}
+
+.nav-landing ul li {
+    display: inline-block;
+    margin-right: 5rem;
+}
+
+.nav-landing ul li a {
+    text-decoration: none;
+    color:  #000;
+}
+
+.logo-landing {
+    padding: 5px 0 0 40px;
+    cursor: pointer;
+}
+
+.logo-landing img {
+    width: 100%;
+}
+
+/* <------------------ FIRST-SECTION ---------------> */
+
+#home {
+    width: 100%;
+    height: 100vh;
+    background-image: url(images/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+  
+  
+  
+.home-box h1{
+    text-align: left;
+    color: orange;
+    padding: 60px;
+    font-size: 4rem;
+}
+  
+.home-box {
+    padding-right: 2rem;
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    
+}
+  
+.home-btn {
+    /* width: 10rem; */
+    padding: 2rem 5rem 2rem 5rem;
+    border-radius: 50px;
+    background-color: orange;
+    border: none;
+    outline: none;
+    margin-left: 5rem;
+    margin-bottom: 5rem;
+    font-weight: 700;
+    font-size: larger;
+    cursor: pointer;
+}
+  
+/* <------------------- SECOND-SECTION -----------------> */
+  
+#promos {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+  
+.deal-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; 
+    flex-wrap: wrap;
+    margin: 2rem auto; 
+    max-width: 150rem; 
+}
+  
+.deal1, .deal2, .deal3 {
+    flex-basis: calc(33.33% - 2rem); 
+    padding: 1rem 2rem 5rem 2rem;
+    border-radius: 12px;
+    margin: 1rem; 
+    background-color: #fff;
+    border: 1px solid ;
+}
+  
+.deals,
+.payout,
+.win-rate {
+    text-align: center;
+    margin: 1rem 0 1rem 0;
+    white-space: nowrap;
+}
+  
+.deal-btn {
+    margin: 2rem 0 0 0 ;
+    text-align: center;
+}
+.deal-btn a {
+    text-decoration: none;
+    color: black;
+    background-color: orange;
+    padding: 1rem;
+    border-radius: 20px;
+    font-weight: bolder;
+}
+  
+.image img {
+    width: 60%;
+    margin-left: 3rem;
+    white-space: nowrap;
+}
+  
+  
+/* <--------------------THIRD-SECTION & FOURTH-SECTION --------------------> */
+  
+#coins-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+  
+#coins-section h1 {
+    text-align: center;
+    margin: 0;
+    padding: 20px; 
+    color: gold;
+    
+}
+  
+#coins-section{
+    width: 100%;
+    min-height: 100vh;
+    background-image: url(images/sugal2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 20px; 
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+  
+.container-coins-games {
+    position: relative; 
+    width: calc(20% - 40px);
+    margin: 10px;
+    text-align: center; 
+    overflow: hidden; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /
+}
+  
+.container-coins-games img {
+    width: 100%; 
+    border-radius: 20px; 
+    transition: transform 0.3s ease;
+    
+}
+  
+.container-coins-games .label {
+    position: absolute;
+    bottom: 10px; 
+    left: 0;
+    width: 100%; 
+    font-size: 1em; 
+    color: white;
+    background: rgba(0, 0, 0, 0.5); 
+    padding: 5px 0; 
+    transition: background-color 0.3s ease;
+}
+  
+#coins-section .container-coins-games img {
+    border-radius: 20px;
+    max-width: 100%; 
+    max-height: calc((100vh - 60px - 20px) / 2); 
+    height: auto;
+}
+  
+#coins-section > div {
+    justify-content: center; 
+}
+  
+#coins-section .container-coins-games {
+    margin: 10px; 
+    width: calc(20% - 30px); 
+}
+  
+#coins-section .container-coins-games img {
+    max-height: calc((100vh - 40px - 20px) / 2);
+}
+  
+.container-coins-games:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 20px;
+}
+  
+.container-coins-games:hover img {
+    transform: scale(1.1); 
+}
+  
+.container-coins-games:hover .label {
+    color: gold;
+    background-color: rgba(0, 0, 0, 0.7); 
+}
+  
+#games-section h1 {
+    text-align: center;
+    margin: 0;
+    padding: 20px; 
+    color: gold;
+}
+  
+#games-section {
+    width: 100%;
+    min-height: 100vh;
+    /* background-image: url(images/sugal3.jpg); */
+    background-color: #fff;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 20px; 
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+  
+#games-section .container-coins-games img {
+    max-width: 100%; 
+    max-height: calc((100vh - 80px - 40px) / 4); 
+    height: auto;
+}
+  
+#games-section > div {
+    justify-content: center; 
+}
+  
+#games-section .container-coins-games {
+    margin: 5px;
+    width: calc(20% - 40px);
+    height: auto; 
+}
+  
+#games-section .container-coins-games img {
+    max-height: calc((100vh - 80px - 40px) / 4);
+}
+
+/* <------------------------- DASHBOARD -----------------------------> */
+
+
+/* <------------------------- NAVBAR-DASHBOARD ---------------------------> */
+.navbar {
+    display: flex;
+    padding: 3px;
+    align-items: center;
+    background-color: #15181b;
+    font-size: 12px;
+    flex-wrap: wrap;
+}
+  
+nav {
+    flex: 1;
+    position: relative;
+    text-align: left;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+  
+nav ul {
+    display: inline-block;
+    list-style-type: none;
+    margin-left: -6rem;
+}
+  
+nav ul li {
+    display: inline-block;
+    margin-right: 40px;
+    
+}
+  
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+  
+.logo {
+    padding: 5px 0 0 40px;
+    cursor: pointer;
+}
+  
+.logo img {
+    width: 25%;
+}
+  
+.user-container {
+    position: absolute;
+    padding: 0.5rem;
+    display: inline-flex;
+    bottom: -1.2rem;
+    right: 5%;
+}
+  
+.coins-container {
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    padding: 0.1rem 0 0 0.5rem;
+    border-radius: 25px;
+    min-width: 9rem;
+    max-width: calc(100% - 4rem);
+    min-height: 2.8rem;
+    max-height: calc(100% - 1rem);
+    cursor: pointer;
+}
+  
+.notification-container {
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    padding: 0.5rem 0 0 0.5rem;
+    border-radius: 30px;
+    width: 3rem;
+    height: 2.8rem;
+    cursor: pointer;
+}
+  
+.profile-container {
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    padding: 0.5rem 0 0 0.5rem;
+    border-radius: 30px;
+    width: 3rem;
+    height: 2.8rem;
+    cursor: pointer;
+}
+  
+.coins-container,
+.notification-container,
+.profile-container {
+    margin-right: 1rem;
+}
+  
+.notification-container img {
+    margin: -2px 0 0 0;
+    width: 80%;
+}
+  
+.profile-container img {
+    margin: -2px 0 0 0;
+    width: 80%;
+}
+  
+.coins-container img {
+    padding: 2px;
+    width: 20%;
+}
+  
+.coins-container h3 {
+    text-align: center;
+    margin: -2rem 3rem;
+}
+  
+.notification-container h3 {
+    color: red;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+    margin: -2.5rem 0 0 1rem; 
+}
+/* .menu-img {
+    margin-right: 2rem;
+} */
+  
+
+/* <-------------------------- DASHBOARD-MENU ------------------> */
+.dashboard-section {
+    position: relative;
+    width: 100vw;
+    max-width: 100%;
+    background-color: #212529;
+    /* background-color: maroon; */
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-wrap: wrap;
+    height: 100vh;
+    max-height: 90%;
+}
+  
+.dashboard-menu {
+    position: absolute;
+    display: block;
+    background-color: #05c451;
+    padding: 3rem;
+    min-width: 5rem;
+    height: 77.6vh;
+    max-height: 77.6vh;
+    margin: 1.8rem 0 0 1rem;
+    border-radius: 20px;
+}
+  
+.dashboard-events {
+    position: relative;
+    max-width: 85%;
+    background-color: #000;
+    padding: 0.4rem;
+    left: 10rem;
+    min-height: 50%;
+    border-radius: 25px;
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+.dashboard-winnings {
+    position: relative;
+    padding: 2rem;
+    background-color: pink;
+    min-width: 30%;
+    min-height: 19.2%;
+    border-radius: 25px;
+}
+  
+.event-board {
+    position: relative;
+    padding: 2rem;
+    background-color: blue;
+    top: 1px;
+    min-width: 69%;
+    min-height: 19.2rem;
+    border-radius: 25px;
+    margin-right: 0.5rem;
+}
+  
+.dashboard-games {
+    position: relative;
+    padding: 15px;
+    background-color: #0b0e13;
+    top: 0.7rem;
+    left: 10rem;
+    max-width: 85%;
+    min-height: 10rem;
+    margin: 1rem 0 0 0;
+    border-radius: 25px;
+    display: flex;
+}
+  
+.h1-game {
+    position: relative;
+    top: 1rem;
+    left: 10rem;
+    font-size: 3rem;
+    color: #fff;
+}
+  
+.dashboard-games img {
+    position: relative;
+    left: 0.7rem;
+    margin-right: 1rem;
+    border-radius: 15px;
+}
+  
+  
+  
+  /* <------------------- BUY-COINS -----------------> */
+.buy-coins-section {
+    width: 100%;
+    padding: 2rem;
+    background-color: orange;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-height: 1200px;
+}
+.coins-texts {
+    position: relative;
+    min-width: 30%;
+    padding: 1.01rem;
+    min-height: 50%;
+    text-align: left;
+}
+  
+.coins-texts img {
+    position: relative;
+    height: 100%;
+    margin-bottom: -6.6rem;
+    top: 3rem;
+    right: 3.7rem;
+}
+  
+.coins-wrapper {
+    position: relative;
+    max-width: 60%;
+    background-color: #15181b;
+    min-height: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border-radius: 12px;
+    /* margin-top: 4rem; */
+}
+  
+.coins-box {
+    /* padding: 1px; */
+    background-color: #15181b;
+    margin-top: 1rem;
+    width: calc(36.90% - 8rem);
+    box-sizing: border-box; 
+    border-radius: 12px;
+    cursor: pointer;
+}
+  
+.coins-box img {
+    width: 100%;
+    border-radius: 12px;
+}
+  
+.coins-box .label {
+    position: relative;
+    bottom: 2rem; 
+    width: 100%; 
+    font-size: 1em; 
+    color: white;
+    background: rgba(0, 0, 0, 0.5); 
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+  
+.coins-box:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 20px;
+}
+  
+.coins-box:hover img {
+    transform: scale(1.1); 
+}
+  
+.coins-box:hover .label {
+    color: gold;
+    background-color: rgba(0, 0, 0, 0.7); 
+}
+  
+  
+  /* <--------------- POP-UP-COINS ----------------> */
+  
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+}
+  
+.popup-content {
+    display: block;
+    justify-content: center;
+    background-color: #fefefe;
+    text-align: center;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+}
+  
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    right: -0.5rem;
+}
+  
+.popup-content img {
+    margin-bottom: 12px;
+    margin-right: -1rem;
+    border-radius: 12px;
+}
+  
+#amount {
+    margin-bottom: 1rem;
+}
+  
+  
+  /* <------------------ PLAY-GAMES ----------------> */
+  
+  
+#play-game-section {
+    max-width: 100%;
+    padding: 2rem;
+    background-color: maroon;
+    overflow: hidden;
+}
+  
+.games-container {
+    display: flex;
+    padding: 1rem;
+    flex-wrap: wrap;
+    justify-content: center; 
+}
+  
+.containersss {
+    width: 100%; 
+    max-width: 1250px; 
+    height: auto; 
+    border-radius: 10px;
+    overflow: hidden; 
+    text-align: center;
+    margin-bottom: 1rem; 
+}
+  
+.containersss img {
+    border-radius: 12px;
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto;
+}
+  
+.below-container {
+    padding: 2rem 0 2rem;
+    background-color: #15181b;
+    text-align: center;
+    color: #fff;
+}
+  
+.below-container .text {
+    letter-spacing: 2px;
+}
+  
+.top-container {
+    padding: 2rem 0 0 0;
+    background-color: #fff;
+    text-align: center;
+}
+  
+.top-container .text {
+    letter-spacing: 2px;
+    color: #000;
+    font-weight: 800;
+    font-size: 2rem;
+}
+  
+  /* <-------------- GAMES-MENU ---------------> */
+#games-menu {
+    width: 100%;
+    padding: 2rem 2rem 0 2rem;
+    background-color: #fff;
+    max-height: auto;
+}
+  
+.games-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    text-align: center;
+    padding: 2rem 2rem 5rem 1rem;
+    justify-content: center;
+}
+  
+  .first-container,
+.second-container {
+    position: relative;
+    width: 500px; 
+    height: 300px; 
+    border-radius: 20px;
+    margin-top: 1rem;
+}
+  
+  .third-container,
+.fourth-container {
+    position: relative;
+    width: 500px; 
+    height: 300px; 
+    border-radius: 20px;
+}
+  
+  .fifth-container,
+.sixth-container {
+    position: relative;
+    width: 500px; 
+    height: 300px; 
+    border-radius: 20px;
+}
+  
+  .first-container,
+  .third-container,
+.fifth-container {
+    left: 3rem;
+}
+  .second-container,
+  .fourth-container,
+.sixth-container {
+    right: 2rem;
+}
+  
+  
+  .first-container img,
+  .second-container img,
+  .third-container img,
+  .fourth-container img,
+  .fifth-container img,
+.sixth-container img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto;
+    cursor: pointer;
+}
+  
+  .first-container img:hover,
+  .second-container img:hover,
+  .third-container img:hover,
+  .fourth-container img:hover,
+  .fifth-container img:hover,
+.sixth-container img:hover {
+    transform: scale(1.03); 
+} 
+  
+  
+  
+  /* <---------------- OTHER-GAMES-SECTION --------------> */
+#other-games {
+    max-width: 100%;
+    padding: 1rem;
+    height: auto;
+    background-color: #fff;
+    flex-wrap: wrap;
+    
+}
+  
+.other-game-top-container {
+    padding: 0 0 2rem 0;
+    background-color: #fff;
+    text-align: center;
+}
+  
+.other-game-top-container .text {
+    letter-spacing: 2px;
+    color: #000;
+    font-weight: 800;
+    font-size: 2rem;
+}
+  
+.other-games-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    text-align: center;
+    padding: 2rem 2rem 5rem 1rem;
+    justify-content: center;
+}
+  
+  .seventh-container,
+.eighth-container {
+    position: relative;
+    width: 500px; 
+    height: 250px; 
+    margin-bottom: -1rem;
+}
+  
+  .seventh-container,
+.nineth-container {
+    left: 1rem;
+}
+  
+  .eighth-container,
+.tenth-container {
+    left: 1.5rem;
+}
+  
+  .nineth-container,
+.tenth-container {
+    position: relative;
+    width: 500px; 
+    height: 250px; 
+    border-radius: 20px;
+    /* border: solid; */
+}
+  
+.vip-games-container {
+    position: relative;
+    width: 1000px; 
+    height: 250px; 
+    border-radius: 20px;
+    left: 1.3rem;
+    margin-top: -1rem;
+}
+  
+  .seventh-container img,
+  .eighth-container img,
+  .nineth-container img,
+  .tenth-container img,
+.vip-games-container img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 12px;
+}
+  
+  .seventh-container img:hover,
+  .eighth-container img:hover,
+  .nineth-container img:hover,
+  .tenth-container img:hover,
+.vip-games-container img:hover{
+    transform: scale(1.01); 
+} 
+  
+  

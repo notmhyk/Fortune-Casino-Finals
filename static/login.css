@@ -1,0 +1,155 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; 
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('images/zxc.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  height: 100vh;
+}
+
+section {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  gap: 20px; 
+  width: 100%; 
+  margin: 0;
+  padding: 20px;
+  background-color: transparent; 
+}
+
+#SigninContainer {
+  min-width: 300px; 
+  max-width: 400px; 
+  padding: 20px;
+  border: 1px solid #fff; 
+  border-radius: 8px; 
+  background-color: #f0f0f0; 
+  box-shadow: 0 2px 5px rgba(1,0,0,0.5); 
+  text-align: center;
+}
+
+#CreateAccContainer {
+  flex: 1; 
+  min-width: 300px; 
+  max-width: 400px; 
+  /* margin: 10px; */
+  margin-top: 0.5rem;
+  padding: 20px 20px 0 20px;
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  background-color: #ffffff; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+  text-align: center;
+}
+
+.otp-create {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.otp-create input[type="text"] {
+  flex-grow: 1; 
+  margin-right: 10px; 
+}
+
+.otp-create button {
+  flex-shrink: 0; 
+  width: auto; 
+}
+
+#ForgotPasswordContainer{
+  min-width: 300px; 
+  max-width: 400px; 
+  padding: 20px;
+  border: 1px solid #fff; 
+  border-radius: 8px; 
+  background-color: #f0f0f0; 
+  box-shadow: 0 2px 5px rgba(1,0,0,0.5); 
+  text-align: center;
+  }
+
+  #EmailVerificationContainer {
+    flex: 1; 
+  min-width: 300px; 
+  max-width: 400px; 
+  /* margin: 10px; */
+  margin-top: 0.5rem;
+  padding: 20px 20px 0 20px;
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  background-color: #ffffff; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+  text-align: center;
+  }
+
+
+    .otp-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+    
+    .otp-section input[type="text"] {
+      flex-grow: 1; 
+      margin-right: 10px; 
+    }
+    
+    .otp-section button {
+      flex-shrink: 0; 
+      width: auto; 
+    }
+
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+button {
+  display: block;
+  margin-top: 10px;
+  width: calc(100% - 20px); 
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9; 
+  text-align: center;
+}
+
+button {
+  background-color: #4CAF50; 
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+  width: 25rem;
+}
+
+button:hover {
+  opacity: 0.8; 
+}
+
+form {
+  margin-bottom: 20px; 
+}
+
+.hidden {
+  display: none; 
+}
+
+
+
+
+
+

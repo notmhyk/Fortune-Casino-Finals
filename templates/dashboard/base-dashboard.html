@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortune Casino: {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="static/style.css">
+    {% block paypal %}{% endblock %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Montserrat";
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="static/images/fortune's-chip.png" alt="Logo" onclick="window.location.href='/dashboard'">
+            </div>
+            <nav>
+                <ul id="menuItems">
+                    <li><a href="/dashboard">HOME</a></li>
+                    <li><a href="">PROMOTIONS</a></li>
+                    <li><a href="">LOTTERY</a></li>
+                    <li><a href="/coins">BUY COINS</a></li>
+                    <li><a href="/games">GAMES</a></li>
+                    <div class="user-container">
+                        <div class="coins-container" onclick="window.location.href='/coins'">
+                            <img src="static/images/chip.png" alt="Chip">
+                            <h3> $ 10000000</h3>
+                        </div>
+                        <div class="notification-container">
+                            <img src="static/images/bell.png" alt="Bell">
+                            <h3> 100</h3>
+                        </div>
+                        <div class="profile-container">
+                            <img src="static/images/profile.png" alt="Profile">
+                        </div>
+                    </div>
+                </ul>
+                
+            </nav>
+        </div>
+    </header>
+
+    {% block body %}
+    
+    {% endblock %}
+
+</body>
+</html>
