@@ -4,6 +4,7 @@
 
 
 {% block body %}
+
   <section>
     <div id="CreateAccContainer">
       <h1>Create Account </h1>
@@ -13,6 +14,13 @@
         <input type="number" placeholder="Age" name="age" required>
         <input type="date" placeholder="Birthday" name="birthday" required>
         <input type="email" placeholder="Email" name="email" required>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: red;">{{ message }}</p>
+                    {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div class="otp-create">
         <input type="text" placeholder="Email Verification Code" name="otp" required>
         <button type="button" onclick="sendOTP()">Send OTP</button>

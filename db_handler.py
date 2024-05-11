@@ -1,5 +1,5 @@
 from sqlalchemy.exc import IntegrityError
-from flask import flash
+from flask import flash, redirect, url_for
 from models import User, db
 
 class DBHandler:
@@ -14,6 +14,10 @@ class DBHandler:
 
     def insert_account(self, profile):
         try:
+            existing_user = User.query.filter_by(email=profile.email).first()
+            if existing_user:
+                flash('Email address already exists', 'error')
+                return False
             new_user = User(
                 first_name=profile.first_name,
                 last_name=profile.last_name,
@@ -29,10 +33,10 @@ class DBHandler:
                 self.db.session.add(new_user)
                 self.db.session.commit()
             flash('User registered successfully!', 'success')
+            return True
         except IntegrityError:
-            flash('Email address already exists', 'error')
-
-    # Implement the rest of your DBHandler methods similarly
+            flash('An error occurred while registering the user.', 'error')
+            return False
 
     def close(self):
         with self.app.app_context():

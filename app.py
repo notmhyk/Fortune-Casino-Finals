@@ -48,9 +48,11 @@ def register():
             balance=0,  
             image=None  
         )
-        db_handler.insert_account(new_user)
-        
-        return redirect(url_for('login'))  
+        success = db_handler.insert_account(new_user)
+        if success:
+            return redirect(url_for('login')) 
+        else:
+            return redirect(url_for('register'))  
 
     return render_template('login/register.html')
 
