@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign In Form</title>
-<link rel="stylesheet" href="static/login.css">
-</head>
-<body>
-<section>
+{% extends "login/base-login.html" %}
+
+{% block title %}Fortune Casino - Sign in or Sign up {% endblock %}
+
+
+{% block body %}
+  <section>
     <div id="SigninContainer">
       <h1>Log in </h1>
       <form id="signinForm">
-        <input type="text" placeholder="Username" id="loginUsername" required>
+        <input type="text" placeholder="Username" name="loginUsername" required>
         <input type="password" placeholder="Password" id="loginPassword" required>
         <button type="submit">Log In</button>
-        <p>Don't have an account yet? <a href="/dashboard">Create Account</a></p>
-         <a href="/forgot-password">Forgot Password</a>
+        <p>Don't have an account yet? <a href="/register">Create Account</a></p>
+          <a href="/forgot-password">Forgot Password</a>
       </form>
     </div>
-</section>
+  </section>
+{% endblock %}
 
-<!-- <script src="script.js"></script> -->
-</body>
-</html>

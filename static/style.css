@@ -225,7 +225,7 @@ flex: 1;
   
 .container-coins-games:hover {
     transform: scale(1.05); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1); 
     border-radius: 20px;
 }
   
@@ -753,6 +753,7 @@ nav ul li a {
   .fifth-container img:hover,
 .sixth-container img:hover {
     transform: scale(1.03); 
+    
 } 
   
   
@@ -844,6 +845,7 @@ nav ul li a {
   .tenth-container img:hover,
 .vip-games-container img:hover{
     transform: scale(1.01); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1); 
 } 
   
   

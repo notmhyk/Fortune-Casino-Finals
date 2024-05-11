@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Account</title>
-<link rel="stylesheet" href="static/login.css">
-</head>
-<body>
+{% extends "login/base-login.html" %}
+
+{% block title %}Sign up {% endblock %}
+
+
+{% block body %}
   <section>
     <div id="CreateAccContainer">
       <h1>Create Account </h1>
-      <form id="createaccForm">
+      <form id="createaccForm" action="#" method="post">
         <input type="text" placeholder="First Name" name="firstName" required>
         <input type="text" placeholder="Last Name" name="lastName" required>
         <input type="number" placeholder="Age" name="age" required>
@@ -27,10 +24,6 @@
         <button type="submit">Sign Up</button>
       </form>
     </div>
+  </section>
+{% endblock %}
 
-    </section>
-
-    <script src="script.js"></script>
-
-</body>
-</html>

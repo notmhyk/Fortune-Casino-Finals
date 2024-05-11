@@ -1,6 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, session, flash, redirect, url_for
+from datetime import timedelta, datetime
+from models import db, User
+from db_handler import DBHandler
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.permanent_session_lifetime = timedelta(hours=1)
+
+db.init_app(app)
+
+db_handler = DBHandler(app)
 
 @app.route('/')
 def index():
@@ -10,8 +21,37 @@ def index():
 def login():
     return render_template('login/login.html')
 
-@app.route("/register")
+@app.route("/register", methods = ["POST", "GET"])
 def register():
+    if request.method == "POST":
+        first_name = request.form['firstName']
+        last_name = request.form['lastName']
+        age = request.form['age']
+        birthday = datetime.strptime(request.form['birthday'], '%Y-%m-%d').date()
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+        confirm_password = request.form['confirmPassword']
+
+        if password != confirm_password:
+            flash('Passwords do not match!', 'error')
+            return redirect(url_for('register'))
+
+        new_user = User(
+            first_name=first_name,
+            last_name=last_name,
+            age=age,
+            birthday=birthday,
+            email=email,
+            username=username,
+            password=password,
+            balance=0,  
+            image=None  
+        )
+        db_handler.insert_account(new_user)
+        
+        return redirect(url_for('login'))  
+
     return render_template('login/register.html')
 
 @app.route("/forgot-password")
