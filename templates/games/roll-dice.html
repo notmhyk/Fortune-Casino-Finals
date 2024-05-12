@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Fortune Casino - Beat The Dealer {% endblock %}
+
+{% block body %}
+<body class="body-roll-dice">
+    <div class="game">
+        <div class="container">
+          <div id='dice1' class="dice dice-one">
+            <div id="dice-one-side-one" class='side one'>
+              <img src="../images/dice-01.svg" alt="dot-1">
+            </div>
+            <div id="dice-one-side-two" class='side two'>
+                <img src="../images/dice-02.svg" alt="dot-1">
+            </div>
+            <div id="dice-one-side-three" class='side three'>
+                <img src="../images/dice-03.svg" alt="dot-1">
+            </div>
+            <div id="dice-one-side-four" class='side four'>
+                <img src="../images/dice-04.svg" alt="dot-1">
+            </div>
+            <div id="dice-one-side-five" class='side five'>
+                <img src="../images/dice-05.svg" alt="dot-1">
+            </div>
+            <div id="dice-one-side-six" class='side six'>
+                <img src="../images/dice-06.svg" alt="dot-1">
+            </div>
+          </div>
+       </div>
+        <div class="container">
+          <div id='dice2' class="dice dice-two">
+            <div id="dice-two-side-one" class='side one'>
+                <img src="../images/dice-01.svg" alt="dot-1">
+            </div>
+            <div id="dice-two-side-two" class='side two'>
+                <img src="../images/dice-02.svg" alt="dot-1">
+            </div>
+            <div id="dice-two-side-three" class='side three'>
+                <img src="../images/dice-03.svg" alt="dot-1">
+            </div>
+            <div id="dice-two-side-four" class='side four'>
+                <img src="../images/dice-04.svg" alt="dot-1">
+            </div>
+            <div id="dice-two-side-five" class='side five'>
+                <img src="../images/dice-05.svg" alt="dot-1">
+            </div>
+            <div id="dice-two-side-six" class='side six'>
+                <img src="../images/dice-06.svg" alt="dot-1">
+            </div>
+          </div> 
+       </div>
+       <div id='roll' class='roll-button'>
+        <button class="roll-btn-roll-em-dice" onclick="animateDiceRoll()">Roll dice!</button>
+    </div>
+      </div> 
+
+       <div class="get-dice-number">
+            <h1 class="dice-1-dice-2-addnumber"></h1>
+            <form action="">
+                <input type="text" class="bet-entry" placeholder="Your Guess">
+            </form>
+       </div>
+</body>
+<script src="../script.js"></script>
+{% endblock %}

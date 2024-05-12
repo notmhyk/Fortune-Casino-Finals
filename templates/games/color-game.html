@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Fortune Casino - Color Game {% endblock %}
+
+{% block body %}
+<body class="body-color">
+    <div class="game">
+        <div class="container-color">
+          <div id='dice1' class="dice dice-one">
+            <div id="dice-one-side-one" class='side one'>
+              <img src="static/images/color-game-blue.png" alt="dot-1" width="100px">
+            </div>
+            <div id="dice-one-side-two" class='side two'>
+                <img src="static/images/color-game-green.png" alt="dot-1" width="100px">
+            </div>
+            <div id="dice-one-side-three" class='side three'>
+                <img src="static/images/color-game-pink.png" alt="dot-1" width="100px">
+            </div>
+            <div id="dice-one-side-four" class='side four'>
+                <img src="static/images/color-game-red.png" alt="dot-1" width="100px">
+            </div>
+            <div id="dice-one-side-five" class='side five'>
+                <img src="static/images/color-game-white.png" alt="dot-1" width="100px">
+            </div>
+            <div id="dice-one-side-six" class='side six'>
+                <img src="static/images/color-game-yellow.png" alt="dot-1" width="100px">
+            </div>
+          </div>
+       </div>
+       <div class="container-color">
+        <div id='dice2' class="dice dice-two">
+          <div id="dice-two-side-one" class='side one'>
+              <img src="static/images/color-game-blue.png" alt="dot-1" width="100px">
+          </div>
+          <div id="dice-two-side-two" class='side two'>
+              <img src="static/images/color-game-green.png" alt="dot-1" width="100px">
+          </div>
+          <div id="dice-two-side-three" class='side three'>
+              <img src="static/images/color-game-pink.png" alt="dot-1" width="100px">
+          </div>
+          <div id="dice-two-side-four" class='side four'>
+              <img src="static/images/color-game-red.png" alt="dot-1" width="100px">
+          </div>
+          <div id="dice-two-side-five" class='side five'>
+              <img src="static/images/color-game-white.png" alt="dot-1" width="100px">
+          </div>
+          <div id="dice-two-side-six" class='side six'>
+              <img src="static/images/color-game-yellow.png" alt="dot-1" width="100px">
+          </div>
+        </div> 
+     </div>
+     <div class="container-color">
+        <div id='dice3' class="dice dice-three">
+          <div id="dice-three-side-one" class='side one'>
+              <img src="static/images/color-game-blue.png" alt="dot-1" width="100px">
+          </div>
+          <div id="dice-three-side-two" class='side two'>
+              <img src="static/images/color-game-green.png" alt="dot-1" width="100px">
+          </div>
+          <div id="dice-three-side-three" class='side three'>
+              <img src="static/images/color-game-pink.png" alt="dot-1" width="100px">
+          </div>
+          <div id="dice-three-side-four" class='side four'>
+              <img src="static/images/color-game-red.png" alt="dot-1" width="100px">
+          </div>
+          <div id="dice-three-side-five" class='side five'>
+              <img src="static/images/color-game-white.png" alt="dot-1" width="100px">
+          </div>
+          <div id="dice-three-side-six" class='side six'>
+              <img src="static/images/color-game-yellow.png" alt="dot-1" width="100px">
+          </div>
+        </div> 
+     </div>
+
+     <div id='roll-color' class='roll-button'>
+        <button class="roll-btn-color" onclick="animateDiceRollColor()">Roll dice!</button>
+    </div>
+      </div> 
+</body>
+<!-- <script src="../script.js"></script> -->
+{% endblock %}

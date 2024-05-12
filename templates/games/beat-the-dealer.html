@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Fortune Casino - Beat The Dealer {% endblock %}
+
+{% block body %}
+<body class="body-beat-the-dealer">
+    <h2>Dealer: <span id="dealer-sum"></span></h2>
+    <div id="dealer-cards">
+        <img id="hidden" src="">
+    </div>
+
+    <h2>You: <span id="your-sum"></span></h2>
+    <div id="your-cards"> 
+        <img id="your-card-hidden" src="static/images/BACK.png">
+    </div>
+
+    <br>
+    <button id="higher">Higher</button>
+    <button id="lower">Lower</button>
+    <p id="results"></p>
+</body>
+<!-- <script src="../script.js"></script> -->
+<script>
+    window.onload = function() {
+    buildDeckBeatTheDealer();
+    shuffleDeckBeatTheDealer();
+    startGameBeatTheDealer();
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Fortune Casino - Beat The Dealer {% endblock %}
+
+{% block body %}
+<body class="body-scratch">
+    <div class="main-container">
+      <h2 class="main-heading">Scratch to view code</h2>
+
+      <h3>Unlock Knowledge: 40% Off on All Courses!</h3>
+      <div class="scratch-container">
+        <div class="scratch-card">
+          <div class="code">D7DF9CFF0C</div>
+        </div>
+        <canvas id="scratch-card1" width="300" height="100"></canvas>
+      </div>
+
+      <h3>Free Merchandise on Orders Over $50</h3>
+      <div class="scratch-container">
+        <div class="scratch-card">
+          <div class="code">8DDIECIW3</div>
+        </div>
+        <canvas id="scratch-card2" width="300" height="100"></canvas>
+      </div>
+
+      <h3>Double the Delight: Buy One, Get One Free!</h3>
+      <div class="scratch-container">
+        <div class="scratch-card">
+          <div class="code">38CUDCJS93</div>
+        </div>
+        <canvas id="scratch-card3" width="300" height="100"></canvas>
+      </div>
+    </div>
+
+    <script>
+        const createScratchCard = (canvasId, color) => {
+  let canvas = document.getElementById(canvasId);
+  let context = canvas.getContext("2d");
+
+  const init = () => {
+    context.fillStyle = color;
+    context.fillRect(0, 0, 300, 100);
+  };
+
+  let isDragging = false;
+
+  const scratch = (x, y) => {
+    context.globalCompositeOperation = "destination-out";
+    context.beginPath();
+    context.arc(x, y, 24, 0, 2 * Math.PI);
+    context.fill();
+  };
+
+  canvas.addEventListener("mousedown", (event) => {
+    isDragging = true;
+    scratch(event.offsetX, event.offsetY);
+  });
+
+  canvas.addEventListener("mousemove", (event) => {
+    if (isDragging) {
+      scratch(event.offsetX, event.offsetY);
+    }
+  });
+
+  canvas.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
+
+  canvas.addEventListener("mouseleave", () => {
+    isDragging = false;
+  });
+
+  init();
+};
+
+createScratchCard("scratch-card1", "#006d77");
+createScratchCard("scratch-card2", "#83c5be");
+createScratchCard("scratch-card3", "#8338ec");
+
+    </script>
+  </body>
+{% endblock %}
