@@ -76,5 +76,9 @@ def coins():
 def gamesdashboard():
     return render_template('dashboard/games.html')
 
+@app.route("/game-base")
+def gamesdashboard_base():
+    return render_template('base.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
