@@ -1,6 +1,6 @@
-{% extends "base-dashboard.html" %}
+{% extends "dashboard/base-dashboard.html" %}
 
-{% block title %}Fortune Casino - Beat The Dealer {% endblock %}
+{% block title %}- Beat The Dealer {% endblock %}
 
 {% block body %}
 <body class="body-beat-the-dealer">
@@ -19,7 +19,7 @@
     <button id="lower">Lower</button>
     <p id="results"></p>
 </body>
-<!-- <script src="../script.js"></script> -->
+<script src="static/script.js"></script>
 <script>
     window.onload = function() {
     buildDeckBeatTheDealer();

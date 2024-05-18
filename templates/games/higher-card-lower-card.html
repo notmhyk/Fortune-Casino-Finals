@@ -1,12 +1,12 @@
-{% extends "base-dashboard.html" %}
+{% extends "dashboard/base-dashboard.html" %}
 
-{% block title %}Fortune Casino - Beat The Dealer {% endblock %}
+{% block title %}- Higher or Lower {% endblock %}
 
 {% block body %}
 <body class="body-higher-lower">
     <h2>Dealer: <span id="dealer-sum"></span></h2>
     <div id="dealer-cards">
-        <img id="hidden" src="../images/BACK.png">
+        <img id="hidden" src="static/images/BACK.png">
     </div>
 
     <h2>You: <span id="your-sum"></span></h2>
@@ -64,7 +64,7 @@
         while (dealerSum < 1) { 
             let cardImg = document.createElement("img");
             let card = deck.pop();
-            cardImg.src = "../images/" + card + ".png";
+            cardImg.src = "static/images/" + card + ".png";
             dealerSum += getValue(card);
             dealerAceCount += checkAce(card);
             document.getElementById("dealer-cards").append(cardImg);
@@ -74,7 +74,7 @@
         for (let i = 0; i < 1; i++) {
             let cardImg = document.createElement("img");
             let card = deck.pop();
-            cardImg.src = "../images/" + card + ".png";
+            cardImg.src = "static/images/" + card + ".png";
             yourSum += getValue(card);
             yourAceCount += checkAce(card);
             document.getElementById("your-cards").append(cardImg);
@@ -93,7 +93,7 @@
 
         let cardImg = document.createElement("img");
         let card = deck.pop();
-        cardImg.src = "../images/" + card + ".png";
+        cardImg.src = "static/images/" + card + ".png";
         yourSum += getValue(card);
         yourAceCount += checkAce(card);
         document.getElementById("your-cards").append(cardImg);
@@ -108,7 +108,7 @@
         yourSum = reduceAce(yourSum, yourAceCount);
 
         canHit = false;
-        document.getElementById("hidden").src = "../images/" + hidden + ".png";
+        document.getElementById("hidden").src = "static/images/" + hidden + ".png";
 
         let message = "";
         if (yourSum > dealerSum) {
@@ -131,7 +131,7 @@
         yourSum = reduceAce(yourSum, yourAceCount);
 
         canHit = false;
-        document.getElementById("hidden").src = "../images/" + hidden + ".png";
+        document.getElementById("hidden").src = "static/images/" + hidden + ".png";
 
         let message = "";
         if (yourSum > dealerSum) {

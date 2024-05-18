@@ -80,5 +80,9 @@ def gamesdashboard():
 def gamesdashboard_base():
     return render_template('base.html')
 
+@app.route("/game-bingo")
+def game_bingo():
+    return render_template('games/memory-game.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

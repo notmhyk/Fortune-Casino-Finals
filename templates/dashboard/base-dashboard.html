@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortune Casino: {% block title %}{% endblock %}</title>
+    <title>Fortune Casino {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="static/style.css">
-    {% block paypal %}{% endblock %}
+    {% block paypal %}
+
+    {% endblock %}
+
     <style>
         * {
             margin: 0;
@@ -14,6 +17,7 @@
             font-family: "Montserrat";
         }
     </style>
+
 </head>
     <header>
         <div class="navbar">
@@ -30,7 +34,7 @@
                     <div class="user-container">
                         <div class="coins-container" onclick="window.location.href='/coins'">
                             <img src="static/images/chip.png" alt="Chip">
-                            <h3> $ 10000000</h3>
+                            <h3> $ 0</h3>
                         </div>
                         <div class="notification-container">
                             <img src="static/images/bell.png" alt="Bell">
@@ -50,5 +54,4 @@
     
     {% endblock %}
 
-</body>
 </html>

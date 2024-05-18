@@ -1,16 +1,6 @@
-{% extends "base-dashboard.html" %}
+{% extends "dashboard/base-dashboard.html" %}
 
-{% block title %}Fortune Casino - Beat The Dealer {% endblock %}
-
-{% block link %}
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    </style>
-{% endblock %}
+{% block title %}- Don't the Dealer {% endblock %}
 
 {% block body %}
 <body class="body-hang">
@@ -312,7 +302,7 @@
     const resetGame = () => {
         correctLetters = [];
         wrongGuessCount = 0;
-        hangmanImage.src = "../images/hangman-0.svg";
+        hangmanImage.src = "static/images/hangman-0.svg";
         guessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;
         wordDisplay.innerHTML = currentWord.split("").map(() => `<li class="letter"></li>`).join("");
         keyboardDiv.querySelectorAll(".play-again").forEach(btn => btn.disabled = false);
@@ -329,7 +319,7 @@
 
     const gameOver = (isVictory) => {
         const modalText = isVictory ? `You found the word:` : 'The correct word was:';
-        gameModal.querySelector("img").src = `../images/${isVictory ? 'victory' : 'lost'}.gif`;
+        gameModal.querySelector("img").src = `static/images/${isVictory ? 'victory' : 'lost'}.gif`;
         gameModal.querySelector("h4").innerText = isVictory ? 'Congrats!' : 'Game Over!';
         gameModal.querySelector("p").innerHTML = `${modalText} <b>${currentWord}</b>`;
         gameModal.classList.add("show");
@@ -349,7 +339,7 @@
         } else {
             
             wrongGuessCount++;
-            hangmanImage.src = `../images/hangman-${wrongGuessCount}.svg`;
+            hangmanImage.src = `static/images/hangman-${wrongGuessCount}.svg`;
         }
         button.disabled = true;
         guessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;

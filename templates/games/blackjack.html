@@ -1,12 +1,13 @@
-{% extends "base-dashboard.html" %}
+{% extends "dashboard/base-dashboard.html" %}
 
-{% block title %}Fortune Casino - Beat The Dealer {% endblock %}
+{% block title %}- Blackjack {% endblock %}
+
 
 {% block body %}
 <body class="body-lucky">
     <h2>Dealer: <span id="dealer-sum"></span></h2>
     <div id="dealer-cards">
-        <img id="hidden" src="../images/BACK.png">
+        <img id="hidden" src="static/images/BACK.png">
     </div>
 
     <h2>You: <span id="your-sum"></span></h2>
@@ -24,4 +25,5 @@
         startGame();
     }
 </script>
+<script src="static/script.js"></script>
 {% endblock %}

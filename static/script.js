@@ -37,12 +37,12 @@ function shuffleDeckBeatTheDealer() {
 function startGameBeatTheDealer() {
     hiddenBeatTheDealer = deckBeatTheDealer.pop();
     dealerSumBeatTheDealer += getValueBeatTheDealer(hiddenBeatTheDealer);
-    document.getElementById("hidden").src = "../images/" + hiddenBeatTheDealer + ".png";
+    document.getElementById("hidden").src = "static/images/" + hiddenBeatTheDealer + ".png";
     dealerAceCountBeatTheDealer += checkAceBeatTheDealer(hiddenBeatTheDealer);
     while (dealerSumBeatTheDealer < 1) { 
         let cardImgBeatTheDealer = document.createElement("img");
         let cardBeatTheDealer = deckBeatTheDealer.pop();
-        cardImgBeatTheDealer.src = "../images/" + cardBeatTheDealer + ".png";
+        cardImgBeatTheDealer.src = "static/images/" + cardBeatTheDealer + ".png";
         dealerSumBeatTheDealer += getValueBeatTheDealer(cardBeatTheDealer);
         dealerAceCountBeatTheDealer += checkAceBeatTheDealer(cardBeatTheDealer);
         document.getElementById("dealer-cards").append(cardImgBeatTheDealer);
@@ -63,10 +63,10 @@ function lowerBeatTheDealer() {
     for (let i = 0; i < 1; i++) {
         let cardImgBeatTheDealer = document.createElement("img");
         let cardBeatTheDealer = deckBeatTheDealer.pop();
-        cardImgBeatTheDealer.src = "../images/" + cardBeatTheDealer + ".png";
+        cardImgBeatTheDealer.src = "static/images/" + cardBeatTheDealer + ".png";
         yourSumBeatTheDealer += getValueBeatTheDealer(cardBeatTheDealer);
         yourAceCountBeatTheDealer += checkAceBeatTheDealer(cardBeatTheDealer);
-        document.getElementById("your-card-hidden").src = "../images/" + cardBeatTheDealer + ".png";
+        document.getElementById("your-card-hidden").src = "static/images/" + cardBeatTheDealer + ".png";
     }
     
 
@@ -96,10 +96,10 @@ function higherBeatTheDealer() {
     for (let i = 0; i < 1; i++) {
         let cardImgBeatTheDealer = document.createElement("img");
         let cardBeatTheDealer = deckBeatTheDealer.pop();
-        cardImgBeatTheDealer.src = "../images/" + cardBeatTheDealer + ".png";
+        cardImgBeatTheDealer.src = "static/images/" + cardBeatTheDealer + ".png";
         yourSumBeatTheDealer += getValueBeatTheDealer(cardBeatTheDealer);
         yourAceCountBeatTheDealer += checkAceBeatTheDealer(cardBeatTheDealer);
-        document.getElementById("your-card-hidden").src = "../images/" + cardBeatTheDealer + ".png";
+        document.getElementById("your-card-hidden").src = "static/images/" + cardBeatTheDealer + ".png";
     }
     
 
@@ -155,21 +155,21 @@ function reduceAceBeatTheDealer(playerSumBeatTheDealer, playerAceCountBeatTheDea
 
 // <-------------------- DICE ---------------------------->
 let images = [
-    "../images/dice-01.svg",
-    "../images/dice-02.svg",
-    "../images/dice-03.svg",
-    "../images/dice-04.svg",
-    "../images/dice-05.svg",
-    "../images/dice-06.svg"
+    "static/images/dice-01.svg",
+    "static/images/dice-02.svg",
+    "static/images/dice-03.svg",
+    "static/images/dice-04.svg",
+    "static/images/dice-05.svg",
+    "static/images/dice-06.svg"
 ];
 
 let imagesColor = [
-    "../images/color-game-blue.png",
-    "../images/color-game-green.png",
-    "../images/color-game-pink.png",
-    "../images/color-game-red.png",
-    "../images/color-game-white.png",
-    "../images/color-game-yellow.png"
+    "static/images/color-game-blue.png",
+    "static/images/color-game-green.png",
+    "static/images/color-game-pink.png",
+    "static/images/color-game-red.png",
+    "static/images/color-game-white.png",
+    "static/images/color-game-yellow.png"
 ];
 
 // <----------------------- Roll-'em-Dice ----------------------->
@@ -299,7 +299,7 @@ function startGame() {
     while (dealerSum < 17) { 
         let cardImg = document.createElement("img");
         let card = deck.pop();
-        cardImg.src = "../images/" + card + ".png";
+        cardImg.src = "static/images/" + card + ".png";
         dealerSum += getValue(card);
         dealerAceCount += checkAce(card);
         document.getElementById("dealer-cards").append(cardImg);
@@ -309,7 +309,7 @@ function startGame() {
     for (let i = 0; i < 2; i++) {
         let cardImg = document.createElement("img");
         let card = deck.pop();
-        cardImg.src = "../images/" + card + ".png";
+        cardImg.src = "static/images/" + card + ".png";
         yourSum += getValue(card);
         yourAceCount += checkAce(card);
         document.getElementById("your-cards").append(cardImg);
@@ -328,7 +328,7 @@ function hit() {
 
     let cardImg = document.createElement("img");
     let card = deck.pop();
-    cardImg.src = "../images/" + card + ".png";
+    cardImg.src = "static/images/" + card + ".png";
     yourSum += getValue(card);
     yourAceCount += checkAce(card);
     document.getElementById("your-cards").append(cardImg);
@@ -344,7 +344,7 @@ function stay() {
     yourSum = reduceAce(yourSum, yourAceCount);
 
     canHit = false;
-    document.getElementById("hidden").src = "../images/" + hidden + ".png";
+    document.getElementById("hidden").src = "static/images/" + hidden + ".png";
 
     let message = "";
     if (yourSum > 21) {

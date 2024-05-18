@@ -301,13 +301,13 @@ nav {
 nav ul {
     display: inline-block;
     list-style-type: none;
-    margin-left: -6rem;
+    /* margin-left: -6rem; */
 }
   
 nav ul li {
     display: inline-block;
     margin-right: 40px;
-    
+    margin-left: 1rem;
 }
   
 nav ul li a {
@@ -316,12 +316,15 @@ nav ul li a {
 }
   
 .logo {
-    padding: 5px 0 0 40px;
+    padding: 5px 0 0 100px;
+    position: relative;
     cursor: pointer;
+    left: 1rem;
 }
   
 .logo img {
     width: 25%;
+    position: relative;
 }
   
 .user-container {
@@ -916,15 +919,15 @@ nav ul li a {
   
   /* <-------------------- COLOR-GAME --------------------> */
 .body-color {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: #000;
 }
 .roll-btn-color {
       position: relative;
       top: 25rem;
-      left: -20rem;
+      left: 14.5rem;
       padding: 15px 50px;
       color: #fff;
       background-color: #f4d35e;
@@ -944,10 +947,10 @@ nav ul li a {
 }
   
 .container-color {
-      position: relative;
+      position: relative;    
       display: inline-block;
       top: 150px;
-      left: -15rem;
+      left: 20rem;
 }
   
   
@@ -990,18 +993,18 @@ nav ul li a {
   
   /* <-------- ROLL-EM-DICE & COLOR-GAME & SIC-BO --------> */
 .game {
-      position: relative;
-      width: auto;
-      height: 100%; 
+    position: relative;
+    width: auto;
+    height: 100%; 
       
 }
   
 .dice {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      transform-style: preserve-3d;
-      transition: transform 1s; 
+    position: relative;
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+    transition: transform 1s; 
 }
   
 .dot {
@@ -1098,6 +1101,7 @@ nav ul li a {
 .body-beat-the-dealer {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    /* margin-top: 2rem; */
 }
 #higher {
     width: 100px;
@@ -1168,6 +1172,7 @@ nav ul li a {
         #f9fbfc 50%
     ) fixed;
     font-family: "Rubik",sans-serif;
+    margin-top: 2rem;
 }
 .container-flip {
       background-color: #ffffff;
@@ -1356,24 +1361,25 @@ nav ul li a {
     /* Importing Google font - Open Sans */
   /* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"); */
 .body-hang {
-    display: flex;
-    padding: 0 10px;
-    align-items: center;
+    /* display: flex; */
+    /* padding: 0 10px; */
+    /* align-items: center; */
     justify-content: center;
-    min-height: 100vh;
+    max-height: 100vh;
     background: #5E63BA;
     font-family: "Open Sans", sans-serif;
 }
 .container-hang-dealer {
-      display: flex;
-      width: 850px;
-      gap: 70px;
-      padding: 60px 40px;
-      background: #fff;
-      border-radius: 10px;
-      align-items: flex-end;
-      justify-content: space-between;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    display: flex;
+    width: 850px;
+    gap: 70px;
+    padding: 60px 40px;
+    background: #fff;
+    border-radius: 10px;
+    /* align-items: flex-end; */
+    justify-content: space-between;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    margin: 5rem 0 0 25rem;
 }
 .hangman-box img {
       user-select: none;
@@ -1546,10 +1552,10 @@ nav ul li a {
     font-size: 20px;
 }
 .body-memory{
-    display: flex;
-    align-items: center;
+    /* display: flex; */
+    /* align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    max-height: 100vh; */
     background: #6563ff;
     font-family: 'Poppins', sans-serif;
 }
@@ -1562,6 +1568,8 @@ nav ul li a {
     background: #f8f8f8;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 26rem;
+    margin: 5rem 0 0 30rem;
 }
 .cards, .card, .view, .details, p{
     display: flex;
@@ -1711,135 +1719,135 @@ nav ul li a {
   
   /* <-------------------------- MAZE-GAME --------------------------> */
   
-  .html,
-        .body-maze {
-              width: 100vw;
-              height: 100vh;
-              position: fixed;
-              padding: 0;
-              margin: 0;
-              top: 0;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              background-color:#ee7752;
-        }
-        #mazeContainer {
-      transition-property: opacity;
-      transition-duration: 1s;
-      transition-timing-function: linear;
-      top: 75px;
-      opacity: 0;
-      display: inline-block;
-      background-color: rgba(0, 0, 0, 0.3);
-      margin: auto;
+.html,
+.body-maze {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color:#ee7752;
+}
+#mazeContainer {
+    transition-property: opacity;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+    top: 75px;
+    opacity: 0;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: auto;
 }
 #mazeContainer #mazeCanvas {
-      margin: 0;
-      display: block;
-      border: solid 1px black;
+    margin: 0;
+    display: block;
+    border: solid 1px black;
 }
-  input,
+input,
 select {
-      transition-property: background-color opacity;
-      transition-duration: 0.2s;
-      transition-timing-function: ease-in-out;
-      cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.3);
-      height: 45px;
-      width: 150px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      display: inline-block;
-      font-size: 15px;
-      text-align: center;
-      text-decoration: none;
-      appearance: none;
+    transition-property: background-color opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 45px;
+    width: 150px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    appearance: none;
 }
-    input:hover,
+input:hover,
 select:hover {
-      background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
 }
-    input:active,
+input:active,
 select:active {
-      background-color: black;
+    background-color: black;
 }
-    input:focus,
+input:focus,
 select:focus {
-      outline: none;
+    outline: none;
 }
 .custom-select {
-      display: inline-block;
+    display: inline-block;
 }
 .custom-select select {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      background-image: url("data:image/png; base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC");
-      background-repeat: no-repeat;
-      background-position: 125px center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/png; base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC");
+    background-repeat: no-repeat;
+    background-position: 125px center;
 }
 #Message-Container {
-      visibility: hidden;
-      color: white;
-      display: block;
-      width: 100vw;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      background-color: rgba(0, 0, 0, 0.3);
-      z-index: 1;
+    visibility: hidden;
+    color: white;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
 }
 #Message-Container #message {
-      width: 300px;
-      height: 300px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      margin-left: -150px;
-      margin-top: -150px;
+    width: 300px;
+    height: 300px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: -150px;
 }
 #page {
-      font-family: "Segoe UI", Arial, sans-serif;
-      text-align: center;
-      height: auto;
-      width: auto;
-      margin: auto;
+    font-family: "Segoe UI", Arial, sans-serif;
+    text-align: center;
+    height: auto;
+    width: auto;
+    margin: auto;
 }
 #page #menu {
-      margin: auto;
-      padding: 10px;
-      height: 65px;
-      box-sizing: border-box;
+    margin: auto;
+    padding: 10px;
+    height: 65px;
+    box-sizing: border-box;
 }
 #page #menu h1 {
-      margin: 0;
-      margin-bottom: 10px;
-      font-weight: 600;
-      font-size: 3.2rem;
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 3.2rem;
 }
 #page #view {
-      position: absolute;
-      top: 65px;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: auto;
+    position: absolute;
+    top: 65px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
 }
 .border {
-      border: 1px black solid;
-      border-radius: 5px;
+    border: 1px black solid;
+    border-radius: 5px;
 }
     
     
 @media only screen and (max-width: 400px) {
-      input,
+    input,
     select {
         width: 120px;
     }
@@ -1998,8 +2006,10 @@ select:focus {
 .body-bingo {
     margin: 0;
     padding: 0;
-    padding-top: 30px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* margin-top: 10px; */
+    /* position: relative;
+    bottom: -1rem; */
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
   
 .body-bingo:focus {

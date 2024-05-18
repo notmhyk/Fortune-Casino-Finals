@@ -1,4 +1,4 @@
-{% extends "base-dashboard.html" %}
+{% extends "dashboard/base-dashboard.html" %}
 
 {% block title %}Fortune Casino - Beat The Dealer {% endblock %}
 
@@ -18,98 +18,98 @@
       <ul class="cards">
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-1.png" alt="card-img">
+            <img src="static/images/img-1.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-2.png" alt="card-img">
+            <img src="static/images/img-2.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-3.png" alt="card-img">
+            <img src="static/images/img-3.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-4.png" alt="card-img">
+            <img src="static/images/img-4.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-5.png" alt="card-img">
+            <img src="static/images/img-5.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-6.png" alt="card-img">
+            <img src="static/images/img-6.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-5.png" alt="card-img">
+            <img src="static/images/img-5.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-6.png" alt="card-img">
+            <img src="static/images/img-6.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-1.png" alt="card-img">
+            <img src="static/images/img-1.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-2.png" alt="card-img">
+            <img src="static/images/img-2.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-3.png" alt="card-img">
+            <img src="static/images/img-3.png" alt="card-img">
           </div>
         </li>
         <li class="card">
           <div class="view front-view">
-            <img src="../images/que_icon.svg" alt="icon">
+            <img src="static/images/que_icon.svg" alt="icon">
           </div>
           <div class="view back-view">
-            <img src="../images/img-4.png" alt="card-img">
+            <img src="static/images/img-4.png" alt="card-img">
           </div>
         </li>
         <div class="details">
@@ -203,7 +203,7 @@ function shuffleCard() {
         card.classList.remove("flip");
         let imgTag = card.querySelector(".back-view img");
         setTimeout(() => {
-            imgTag.src = `../images/img-${arr[index]}.png`;
+            imgTag.src = `static/images/img-${arr[index]}.png`;
         }, 500);
         card.addEventListener("click", flipCard);
     });
