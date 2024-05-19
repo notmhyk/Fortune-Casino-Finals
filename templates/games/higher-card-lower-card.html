@@ -32,8 +32,11 @@
             <button id="play-the-game" onclick="closePopUpGame()">Play!</button>
         </div>
     </div>
+
 </body>
+<!-- <script src="static/script.js"></script> -->
     <script>
+        
         let dealerSum = 0;
         let yourSum = 0;
 
@@ -45,6 +48,7 @@
 
         let canHit = true;
         window.onload = function() {
+            openPopUpGame();
             buildDeck();
             shuffleDeck();
             startGame();
@@ -192,6 +196,18 @@
         }
         return playerSum;
     }
+    function openPopUpGame() {
+    document.getElementById("popUp").style.display = "block";
+    document.getElementById("instruction").style.display = "block";
+    document.getElementById("mechanics").style.display = "block";
+}
 
+    function closePopUpGame() {
+        // buildDeckBeatTheDealer();
+        // shuffleDeckBeatTheDealer();
+        // startGameBeatTheDealer();
+        document.getElementById("popUp").style.display = "none";
+    }
     </script>
+    
 {% endblock %}

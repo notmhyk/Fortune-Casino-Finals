@@ -7,7 +7,26 @@
     <h1>Pong Game</h1>
     <canvas></canvas>
     <p>Control the left player by using up and down arrow keys</p>
+    <div id="popUp" class="popup-game">
+        <div class="popup-content-game">
+            <span class="close-game" onclick="closePopUpGame()">&times;</span>
+            <h1 id="mechanics">Mechanics <br> <br></h1>
+            <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
+            <button id="play-the-game" onclick="closePopUpGame()">Okay!</button>
+        </div>
+    </div>
+  
+    <div id="popUp-bet" class="popup-bet">
+        <div class="popup-content-bet">
+            <span class="close-bet" onclick="closePopUpGame()">&times;</span>
+            <h1 id="mechanics">Your bet <br> <br></h1>
+            <button id="play-the-game" onclick="closePopUpGame()">Play!</button>
+        </div>
+    </div>
     <script>
+        window.onload = function() {
+            openPopUpGame();
+        }
         
 let DIRECTION = {
     IDLE: 0,
@@ -346,4 +365,5 @@ let Pong = Object.assign({}, Game);
 Pong.initialize();
     </script>
 </body>
+<script src="static/script.js"></script>
 {% endblock %}

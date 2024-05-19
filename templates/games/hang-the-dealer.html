@@ -40,9 +40,13 @@
             <button id="play-the-game" onclick="closePopUpGame()">Play!</button>
         </div>
     </div>
+
 </body>
 
 <script>
+    window.onload = function() {
+        openPopUpGame();
+      }
     const wordList = [
     {
         word: "guitar",
@@ -372,4 +376,5 @@
     getRandomWord();
     playAgainBtn.addEventListener("click", getRandomWord);
 </script>
+<script src="static/script.js"></script>
 {% endblock %}

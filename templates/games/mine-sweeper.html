@@ -8,6 +8,22 @@
     <div id="board-mine"></div>
     <br>
     <button id="flag-button">🚩</button>
+    <div id="popUp" class="popup-game">
+        <div class="popup-content-game">
+            <span class="close-game" onclick="closePopUpGame()">&times;</span>
+            <h1 id="mechanics">Mechanics <br> <br></h1>
+            <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
+            <button id="play-the-game" onclick="closePopUpGame()">Okay!</button>
+        </div>
+    </div>
+  
+    <div id="popUp-bet" class="popup-bet">
+        <div class="popup-content-bet">
+            <span class="close-bet" onclick="closePopUpGame()">&times;</span>
+            <h1 id="mechanics">Your bet <br> <br></h1>
+            <button id="play-the-game" onclick="closePopUpGame()">Play!</button>
+        </div>
+    </div>
 </body>
 <script>
     let board = [];
@@ -24,6 +40,7 @@
     
     window.onload = function() {
         startGame();
+        openPopUpGame();
     }
     
     function setMines() {
@@ -40,7 +57,18 @@
             }
         }
     }
-    
+    function openPopUpGame() {
+    document.getElementById("popUp").style.display = "block";
+    document.getElementById("instruction").style.display = "block";
+    document.getElementById("mechanics").style.display = "block";
+}
+
+    function closePopUpGame() {
+        // buildDeckBeatTheDealer();
+        // shuffleDeckBeatTheDealer();
+        // startGameBeatTheDealer();
+        document.getElementById("popUp").style.display = "none";
+    }
     
     function startGame() {
         document.getElementById("mines-count").innerText = minesCount;
@@ -179,4 +207,5 @@
         return 0;
     }
 </script>
+<!-- <script src="static/script.js"></script> -->
 {% endblock %}

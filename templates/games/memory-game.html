@@ -119,8 +119,27 @@
         </div>
       </ul>
     </div>
+    <div id="popUp" class="popup-game">
+      <div class="popup-content-game">
+          <span class="close-game" onclick="closePopUpGame()">&times;</span>
+          <h1 id="mechanics">Mechanics <br> <br></h1>
+          <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
+          <button id="play-the-game" onclick="closePopUpGame()">Okay!</button>
+      </div>
+  </div>
+
+  <div id="popUp-bet" class="popup-bet">
+      <div class="popup-content-bet">
+          <span class="close-bet" onclick="closePopUpGame()">&times;</span>
+          <h1 id="mechanics">Your bet <br> <br></h1>
+          <button id="play-the-game" onclick="closePopUpGame()">Play!</button>
+      </div>
+  </div>
 
     <script>
+      window.onload = function() {
+            openPopUpGame();
+      }
         const cards = document.querySelectorAll(".card"),
 timeTag = document.querySelector(".time b"),
 flipsTag = document.querySelector(".flips b"),
@@ -218,4 +237,5 @@ cards.forEach(card => {
 });
     </script>
   </body>
+  <script src="static/script.js"></script>
 {% endblock %}

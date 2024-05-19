@@ -28,10 +28,29 @@
         <p>Click On The Spin Button To Start</p>
     </div>
     </div>
+    <div id="popUp" class="popup-game">
+        <div class="popup-content-game">
+            <span class="close-game" onclick="closePopUpGame()">&times;</span>
+            <h1 id="mechanics">Mechanics <br> <br></h1>
+            <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
+            <button id="play-the-game" onclick="closePopUpGame()">Okay!</button>
+        </div>
+    </div>
+  
+    <div id="popUp-bet" class="popup-bet">
+        <div class="popup-content-bet">
+            <span class="close-bet" onclick="closePopUpGame()">&times;</span>
+            <h1 id="mechanics">Your bet <br> <br></h1>
+            <button id="play-the-game" onclick="closePopUpGame()">Play!</button>
+        </div>
+    </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
     <script>
+        window.onload = function() {
+            openPopUpGame();
+        }
         const wheel = document.getElementById("wheel");
         const spinBtn = document.getElementById("spin-btn");
         const finalValue = document.getElementById("final-value");
@@ -117,4 +136,5 @@
 
     </script>
 </body>
+<script src="static/script.js"></script>
 {% endblock %}

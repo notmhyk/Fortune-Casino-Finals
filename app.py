@@ -82,7 +82,7 @@ def gamesdashboard_base():
 
 @app.route("/game-bingo")
 def game_bingo():
-    return render_template('games/guess-the-number.html')
+    return render_template('games/whack-a-mole.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
