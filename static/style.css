@@ -859,16 +859,16 @@ nav ul li a {
 /* <----------------------- Roll-'em-Dice -----------------------> */
   
 .body-roll-dice {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
     background-color: #70c1b3;
 }
   
 .roll-btn-roll-em-dice {
       position: relative;
-      top: 30rem;
-      left: -19rem;
+      top: 25rem;
+      left: 20.5rem;
       padding: 15px 50px;
       color: #fff;
       background-color: #f4d35e;
@@ -891,7 +891,7 @@ nav ul li a {
       position: relative;
       display: inline-block;
       top: 150px;
-      left: -20rem;
+      left: 20rem;
 }
   
 .get-dice-number {
@@ -903,13 +903,13 @@ nav ul li a {
 }
   
 .get-dice-number h1 {
-    margin: 10rem 0 0 1rem;
+    margin: 10rem 0 0 6rem;
     color: #fff;
     font-size: 5rem;
 }
   
 .bet-entry {
-    margin: 1rem 0 0 1rem;
+    margin: 1rem 0 0 6rem;
     width: 7rem;
     height: 2rem;
     text-align: center;
@@ -956,15 +956,15 @@ nav ul li a {
   
   /* <---------- SIC-BO ----------> */
 .body-sic {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
     background-color: #70c1b3;
 }
 .roll-btn-sic-bo {
       position: relative;
       top: 25rem;
-      left: -23.2rem;
+      left: 12.5rem;
       padding: 15px 50px;
       color: #fff;
       background-color: #f4d35e;
@@ -987,7 +987,7 @@ nav ul li a {
       position: relative;
       display: inline-block;
       top: 150px;
-      left: -18rem;
+      left: 18rem;
 }
   
   
@@ -1262,12 +1262,12 @@ nav ul li a {
   /* Import Google font - Poppins */
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 .body-rock-paper {
-    height: 100vh;
-    display: flex;
+    /* height: 100vh; */
+    /* display: flex; */
     align-items: center;
     justify-content: center;
     background: #f6f7fb;
-    font-family: "Poppins", sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 ::selection {
       color: #fff;
@@ -1278,10 +1278,12 @@ nav ul li a {
       border-radius: 14px;
       background: #fff;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      margin: 8rem 10rem 0 10rem;
 }
 .result_images {
       display: flex;
       column-gap: 7rem;
+      justify-content: center;
 }
 .container-rock-paper.start .user_result {
       transform-origin: left;
@@ -1304,6 +1306,7 @@ nav ul li a {
 }
 .result_images img {
       width: 100px;
+      
 }
 .user_result img {
       transform: rotate(90deg);
@@ -1325,7 +1328,7 @@ nav ul li a {
       display: flex;
       align-items: center;
       margin-top: 2.5rem;
-      justify-content: space-between;
+      justify-content: space-evenly;
 }
 .container-rock-paper.start .option_images {
       pointer-events: none;
@@ -1856,8 +1859,6 @@ select:focus {
   
   /* <------------------- MINESWEEPER-GAME -------------------> */
 .body-mine {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
     text-align: center;
 }
 #board-mine {
@@ -1865,7 +1866,6 @@ select:focus {
       height: 4405x;
       border: 10px solid darkgray;
       background-color: lightgray;
-  
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
@@ -1940,9 +1940,9 @@ select:focus {
     background-color: #ffffff;
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 50%;
+    top: 55%;
     left: 50%;
-    padding: 3em;
+    padding: 1em 5em;
     border-radius: 1em;
     box-shadow: 0 4em 5em rgba(27, 8, 53, 0.2);
 }
@@ -2201,6 +2201,7 @@ main{
   
 .main-container {
     padding: 24px 16px;
+    margin-left: 32rem;
 }
   
 h2.main-heading {
@@ -2286,9 +2287,9 @@ h2.main-heading {
 .body-ping-pong {
     text-align: center;
     background-color: ghostwhite;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     height: 100vh;
     flex-direction: column;
     position: fixed;

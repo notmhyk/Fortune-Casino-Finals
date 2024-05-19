@@ -1,6 +1,6 @@
 {% extends "dashboard/base-dashboard.html" %}
 
-{% block title %}Fortune Casino - Beat The Dealer {% endblock %}
+{% block title %}- Whack a Mole {% endblock %}
 
 {% block body %}
 <body class="body-whack">
@@ -44,7 +44,7 @@
         currMoleTile.innerHTML = "";
     }
     let mole = document.createElement("img");
-    mole.src = "../images/monty-mole.png";
+    mole.src = "static/images/monty-mole.png";
 
     let num = getRandomTile();
     if (currPlantTile && currPlantTile.id == num) {
@@ -62,7 +62,7 @@
         currPlantTile.innerHTML = "";
     }
     let plant = document.createElement("img");
-    plant.src = "../images/piranha-plant.png";
+    plant.src = "static/images/piranha-plant.png";
 
     let num = getRandomTile();
     if (currMoleTile && currMoleTile.id == num) {

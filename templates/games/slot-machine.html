@@ -1,6 +1,6 @@
 {% extends "dashboard/base-dashboard.html" %}
 
-{% block title %}Fortune Casino - Beat The Dealer {% endblock %}
+{% block title %}- Slot Machine {% endblock %}
 
 {% block link %}
     <style>
@@ -21,7 +21,7 @@
         </section>
         <section onclick="doSlot()" id="Gira">TAKE A SPIN!</section>
         <section id="options">
-            <img src="../images/audioOn.png" id="audio" class="option" onclick="toggleAudio()" />
+            <img src="static/images/audioOn.png" id="audio" class="option" onclick="toggleAudio()" />
         </section>
     </main>
     <section id="info">
@@ -33,10 +33,10 @@
 </body>
 <script>
     var doing = false;
-    var spin = [new Audio("../sounds/spin.mp3"),new Audio("../sounds/spin.mp3"),new Audio("../sounds/spin.mp3"),new Audio("../sounds/spin.mp3"),new Audio("../sounds/spin.mp3"),new Audio("../sounds/spin.mp3"),new Audio("../sounds/spin.mp3")];
-    var coin = [new Audio("../sounds/coin.mp3"),new Audio("../sounds/coin.mp3"),new Audio("../sounds/coin.mp3")]
-    var win = new Audio("../sounds/win.mp3");
-    var lose = new Audio("../sounds/lose.mp3");
+    var spin = [new Audio("static/sounds/spin.mp3"),new Audio("static/sounds/spin.mp3"),new Audio("static/sounds/spin.mp3"),new Audio("static/sounds/spin.mp3"),new Audio("static/sounds/spin.mp3"),new Audio("static/sounds/spin.mp3"),new Audio("static/sounds/spin.mp3")];
+    var coin = [new Audio("static/sounds/coin.mp3"),new Audio("static/sounds/coin.mp3"),new Audio("static/sounds/coin.mp3")]
+    var win = new Audio("static/sounds/win.mp3");
+    var lose = new Audio("static/sounds/lose.mp3");
     var audio = false;
     let status = document.getElementById("status")
     var info = true;
@@ -147,7 +147,7 @@
             win.volume = 0;
             lose.volume = 0;
         }
-        document.getElementById("audio").src = "../images/audio"+(audio?"On":"Off")+".png";
+        document.getElementById("audio").src = "static/images/audio"+(audio?"On":"Off")+".png";
     }
     
     function randomInt(min, max){
