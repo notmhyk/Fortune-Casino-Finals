@@ -1114,6 +1114,104 @@ nav ul li a {
     height: 50px;
     font-size: 20px;
 }
+
+/* <-------- POP-UP-GAME -------> */
+.popup-game {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+}
+  
+.popup-content-game {
+    display: block;
+    justify-content: center;
+    background-color: #fefefe;
+    text-align: center;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+}
+  
+.close-game {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    right: 1rem;
+}
+
+#play-the-game {
+    padding: 1rem 3rem;
+    border-radius: 15px;
+    border: none;
+    color: black;
+    background-color: orange;
+    cursor: pointer;
+}
+
+#play-the-game:hover {
+    color: white;
+    background-color: rgb(204, 133, 2);
+}
+
+/* <------ POP-UP-BET ---------> */
+
+.popup-bet {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+}
+  
+.popup-content-bet {
+    display: block;
+    justify-content: center;
+    background-color: #fefefe;
+    text-align: center;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+}
+  
+.close-bet {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    right: 1rem;
+}
+
+#play-the-game {
+    padding: 1rem 3rem;
+    border-radius: 15px;
+    border: none;
+    color: black;
+    background-color: orange;
+    cursor: pointer;
+}
+
+#play-the-game:hover {
+    color: white;
+    background-color: rgb(204, 133, 2);
+}
+
   
   /* <---------------- HIHGER-LOWER-CARD --------------> */
 .body-higher-lower {
@@ -1172,7 +1270,7 @@ nav ul li a {
         #f9fbfc 50%
     ) fixed;
     font-family: "Rubik",sans-serif;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
 }
 .container-flip {
       background-color: #ffffff;

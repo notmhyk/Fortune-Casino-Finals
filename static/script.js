@@ -76,6 +76,7 @@ function lowerBeatTheDealer() {
     }
     else if (dealerSumBeatTheDealer > yourSumBeatTheDealer) {
         messageBeatTheDealer = "You win!";
+        openPopUpGame();
     }
     
     else if (yourSumBeatTheDealer == dealerSumBeatTheDealer) {
@@ -428,6 +429,8 @@ paypal.Buttons({
     },
 }).render("#paypal");
 
+
+
 function openPopup(amountValue, img) {
     amount = amountValue;
     document.getElementById("pop-up-img").src = "static/images/" + img + ".png";
@@ -438,3 +441,18 @@ function openPopup(amountValue, img) {
 function closePopup() {
     document.getElementById("popup").style.display = "none";
 }
+
+function openPopUpGame() {
+    document.getElementById("popUp").style.display = "block";
+    document.getElementById("instruction").style.display = "block";
+    document.getElementById("mechanics").style.display = "block";
+}
+
+function closePopUpGame() {
+    // buildDeckBeatTheDealer();
+    // shuffleDeckBeatTheDealer();
+    // startGameBeatTheDealer();
+    document.getElementById("popUp").style.display = "none";
+}
+
+
