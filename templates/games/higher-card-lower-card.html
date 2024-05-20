@@ -27,9 +27,29 @@
   
     <div id="popUp-bet" class="popup-bet">
         <div class="popup-content-bet">
-            <span class="close-bet" onclick="closePopUpGame()">&times;</span>
-            <h1 id="mechanics">Your bet <br> <br></h1>
-            <button id="play-the-game" onclick="closePopUpGame()">Play!</button>
+            <span class="close-bet" onclick="closePopUpBet()">&times;</span>
+            <h1 id="mechanics">Your bet</h1>
+            <div id="bet-wrapper" class="bet-wrapper">
+                <div class="bet-container">
+                    <img src="static/images/30-bet.png" onclick="(onClickBet(30))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/90-bet.png" onclick="(onClickBet(90))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/150-bet.png" onclick="(onClickBet(150))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/300-bet.png" onclick="(onClickBet(300))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/500-bet.png" onclick="(onClickBet(500))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/all-in-bet.png" onclick="(onClickBet('all-in'))" alt="">
+                </div>
+            </div>
+            <button id="play-the-game" onclick="closePopUpBet()">Play!</button>
         </div>
     </div>
 
@@ -208,6 +228,21 @@
         // startGameBeatTheDealer();
         document.getElementById("popUp").style.display = "none";
     }
+    
+    function openPopUpBet() {
+    document.getElementById("popUp-bet").style.display = "block";
+    document.getElementById("instruction").style.display = "block";
+    document.getElementById("mechanics").style.display = "block";
+    }
+
+    function closePopUpBet() {
+        
+        document.getElementById("popUp-bet").style.display = "none";
+    }
+
+    function onClickBet(amount) {
+    console.log(amount);
+}
     </script>
     
 {% endblock %}

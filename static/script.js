@@ -397,16 +397,9 @@ function reduceAce(playerSum, playerAceCount) {
     return playerSum;
 }
 
-// <-------------------- FLIP-COIN -------------------->
+// <----------- BALANCE -------------->
 
-// <------------------------ ROCK-PAPER-SCISSORS ---------------------->
-
-// <------------------------- HANG-THE-DEALER -------------------------->
-
-// <------------------------ MINE-SWEEPER ------------------------->
-
-// <------------------------- SPIN-THE-WHEEL ---------------------->
-
+let balanceElement = document.getElementById("balance");
 
 
 // <-------------- PAYPAL POP-UP CLOSE-UP ------------->
@@ -442,6 +435,8 @@ function closePopup() {
     document.getElementById("popup").style.display = "none";
 }
 
+// <---- pop-up-game ----->
+
 function openPopUpGame() {
     document.getElementById("popUp").style.display = "block";
     document.getElementById("instruction").style.display = "block";
@@ -449,10 +444,33 @@ function openPopUpGame() {
 }
 
 function closePopUpGame() {
-    // buildDeckBeatTheDealer();
-    // shuffleDeckBeatTheDealer();
-    // startGameBeatTheDealer();
+    
     document.getElementById("popUp").style.display = "none";
 }
 
+// <---- pop-up-bet ----->
 
+function openPopUpBet() {
+    document.getElementById("popUp-bet").style.display = "block";
+    document.getElementById("instruction").style.display = "block";
+    document.getElementById("mechanics").style.display = "block";
+}
+
+function closePopUpBet() {
+    
+    document.getElementById("popUp-bet").style.display = "none";
+}
+
+
+function onClickBet(amount) {
+    let balance = parseInt(balanceElement.textContent, 10);
+    if (balance >= amount) {
+        alert("You have enough money!");
+        
+    }
+    else {
+        alert("You don't have enough money!");
+        return;
+    }
+    console.log(amount, balance);
+}

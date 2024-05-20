@@ -24,7 +24,7 @@ flex: 1;
 
 .nav-landing ul li {
     display: inline-block;
-    margin-right: 5rem;
+    margin-right: 3rem;
 }
 
 .nav-landing ul li a {
@@ -1181,7 +1181,7 @@ nav ul li a {
     justify-content: center;
     background-color: #fefefe;
     text-align: center;
-    margin: 10% auto;
+    margin: 2% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 60%;
@@ -1210,6 +1210,24 @@ nav ul li a {
 #play-the-game:hover {
     color: white;
     background-color: rgb(204, 133, 2);
+}
+
+.bet-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.bet-container img {
+    margin: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.bet-container img:hover {
+    transform: scale(1.02);
 }
 
   
