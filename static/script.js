@@ -173,6 +173,8 @@ let imagesColor = [
     "static/images/color-game-yellow.png"
 ];
 
+let guessAddNumberRollEmDice = 0;
+
 // <----------------------- Roll-'em-Dice ----------------------->
 function animateDiceRoll() {
     let dieOneValue = Math.floor(Math.random() * 6);
@@ -193,9 +195,22 @@ function animateDiceRoll() {
         document.querySelector("#dice-two-side-one img").setAttribute("src", images[dieTwoValue]);
         
         let total = dieOneValue + 1 + dieTwoValue + 1; 
-        document.querySelector(".dice-1-dice-2-addnumber").textContent = total;
+        let result = "";
+        if (total == guessAddNumberRollEmDice) {
+            result = "You Win!";
+        }
+        else {
+            result = "You Lose!";
+        }
+        document.querySelector(".dice-1-dice-2-addnumber").textContent = result;
         }, 1000); 
         
+}
+
+function guessNumberRollEmDice(number) {
+    guessAddNumberRollEmDice = number;
+    document.querySelector(".guess-container-roll").textContent = `Your guess is: ${guessAddNumberRollEmDice}`;
+    console.log(number)
 }
 
 // <-------------------------- COLOR-GAME ---------------------------->
@@ -399,7 +414,8 @@ function reduceAce(playerSum, playerAceCount) {
 
 // <----------- BALANCE -------------->
 
-let balanceElement = document.getElementById("balance");
+const balanceElement = document.getElementById("balance");
+let selectedDice = null;
 
 
 // <-------------- PAYPAL POP-UP CLOSE-UP ------------->
@@ -444,7 +460,6 @@ function openPopUpGame() {
 }
 
 function closePopUpGame() {
-    
     document.getElementById("popUp").style.display = "none";
 }
 
@@ -452,12 +467,11 @@ function closePopUpGame() {
 
 function openPopUpBet() {
     document.getElementById("popUp-bet").style.display = "block";
-    document.getElementById("instruction").style.display = "block";
     document.getElementById("mechanics").style.display = "block";
+    document.getElementById("popUp").style.display = "none";
 }
 
 function closePopUpBet() {
-    
     document.getElementById("popUp-bet").style.display = "none";
 }
 
@@ -473,4 +487,43 @@ function onClickBet(amount) {
         return;
     }
     console.log(amount, balance);
+}
+
+// <-------- pop-up-dice ------->
+
+function openPopUpDice() {
+    document.getElementById("popUp-dice").style.display = "block";
+    document.getElementById("mechanics").style.display = "block";
+    document.getElementById("popUp").style.display = "none";
+}
+
+function closePopUpDice() {
+    document.getElementById("popUp-dice").style.display = "none";
+}
+
+
+function onclickDice(dice) {
+    console.log(dice);
+    document.getElementById("popUp-dice").style.display = "none";
+    document.getElementById("popUp-bet").style.display = "block";
+    selectedDice = dice;
+}
+
+function onClickBetDice(amount) {
+    console.log(amount);
+    let balance = parseInt(balanceElement.textContent, 10);
+    // if (balance >= amount) {
+    //     alert("You have enough money!");
+    //     finalBetDice(selectedDice,amount);
+    // }
+    // else {
+    //     alert("You don't have enough money!");
+    //     return;
+    // }
+    document.getElementById("popUp-bet").style.display = "none";
+    finalBetDice(selectedDice,amount);
+}
+
+function finalBetDice(dice, amount) {
+    console.log(dice, amount);
 }
