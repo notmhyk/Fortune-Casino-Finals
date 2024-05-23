@@ -414,12 +414,16 @@ function reduceAce(playerSum, playerAceCount) {
 
 // <----------- BALANCE -------------->
 
-const balanceElement = document.getElementById("balance");
-let selectedDice = null;
+// const balanceElement = document.getElementById("balance");
+// let selectedDice = null;
+// let newBalance = parseInt(balanceElement.textContent, 10)
 
+const balanceElement = document.getElementById("balance");
+let newBalance = parseInt(balanceElement.textContent.trim(), 10);
+let amount = null;
 
 // <-------------- PAYPAL POP-UP CLOSE-UP ------------->
-let amount = null
+
 
 paypal.Buttons({
     createOrder: function(data, actions) {
@@ -434,12 +438,33 @@ paypal.Buttons({
     onApprove: function(data, actions) {
         return actions.order.capture().then(function(details) {
             alert("Transaction completed by " + details.payer.name.given_name);
-            balanceElement.innerText = amount;
+            let currentBalance = newBalance + parseInt(amount, 10);
+            saveBalanceToServer(balanceElement.textContent = currentBalance);
+            closePopup();
         });
     },
 }).render("#paypal");
 
-
+function saveBalanceToServer(balance) {
+    console.log(balance);
+    fetch('/update_balance', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ new_balance: balance })
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Balance saved successfully!');
+        } else {
+            console.error('Failed to save balance');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 function openPopup(amountValue, img) {
     amount = amountValue;

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, flash, redirect, url_for, make_response
+from flask import Flask, render_template, request, session, flash, redirect, url_for, make_response, jsonify
 from datetime import timedelta, datetime
 from functools import wraps 
 from models import db, User
@@ -25,6 +25,26 @@ def login_required(f):
         return response
     return decorated_function
 
+@app.route("/update_balance", methods=["POST"])
+@login_required 
+def update_balance():
+    user_data = session['user']
+    user_id = user_data['id']
+    new_balance = request.json.get('new_balance')
+
+    if new_balance is None:
+        return jsonify({"status": "error", "message": "No balance provided"}), 400
+
+    user = User.query.get(user_id)
+    if user:
+        user.balance = new_balance
+        db.session.commit()
+        # Update session data
+        session['user']['balance'] = new_balance
+        return jsonify({"status": "success", "new_balance": new_balance})
+    else:
+        return jsonify({"status": "error", "message": "User not found"}), 404
+    
 @app.route('/')
 def index():
     return render_template('index.html')
