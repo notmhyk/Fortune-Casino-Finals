@@ -15,6 +15,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: "Montserrat";
+            /* text-align: center; */
         }
     </style>
 
@@ -34,22 +35,23 @@
                     <div class="user-container">
                         <div class="coins-container" onclick="window.location.href='/coins'">
                             <img src="static/images/chip.png" alt="Chip">
-                            <h3>$ <span id="balance">0</span></h3>
+                            <h3>$ <span id="balance"></span></h3>
                         </div>
                         <div class="notification-container">
                             <img src="static/images/bell.png" alt="Bell">
                             <h3> 100</h3>
                         </div>
-                        <div class="profile-container" onclick="window.location.href='/'">
+                        <div class="profile-container" onclick="window.location.href='/logout'">
                             <img src="static/images/profile.png" alt="Profile">
+                            <h1><span>{{ user['first_name'] }}</span></h1>
                         </div>
+                        
                     </div>
                 </ul>
                 
             </nav>
         </div>
     </header>
-
     {% block body %}
     
     {% endblock %}

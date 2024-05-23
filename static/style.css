@@ -301,7 +301,7 @@ nav {
 nav ul {
     display: inline-block;
     list-style-type: none;
-    /* margin-left: -6rem; */
+    margin-left: -3rem;
 }
   
 nav ul li {
@@ -316,10 +316,11 @@ nav ul li a {
 }
   
 .logo {
-    padding: 5px 0 0 100px;
+    /* padding: 5px 0 0 100px; */
     position: relative;
     cursor: pointer;
     left: 1rem;
+    text-align: center;
 }
   
 .logo img {
@@ -1350,7 +1351,6 @@ nav ul li a {
     text-align: center;
 }
   /* <---------------- LUCKY-21 & BEAT-THE-DEALER & HIGHER-LOWER -------------> */
-  
 #dealer-cards img {
       height: 175px;
       width: 125px;
