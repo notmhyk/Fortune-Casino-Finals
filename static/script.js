@@ -76,19 +76,59 @@ function lowerBeatTheDealer() {
     let messageBeatTheDealer = "";
     if (yourSumBeatTheDealer > dealerSumBeatTheDealer) {
         messageBeatTheDealer = "You Lose!";
-        let newBalance = parseInt(document.getElementById('balance').textContent, 10) - amountBet;
-        saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
-        setTimeout(() => {
-            location.reload();
-        }, 2000);
+        let newBalance = parseInt(document.getElementById('balance').textContent, 10) - parseInt(amountBet, 10);
+            document.getElementById('balance').textContent = newBalance;
+            // saveBalanceToServer(newBalance);
+            fetch('/update_balance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ new_balance: newBalance })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Balance saved successfully!');
+                    // return response.json();
+                } else {
+                    console.error('Failed to save balance');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            betAmountSet();
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
     }
     else if (dealerSumBeatTheDealer > yourSumBeatTheDealer) {
         messageBeatTheDealer = "You win!";
         let newBalance = parseInt(document.getElementById('balance').textContent, 10) + parseInt(amountBet, 10);
-        saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
-        setTimeout(() => {
-            location.reload();
-        }, 2000);
+            document.getElementById('balance').textContent = newBalance;
+            // saveBalanceToServer(newBalance);
+            fetch('/update_balance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ new_balance: newBalance })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Balance saved successfully!');
+                    // return response.json();
+                } else {
+                    console.error('Failed to save balance');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            betAmountSet();
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
     }
     
     else if (yourSumBeatTheDealer == dealerSumBeatTheDealer) {
@@ -123,18 +163,58 @@ function higherBeatTheDealer() {
     if (yourSumBeatTheDealer > dealerSumBeatTheDealer) {
         messageBeatTheDealer = "You win!";
         let newBalance = parseInt(document.getElementById('balance').textContent, 10) + parseInt(amountBet, 10);
-        saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
-        setTimeout(() => {
-            location.reload();
-        }, 2000);
+            document.getElementById('balance').textContent = newBalance;
+            // saveBalanceToServer(newBalance);
+            fetch('/update_balance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ new_balance: newBalance })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Balance saved successfully!');
+                    // return response.json();
+                } else {
+                    console.error('Failed to save balance');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            betAmountSet();
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
     }
     else if (dealerSumBeatTheDealer > yourSumBeatTheDealer) {
         messageBeatTheDealer = "You lose!";
         let newBalance = parseInt(document.getElementById('balance').textContent, 10) - parseInt(amountBet, 10);
-        saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
-        setTimeout(() => {
-            location.reload();
-        }, 2000);
+            document.getElementById('balance').textContent = newBalance;
+            // saveBalanceToServer(newBalance);
+            fetch('/update_balance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ new_balance: newBalance })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Balance saved successfully!');
+                    // return response.json();
+                } else {
+                    console.error('Failed to save balance');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            betAmountSet();
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
     }
     
     else if (yourSumBeatTheDealer == dealerSumBeatTheDealer) {
@@ -447,7 +527,7 @@ function reduceAce(playerSum, playerAceCount) {
 // let newBalance = parseInt(balanceElement.textContent, 10)
 
 const balanceElement = document.getElementById("balance");
-let newBalance = parseInt(balanceElement.textContent.trim(), 10);
+let newBalanceCoins = parseInt(balanceElement.textContent.trim(), 10);
 let amount = null;
 
 // <-------------- PAYPAL POP-UP CLOSE-UP ------------->
@@ -466,7 +546,7 @@ paypal.Buttons({
     onApprove: function(data, actions) {
         return actions.order.capture().then(function(details) {
             alert("Transaction completed by " + details.payer.name.given_name);
-            let currentBalance = newBalance + parseInt(amount, 10);
+            let currentBalance = newBalanceCoins + parseInt(amount, 10);
             saveBalanceToServer(balanceElement.textContent = currentBalance);
             closePopup();
         });
@@ -485,6 +565,7 @@ function saveBalanceToServer(balance) {
     .then(response => {
         if (response.ok) {
             console.log('Balance saved successfully!');
+            // return response.json();
         } else {
             console.error('Failed to save balance');
         }
@@ -630,4 +711,8 @@ function saveBalanceToServerThenExit(balance, url) {
     .catch(error => {
         console.error('Error:', error);
     });
+}
+
+function betAmountSet() {
+    amountBet = 0;
 }

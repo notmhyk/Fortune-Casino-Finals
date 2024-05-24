@@ -26,43 +26,49 @@
     </div> 
     <div id="popUp" class="popup-game">
         <div class="popup-content-game">
-            <span class="close-game" onclick="closePopUpGame()">&times;</span>
+            <span class="close-game" onclick="onClickExit()">&times;</span>
             <h1 id="mechanics">Mechanics <br> <br></h1>
             <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
-            <button id="play-the-game" onclick="closePopUpGame()">Okay!</button>
+            <button id="play-the-game" onclick="openPopUpBet()">Okay!</button>
         </div>
     </div>
   
     <div id="popUp-bet" class="popup-bet">
         <div class="popup-content-bet">
-            <span class="close-bet" onclick="closePopUpBet()">&times;</span>
+            <span class="close-bet" onclick="onClickExit()">&times;</span>
             <h1 id="mechanics">Choose your League</h1>
             <div id="bet-wrapper" class="bet-wrapper">
                 <div class="bet-container">
-                    <img src="static/images/100-bet.png" onclick="(onClickBet(100))" alt="">
+                    <img src="static/images/100-bet.png" onclick="(onClickBet(100, this.src))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/200-bet.png" onclick="(onClickBet(200))" alt="">
+                    <img src="static/images/200-bet.png" onclick="(onClickBet(200, this.src))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/300-bet.png" onclick="(onClickBet(300))" alt="">
+                    <img src="static/images/300-bet.png" onclick="(onClickBet(300, this.src))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/400-bet.png" onclick="(onClickBet(400))" alt="">
+                    <img src="static/images/400-bet.png" onclick="(onClickBet(400, this.src))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/500-bet.png" onclick="(onClickBet(500))" alt="">
+                    <img src="static/images/500-bet.png" onclick="(onClickBet(500, this.src))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/all-in-bet.png" onclick="(onClickBet('all-in'))" alt="">
+                    <img src="static/images/all-in-bet.png" onclick="(onClickBet('all-in', this.src))" alt="">
                 </div>
             </div>
-            <button id="play-the-game" onclick="closePopUpBet()">Play!</button>
+            <!-- <button id="play-the-game" onclick="closePopUpBet()">Play!</button> -->
         </div>
     </div>
 
-</body>
+    <div class="bet-user">
+        <h1>Your Bet: <span id="user-bet"></span></h1>
+        <img src="" alt="" id="bet-img">
+        <h2 id="change-bet">Good Luck!</h2>
+    </div>
 
+</body>
+<script src="static/script.js"></script>
 <script>
     window.onload = function() {
         openPopUpGame();
@@ -350,7 +356,6 @@
     }
 
     const getRandomWord = () => {
-        
         const { word, hint } = wordList[Math.floor(Math.random() * wordList.length)];
         currentWord = word; 
         document.querySelector(".hint-text b").innerText = hint;
@@ -363,6 +368,59 @@
         gameModal.querySelector("h4").innerText = isVictory ? 'Congrats!' : 'Game Over!';
         gameModal.querySelector("p").innerHTML = `${modalText} <b>${currentWord}</b>`;
         gameModal.classList.add("show");
+
+        if (isVictory) {
+            let newBalance = parseInt(document.getElementById('balance').textContent, 10) + parseInt(amountBet, 10);
+            document.getElementById('balance').textContent = newBalance;
+            // saveBalanceToServer(newBalance);
+            fetch('/update_balance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ new_balance: newBalance })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Balance saved successfully!');
+                    // return response.json();
+                } else {
+                    console.error('Failed to save balance');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } 
+        else {
+            let newBalance = parseInt(document.getElementById('balance').textContent, 10) - parseInt(amountBet, 10);
+            document.getElementById('balance').textContent = newBalance;
+            // saveBalanceToServer(newBalance);
+            fetch('/update_balance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ new_balance: newBalance })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Balance saved successfully!');
+                    // return response.json();
+                } else {
+                    console.error('Failed to save balance');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        }
     }
 
     const initGame = (button, clickedLetter) => {
@@ -396,5 +454,5 @@
     getRandomWord();
     playAgainBtn.addEventListener("click", getRandomWord);
 </script>
-<script src="static/script.js"></script>
+
 {% endblock %}

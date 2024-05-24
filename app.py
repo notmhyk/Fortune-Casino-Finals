@@ -39,7 +39,6 @@ def update_balance():
     if user:
         user.balance = new_balance
         db.session.commit()
-        # Update session data
         session['user']['balance'] = new_balance
         return jsonify({"status": "success", "new_balance": new_balance})
     else:
@@ -183,7 +182,7 @@ def coin_flip():
     user_data = session['user']
     return render_template('games/flip-coin.html', user=user_data)
 
-@app.route("/game-dont-let-them-hang-the-dealer")
+@app.route("/game-hang-the-dealer")
 @login_required
 def hang_the_dealer():
     user_data = session['user']
