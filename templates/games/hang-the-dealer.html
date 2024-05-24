@@ -370,56 +370,10 @@
         gameModal.classList.add("show");
 
         if (isVictory) {
-            let newBalance = parseInt(document.getElementById('balance').textContent, 10) + parseInt(amountBet, 10);
-            document.getElementById('balance').textContent = newBalance;
-            // saveBalanceToServer(newBalance);
-            fetch('/update_balance', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ new_balance: newBalance })
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Balance saved successfully!');
-                    // return response.json();
-                } else {
-                    console.error('Failed to save balance');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
+            addBetToBalance(amountBet);
         } 
         else {
-            let newBalance = parseInt(document.getElementById('balance').textContent, 10) - parseInt(amountBet, 10);
-            document.getElementById('balance').textContent = newBalance;
-            // saveBalanceToServer(newBalance);
-            fetch('/update_balance', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ new_balance: newBalance })
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Balance saved successfully!');
-                    // return response.json();
-                } else {
-                    console.error('Failed to save balance');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
+            deductBetFromBalance(amountBet);
         }
     }
 
@@ -453,6 +407,58 @@
 
     getRandomWord();
     playAgainBtn.addEventListener("click", getRandomWord);
+
+    function addBetToBalance(amount) {
+        console.log(amount);
+        fetch('/add_balance', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ new_balance: amount })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                console.log('Balance saved successfully!');
+                document.getElementById('balance').textContent = data.new_balance;
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            } else {
+                console.error('Failed to save balance:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function deductBetFromBalance(amount) {
+        console.log(amount);
+        fetch('/deduct_points', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ new_balance: amount })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                console.log('Balance saved successfully!');
+                document.getElementById('balance').textContent = data.new_balance;
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            } else {
+                console.error('Failed to save balance:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 </script>
 
 {% endblock %}

@@ -39,11 +39,60 @@ def update_balance():
     if user:
         user.balance = new_balance
         db.session.commit()
-        session['user']['balance'] = new_balance
+        # session['user']['balance'] = new_balance
+        # session.modified = True
         return jsonify({"status": "success", "new_balance": new_balance})
     else:
         return jsonify({"status": "error", "message": "User not found"}), 404
-    
+
+@app.route("/add_balance", methods=["POST"])
+@login_required
+def add_balance():
+    user_data = session['user']
+    user_id = user_data['id']
+    points_to_add = request.json.get('new_balance')
+
+    if points_to_add is None:
+        return jsonify({"status": "error", "message": "No points provided"}), 400
+
+    user = User.query.get(user_id)
+    if user:
+        new_balance = user.balance + points_to_add
+        user.balance = new_balance
+        db.session.commit()
+
+        # session['user']['balance'] = new_balance
+        # session.modified = True
+
+        return jsonify({"status": "success", "new_balance": new_balance})
+    else:
+        return jsonify({"status": "error", "message": "User not found"}), 404
+
+@app.route("/deduct_points", methods=["POST"])
+@login_required
+def deduct_points():
+    user_data = session['user']
+    user_id = user_data['id']
+    points_to_deduct = request.json.get('new_balance')
+
+    if points_to_deduct is None:
+        return jsonify({"status": "error", "message": "No points provided"}), 400
+
+    user = User.query.get(user_id)
+    if user:
+        new_balance = user.balance - points_to_deduct
+        if new_balance < 0:
+            return jsonify({"status": "error", "message": "Insufficient balance"}), 400
+        
+        user.balance = new_balance
+        db.session.commit()
+        session['user']['balance'] = new_balance
+        session.modified = True
+
+        return jsonify({"status": "success", "new_balance": new_balance})
+    else:
+        return jsonify({"status": "error", "message": "User not found"}), 404
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -107,20 +156,25 @@ def reset_password():
 @login_required
 def dashboard():
     user_data = session['user']
+    user = User.query.get(user_data['id'])
     print(user_data)
-    return render_template('dashboard/dashboard.html', user=user_data)
+    return render_template('dashboard/dashboard.html', user=user.to_dict())
 
 @app.route("/coins")
 @login_required
 def coins():
     user_data = session['user']
-    return render_template('dashboard/coins.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('dashboard/coins.html', user=user.to_dict())
 
 @app.route("/games")
 @login_required
 def gamesdashboard():
     user_data = session['user']
-    return render_template('dashboard/games.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('dashboard/games.html', user=user.to_dict())
 
 @app.route("/logout")
 def logout():
@@ -132,61 +186,81 @@ def logout():
 @login_required
 def roll_em_die():
     user_data = session['user']
-    return render_template('games/roll-dice.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/roll-dice.html', user=user.to_dict())
 
 @app.route("/game-blackjack")
 @login_required
 def blackjack():
     user_data = session['user']
-    return render_template('games/blackjack.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/blackjack.html', user=user.to_dict())
 
 @app.route("/game-spin-the-wheel")
 @login_required
 def spin_the_wheel():
     user_data = session['user']
-    return render_template('games/spin-the-wheel.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/spin-the-wheel.html', user=user.to_dict())
 
 @app.route("/game-slot-machine")
 @login_required
 def slot_machine():
     user_data = session['user']
-    return render_template('games/slot-machine.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/slot-machine.html', user=user.to_dict())
 
 @app.route("/game-color-game")
 @login_required
 def color_game():
     user_data = session['user']
-    return render_template('games/color-game.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/color-game.html', user=user.to_dict())
 
 @app.route("/game-sic-bo")
 @login_required
 def sic_bo():
     user_data = session['user']
-    return render_template('games/sic-bo.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/sic-bo.html', user=user.to_dict())
 
 @app.route("/game-higher-or-lower-card")
 @login_required
 def higher_lower_card():
     user_data = session['user']
-    return render_template('games/higher-card-lower-card.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/higher-card-lower-card.html', user=user.to_dict())
 
 @app.route("/game-beat-the-dealer")
 @login_required
 def beat_the_dealer():
     user_data = session['user']
-    return render_template('games/beat-the-dealer.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/beat-the-dealer.html', user=user.to_dict())
 
 @app.route("/game-coin-flip")
 @login_required
 def coin_flip():
     user_data = session['user']
-    return render_template('games/flip-coin.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/flip-coin.html', user=user.to_dict())
 
 @app.route("/game-hang-the-dealer")
 @login_required
 def hang_the_dealer():
     user_data = session['user']
-    return render_template('games/hang-the-dealer.html', user=user_data)
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/hang-the-dealer.html', user=user.to_dict())
     
 
 if __name__ == '__main__':

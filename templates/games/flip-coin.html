@@ -131,59 +131,11 @@
         function checkGuess() {
             if (headsOrTails == resultGuess) {
                 result.textContent = "Your guess is Correct!";
-                let newBalance = parseInt(document.getElementById('balance').textContent, 10) + parseInt(amountBet, 10);
-                document.getElementById('balance').textContent = newBalance;
-                // saveBalanceToServer(newBalance);
-                fetch('/update_balance', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ new_balance: newBalance })
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Balance saved successfully!');
-                    // return response.json();
-                } else {
-                    console.error('Failed to save balance');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-                betAmountSet();
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
+                addBetToBalance(amountBet);
                 }
             else {
                 result.textContent = "Your guess is Wrong!";
-                let newBalance = parseInt(document.getElementById('balance').textContent, 10) - parseInt(amountBet, 10);
-                document.getElementById('balance').textContent = newBalance;
-                // saveBalanceToServer(newBalance);
-                fetch('/update_balance', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ new_balance: newBalance })
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Balance saved successfully!');
-                    // return response.json();
-                } else {
-                    console.error('Failed to save balance');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-                betAmountSet();
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
+                deductBetFromBalance(amountBet);
             }
             }
 
