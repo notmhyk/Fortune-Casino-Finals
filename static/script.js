@@ -1,3 +1,6 @@
+let amountBet = 0;
+
+
 // <----------------- BEAT-THE-DEALER --------------------->
 let dealerSumBeatTheDealer = 0;
 let yourSumBeatTheDealer = 0;
@@ -73,14 +76,28 @@ function lowerBeatTheDealer() {
     let messageBeatTheDealer = "";
     if (yourSumBeatTheDealer > dealerSumBeatTheDealer) {
         messageBeatTheDealer = "You Lose!";
+        let newBalance = parseInt(document.getElementById('balance').textContent, 10) - amountBet;
+        saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     else if (dealerSumBeatTheDealer > yourSumBeatTheDealer) {
         messageBeatTheDealer = "You win!";
-        openPopUpGame();
+        let newBalance = parseInt(document.getElementById('balance').textContent, 10) + parseInt(amountBet, 10);
+        saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
+        
+        
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     
     else if (yourSumBeatTheDealer == dealerSumBeatTheDealer) {
         messageBeatTheDealer = "Tie!";
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     
 
@@ -107,13 +124,26 @@ function higherBeatTheDealer() {
     let messageBeatTheDealer = "";
     if (yourSumBeatTheDealer > dealerSumBeatTheDealer) {
         messageBeatTheDealer = "You win!";
+        let newBalance = parseInt(document.getElementById('balance').textContent, 10) + parseInt(amountBet, 10);
+        saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     else if (dealerSumBeatTheDealer > yourSumBeatTheDealer) {
         messageBeatTheDealer = "You lose!";
+        let newBalance = parseInt(document.getElementById('balance').textContent, 10) - parseInt(amountBet, 10);
+        saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     
     else if (yourSumBeatTheDealer == dealerSumBeatTheDealer) {
         messageBeatTheDealer = "Tie!";
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     
 
@@ -491,22 +521,36 @@ function closePopUpGame() {
 
 // <---- pop-up-bet ----->
 
-function openPopUpBet() {
+function openPopUpBet(game) {
+    if (game == 'beat') {
+        buildDeckBeatTheDealer();
+        shuffleDeckBeatTheDealer();
+        startGameBeatTheDealer();
+    }
     document.getElementById("popUp-bet").style.display = "block";
     document.getElementById("mechanics").style.display = "block";
     document.getElementById("popUp").style.display = "none";
+    document.querySelector(".bet-user").style.display = "none";
 }
 
 function closePopUpBet() {
     document.getElementById("popUp-bet").style.display = "none";
 }
 
-
-function onClickBet(amount) {
+function onClickBet(amount, imgsrc) {
     let balance = parseInt(balanceElement.textContent, 10);
     if (balance >= amount) {
-        alert("You have enough money!");
-        
+        amountBet = amount;
+        document.querySelector(".bet-user").style.display = "block";
+        document.getElementById("user-bet").textContent = `$ ${amount}`;
+        document.getElementById("bet-img").src = imgsrc
+        closePopUpBet();
+    }else if (amount == 'all-in') {
+        amountBet = balance;
+        document.querySelector(".bet-user").style.display = "block";
+        document.getElementById("user-bet").textContent = `$ ${balance}`;
+        document.getElementById("bet-img").src = imgsrc
+        closePopUpBet();
     }
     else {
         alert("You don't have enough money!");
@@ -538,18 +582,54 @@ function onclickDice(dice) {
 function onClickBetDice(amount) {
     console.log(amount);
     let balance = parseInt(balanceElement.textContent, 10);
-    // if (balance >= amount) {
-    //     alert("You have enough money!");
-    //     finalBetDice(selectedDice,amount);
-    // }
-    // else {
-    //     alert("You don't have enough money!");
-    //     return;
-    // }
     document.getElementById("popUp-bet").style.display = "none";
     finalBetDice(selectedDice,amount);
 }
 
 function finalBetDice(dice, amount) {
     console.log(dice, amount);
+}
+
+function onClickExit() {
+    window.location.href='/games'
+}
+
+function checkBalanceIfNotNull(url) {
+    if (amountBet != 0) {
+        let result = confirm("Your bet will be deducted to your balance. Are you sure you want to leave this page?");
+        if (result) {
+            let newBalance = parseInt(document.getElementById('balance').textContent, 10) - amountBet;
+            document.getElementById('balance').textContent = newBalance
+            saveBalanceToServerThenExit(newBalance, url);
+        }
+    }
+    else {
+        window.location.href= url;
+    }
+}
+
+function goTo(url){
+    checkBalanceIfNotNull(url);
+}
+
+function saveBalanceToServerThenExit(balance, url) {
+    console.log(balance);
+    fetch('/update_balance', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ new_balance: balance })
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Balance saved successfully!');
+            window.location.href=url;
+        } else {
+            console.error('Failed to save balance');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }

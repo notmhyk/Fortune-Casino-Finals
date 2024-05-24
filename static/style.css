@@ -308,6 +308,7 @@ nav ul li {
     display: inline-block;
     margin-right: 40px;
     margin-left: 1rem;
+    cursor: pointer;
 }
   
 nav ul li a {
@@ -1145,6 +1146,19 @@ nav ul li a {
     width: 100px;
     height: 50px;
     font-size: 20px;
+}
+
+.bet-user {
+    display: none;
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    margin-bottom: 0;
+}
+
+.bet-user img {
+    border-radius: 12px;
+    width: 200px;
 }
 
 /* <-------- POP-UP-GAME -------> */

@@ -23,17 +23,17 @@
     <header>
         <div class="navbar">
             <div class="logo">
-                <img src="static/images/fortune's-chip.png" alt="Logo" onclick="window.location.href='/dashboard'">
+                <img src="static/images/fortune's-chip.png" alt="Logo" onclick="goTo('/dashboard')">
             </div>
             <nav>
                 <ul id="menuItems">
-                    <li><a href="/dashboard">HOME</a></li>
+                    <li><a onclick="goTo('/dashboard')">HOME</a></li>
                     <li><a href="">PROMOTIONS</a></li>
                     <li><a href="">LOTTERY</a></li>
-                    <li><a href="/coins">BUY COINS</a></li>
-                    <li><a href="/games">GAMES</a></li>
+                    <li><a onclick="goTo('/coins')">BUY COINS</a></li>
+                    <li><a onclick="goTo('/games')">GAMES</a></li>
                     <div class="user-container">
-                        <div class="coins-container" onclick="window.location.href='/coins'">
+                        <div class="coins-container" onclick="goTo('/coins')">
                             <img src="static/images/chip.png" alt="Chip">
                             <h3>$ <span id="balance"> {{ user['balance'] }} </span></h3>
                         </div>
@@ -41,7 +41,7 @@
                             <img src="static/images/bell.png" alt="Bell">
                             <h3> 100</h3>
                         </div> -->
-                        <div class="profile-container" onclick="window.location.href='/logout'">
+                        <div class="profile-container" onclick="goTo('/log-out')">
                             <!-- <img src="static/images/profile.png" alt="Profile"> -->
                             <h1><span>{{ user['first_name'] }}</span></h1>
                         </div>
@@ -55,5 +55,5 @@
     {% block body %}
     
     {% endblock %}
-    
+    <script src="static/script.js"></script>
 </html>

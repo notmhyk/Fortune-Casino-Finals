@@ -126,7 +126,7 @@ def gamesdashboard():
 @app.route("/logout")
 def logout():
     session.pop('user', None)
-    flash('You have been logged out.', 'success')
+    # flash('You have been logged out.', 'success')
     return redirect(url_for('login'))
 
 @app.route("/game-roll-em-die")
