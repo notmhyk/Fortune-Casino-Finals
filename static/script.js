@@ -86,8 +86,6 @@ function lowerBeatTheDealer() {
         messageBeatTheDealer = "You win!";
         let newBalance = parseInt(document.getElementById('balance').textContent, 10) + parseInt(amountBet, 10);
         saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
-        
-        
         setTimeout(() => {
             location.reload();
         }, 2000);

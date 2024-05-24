@@ -4,6 +4,48 @@
 
 {% block body %}
 <body class="body-higher-lower">
+    <div id="popUp" class="popup-game">
+        <div class="popup-content-game">
+            <span class="close-game" onclick="onClickExit()">&times;</span>
+            <h1 id="mechanics">Mechanics <br> <br></h1>
+            <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer's card <br> <br></p>
+            <button id="play-the-game" onclick="openPopUpBet('higher-lower')">Okay!</button>
+        </div>
+    </div>
+
+    <div id="popUp-bet" class="popup-bet">
+        <div class="popup-content-bet">
+            <span class="close-bet" onclick="onClickExit()">&times;</span>
+            <h1 id="mechanics">YOUR BET!</h1>
+            <div id="bet-wrapper" class="bet-wrapper">
+                <div class="bet-container">
+                    <img src="static/images/30-bet.png" onclick="(onClickBet(30, this.src))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/90-bet.png" onclick="(onClickBet(90, this.src))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/150-bet.png" onclick="(onClickBet(150, this.src))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/300-bet.png" onclick="(onClickBet(300, this.src))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/500-bet.png" onclick="(onClickBet(500, this.src))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/all-in-bet.png" onclick="(onClickBet('all-in', this.src))" alt="">
+                </div>
+            </div>
+            <!-- <button id="play-the-game" onclick="onClickBet()">Play!</button> -->
+        </div>
+    </div> 
+
+    <div class="bet-user">
+        <h1>Your Bet: <span id="user-bet"></span></h1>
+        <img src="" alt="" id="bet-img">
+        <h2 id="change-bet">Good Luck!</h2>
+    </div>
     <h2>Dealer: <span id="dealer-sum"></span></h2>
     <div id="dealer-cards">
         <img id="hidden" src="static/images/BACK.png">
@@ -16,42 +58,6 @@
     <button id="higher">Higher</button>
     <button id="lower">Lower</button>
     <p id="results"></p>
-    <div id="popUp" class="popup-game">
-        <div class="popup-content-game">
-            <span class="close-game" onclick="closePopUpGame()">&times;</span>
-            <h1 id="mechanics">Mechanics <br> <br></h1>
-            <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
-            <button id="play-the-game" onclick="closePopUpGame()">Okay!</button>
-        </div>
-    </div>
-  
-    <div id="popUp-bet" class="popup-bet">
-        <div class="popup-content-bet">
-            <span class="close-bet" onclick="closePopUpBet()">&times;</span>
-            <h1 id="mechanics">Your bet</h1>
-            <div id="bet-wrapper" class="bet-wrapper">
-                <div class="bet-container">
-                    <img src="static/images/30-bet.png" onclick="(onClickBet(30))" alt="">
-                </div>
-                <div class="bet-container">
-                    <img src="static/images/90-bet.png" onclick="(onClickBet(90))" alt="">
-                </div>
-                <div class="bet-container">
-                    <img src="static/images/150-bet.png" onclick="(onClickBet(150))" alt="">
-                </div>
-                <div class="bet-container">
-                    <img src="static/images/300-bet.png" onclick="(onClickBet(300))" alt="">
-                </div>
-                <div class="bet-container">
-                    <img src="static/images/500-bet.png" onclick="(onClickBet(500))" alt="">
-                </div>
-                <div class="bet-container">
-                    <img src="static/images/all-in-bet.png" onclick="(onClickBet('all-in'))" alt="">
-                </div>
-            </div>
-            <button id="play-the-game" onclick="closePopUpBet()">Play!</button>
-        </div>
-    </div>
 
 </body>
 <!-- <script src="static/script.js"></script> -->
@@ -67,14 +73,13 @@
         let deck;
 
         let canHit = true;
+        const balanceElement = document.getElementById("balance");
+        let amountBet = 0;
         window.onload = function() {
             openPopUpGame();
-            buildDeck();
-            shuffleDeck();
-            startGame();
         }
 
-        function buildDeck() {
+    function buildDeck() {
         let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
         let types = ["C", "D", "H", "S"];
         deck = [];
@@ -153,12 +158,25 @@
         let message = "";
         if (yourSum > dealerSum) {
             message = "You Lose!";
+            let newBalance = parseInt(document.getElementById('balance').textContent, 10) - amountBet;
+            saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
         else if (dealerSum > yourSum) {
             message = "You win!";
+            let newBalance = parseInt(document.getElementById('balance').textContent, 10) + parseInt(amountBet, 10);
+            saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
         else if (yourSum == dealerSum) {
             message = "Tie!";
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
 
         document.getElementById("dealer-sum").innerText = dealerSum;
@@ -176,12 +194,25 @@
         let message = "";
         if (yourSum > dealerSum) {
             message = "You win!";
+            let newBalance = parseInt(document.getElementById('balance').textContent, 10) + parseInt(amountBet, 10);
+            saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
         else if (dealerSum > yourSum) {
             message = "You lose!";
+            let newBalance = parseInt(document.getElementById('balance').textContent, 10) - parseInt(amountBet, 10);
+            saveBalanceToServer(document.getElementById('balance').textContent = newBalance);
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
         else if (yourSum == dealerSum) {
             message = "Tie!";
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
 
         document.getElementById("dealer-sum").innerText = dealerSum;
@@ -216,33 +247,138 @@
         }
         return playerSum;
     }
-    function openPopUpGame() {
-    document.getElementById("popUp").style.display = "block";
-    document.getElementById("instruction").style.display = "block";
-    document.getElementById("mechanics").style.display = "block";
+
+    function openPopup(amountValue, img) {
+    amount = amountValue;
+    document.getElementById("pop-up-img").src = "static/images/" + img + ".png";
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("amount").innerText ="Amount: $" + amountValue + ".00"
 }
 
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // <---- pop-up-game ----->
+
+    function openPopUpGame() {
+        document.getElementById("popUp").style.display = "block";
+        document.getElementById("instruction").style.display = "block";
+        document.getElementById("mechanics").style.display = "block";
+    }
+
     function closePopUpGame() {
-        // buildDeckBeatTheDealer();
-        // shuffleDeckBeatTheDealer();
-        // startGameBeatTheDealer();
         document.getElementById("popUp").style.display = "none";
     }
-    
-    function openPopUpBet() {
-    document.getElementById("popUp-bet").style.display = "block";
-    document.getElementById("instruction").style.display = "block";
-    document.getElementById("mechanics").style.display = "block";
+
+    // <---- pop-up-bet ----->
+
+    function openPopUpBet(game) {
+        if (game == 'beat') {
+            buildDeckBeatTheDealer();
+            shuffleDeckBeatTheDealer();
+            startGameBeatTheDealer();
+        }else if (game =='higher-lower') {
+            buildDeck();
+            shuffleDeck();
+            startGame();
+        }
+        document.getElementById("popUp-bet").style.display = "block";
+        document.getElementById("mechanics").style.display = "block";
+        document.getElementById("popUp").style.display = "none";
+        document.querySelector(".bet-user").style.display = "none";
     }
- 
+
     function closePopUpBet() {
-        
         document.getElementById("popUp-bet").style.display = "none";
     }
 
-    function onClickBet(amount) {
-    console.log(amount);
-}
+    function onClickBet(amount, imgsrc) {
+        let balance = parseInt(balanceElement.textContent, 10);
+        if (balance >= amount) {
+            amountBet = amount;
+            document.querySelector(".bet-user").style.display = "block";
+            document.getElementById("user-bet").textContent = `$ ${amount}`;
+            document.getElementById("bet-img").src = imgsrc
+            closePopUpBet();
+        }else if (amount == 'all-in') {
+            amountBet = balance;
+            document.querySelector(".bet-user").style.display = "block";
+            document.getElementById("user-bet").textContent = `$ ${balance}`;
+            document.getElementById("bet-img").src = imgsrc
+            closePopUpBet();
+        }
+        else {
+            alert("You don't have enough money!");
+            return;
+        }
+        console.log(amount, balance);
+    }
+    
+
+    function onClickExit() {
+        window.location.href='/games'
+    }
+
+    function checkBalanceIfNotNull(url) {
+        if (amountBet != 0) {
+            let result = confirm("Your bet will be deducted to your balance. Are you sure you want to leave this page?");
+            if (result) {
+                let newBalance = parseInt(document.getElementById('balance').textContent, 10) - amountBet;
+                document.getElementById('balance').textContent = newBalance
+                saveBalanceToServerThenExit(newBalance, url);
+            }
+        }
+        else {
+            window.location.href= url;
+        }
+    }
+
+    function goTo(url){
+        checkBalanceIfNotNull(url);
+    }
+
+    function saveBalanceToServerThenExit(balance, url) {
+        console.log(balance);
+        fetch('/update_balance', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ new_balance: balance })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Balance saved successfully!');
+                window.location.href=url;
+            } else {
+                console.error('Failed to save balance');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    function saveBalanceToServer(balance) {
+        console.log(balance);
+        fetch('/update_balance', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ new_balance: balance })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Balance saved successfully!');
+            } else {
+                console.error('Failed to save balance');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
     </script>
     
 {% endblock %}
