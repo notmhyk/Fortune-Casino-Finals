@@ -377,18 +377,25 @@ function stay() {
     let message = "";
     if (yourSum > 21) {
         message = "You Lose!";
+        deductBetFromBalance(amountBet);
     }
     else if (dealerSum > 21) {
         message = "You win!";
+        addBetToBalance(amountBet);
     }
     else if (yourSum == dealerSum) {
         message = "Tie!";
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     else if (yourSum > dealerSum) {
         message = "You Win!";
+        addBetToBalance(amountBet);
     }
     else if (yourSum < dealerSum) {
         message = "You Lose!";
+        deductBetFromBalance(amountBet);
     }
 
     document.getElementById("dealer-sum").innerText = dealerSum;
@@ -583,6 +590,10 @@ function openPopUpBet(game) {
         buildDeckBeatTheDealer();
         shuffleDeckBeatTheDealer();
         startGameBeatTheDealer();
+    } else if (game == 'blackjack') {
+        buildDeck();
+        shuffleDeck();
+        startGame();
     }
     document.getElementById("popUp-bet").style.display = "block";
     document.getElementById("mechanics").style.display = "block";
