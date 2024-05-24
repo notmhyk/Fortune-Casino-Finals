@@ -210,9 +210,11 @@ function animateDiceRoll() {
         let result = "";
         if (total == guessAddNumberRollEmDice) {
             result = "You Win!";
+            addBetToBalance(amountBet);
         }
         else {
             result = "You Lose!";
+            deductBetFromBalance(amountBet);
         }
         document.querySelector(".dice-1-dice-2-addnumber").textContent = result;
         }, 1000); 
