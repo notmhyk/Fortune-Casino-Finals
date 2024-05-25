@@ -185,6 +185,10 @@ let imagesColor = [
     "static/images/color-game-yellow.png"
 ];
 
+const colorBets = [];
+let colorGet = "";
+// let betsGet = 0;
+
 let guessAddNumberRollEmDice = 0;
 
 // <----------------------- Roll-'em-Dice ----------------------->
@@ -251,8 +255,45 @@ function animateDiceRollColor() {
         document.querySelector("#dice-one-side-one img").setAttribute("src", imagesColor[dieOneValue]);
         document.querySelector("#dice-two-side-one img").setAttribute("src", imagesColor[dieTwoValue]);
         document.querySelector("#dice-three-side-one img").setAttribute("src", imagesColor[dieThreeValue]);
-        }, 1000); 
-        
+        // let diceResults = [imagesColor[dieOneValue], imagesColor[dieTwoValue], imagesColor[dieThreeValue]];
+        // for (let i = 0; i < colorBets.length; i += 2) {
+        //     let colorBet = colorBets[i];
+        //     let betAmount = colorBets[i + 1];
+
+        //     // Check if there is a match in any of the dice results
+        //     if (diceResults.includes(colorBet)) {
+        //         addBetToBalance(betAmount);
+        //     } else {
+        //         deductBetFromBalance(betAmount);
+        //     }
+        // }
+
+        let diceResults = [imagesColor[dieOneValue], imagesColor[dieTwoValue], imagesColor[dieThreeValue]];
+        console.log('Dice Results:', diceResults);
+        console.log('Color Bets:', colorBets);
+
+        for (let i = 0; i < colorBets.length; i += 2) {
+            let colorBet = colorBets[i];
+            let betAmount = colorBets[i + 1];
+            let matchFound = false;
+
+            console.log(`Checking bet: ${colorBet} with amount: ${betAmount}`);
+
+            for (let result of diceResults) {
+                if (result === colorBet) {
+                    console.log(`Match found: ${colorBet}`);
+                    addBetToBalance(betAmount);
+                    matchFound = true;
+                    break; // Exit the loop once a match is found
+                }
+            }
+
+            if (!matchFound) {
+                console.log(`No match for: ${colorBet}`);
+                deductBetFromBalance(betAmount);
+            }
+        }
+    }, 1000); 
 }
 
 // <-------------------------- SIC-BO-GAME -------------------------->
@@ -524,9 +565,9 @@ function addBetToBalance(amount) {
         if (data.status === 'success') {
             console.log('Balance saved successfully!');
             document.getElementById('balance').textContent = data.new_balance;
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
+            // setTimeout(() => {
+            //     location.reload();
+            // }, 2000);
         } else {
             console.error('Failed to save balance:', data.message);
         }
@@ -550,9 +591,9 @@ function deductBetFromBalance(amount) {
         if (data.status === 'success') {
             console.log('Balance saved successfully!');
             document.getElementById('balance').textContent = data.new_balance;
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
+            // setTimeout(() => {
+            //     location.reload();
+            // }, 2000);
         } else {
             console.error('Failed to save balance:', data.message);
         }
@@ -631,10 +672,15 @@ function onClickBet(amount, imgsrc) {
 
 // <-------- pop-up-dice ------->
 
-function openPopUpDice() {
-    document.getElementById("popUp-dice").style.display = "block";
-    document.getElementById("mechanics").style.display = "block";
-    document.getElementById("popUp").style.display = "none";
+function openPopUpDice(allIn) {
+    if (allIn == 'no-all-in') {
+        popUpColorWithOutAllIn();
+    } else {
+        document.getElementById("popUp-dice").style.display = "block";
+        document.getElementById("mechanics").style.display = "block";
+        document.getElementById("popUp").style.display = "none";
+    }
+    
 }
 
 function closePopUpDice() {
@@ -706,4 +752,107 @@ function saveBalanceToServerThenExit(balance, url) {
 
 function betAmountSet() {
     amountBet = 0;
+}
+
+
+function getColor(color) {
+    colorGet = color;
+    closePopUpDice();
+    openPopUpBet();
+}
+function getColorWithOutAllIn(color) {
+    colorGet = color;
+    // closePopUpDice();
+    closePopUpColorWithOutAllIn()
+    popUpBetWithOutAllIn();
+}
+function getBets(bets) {
+    closePopUpBet();
+    if (bets == 'all-in') {
+        return getBetAndColor(colorGet, "All In");
+    } 
+    else {
+        getBetAndColor(colorGet, parseInt(bets));
+        // closePopUpBetWithOutAllIn();
+        openPopUpBetAgain();
+    }
+}
+
+function getbetsWithoutAllIn(bets) {
+    closePopUpBetWithOutAllIn();
+    openPopUpBetAgain();
+
+    return getBetAndColor(colorGet, parseInt(bets));
+}
+
+function getBetAndColor(color,bets) {
+    colorBets.push(color, bets);
+    colorGet = "";
+    console.log(colorBets) 
+    const displayContainer = document.querySelector('.bet-and-color-display');
+    displayContainer.innerHTML = '';
+
+    for (let i = 0; i < colorBets.length; i += 2) {
+        const color = colorBets[i];
+        const bet = colorBets[i + 1];
+
+        const div = document.createElement('div');
+        const h1 = document.createElement('h1');
+        const img = document.createElement('img');
+        const h2 = document.createElement('h2');
+        const span = document.createElement('span');
+
+        div.setAttribute('class', 'bet-user-dice');
+        img.setAttribute('id', 'bet-img');
+        h2.setAttribute('id', 'change-bet');
+        span.setAttribute('id', 'user-bet');
+
+        h1.textContent = 'Your Bet: ';
+        span.textContent = bet;
+        img.setAttribute('src', color);
+        img.setAttribute('alt', `Image representing ${color}`);
+        img.setAttribute('width', '150'); 
+        img.setAttribute('height', '150'); 
+        h2.textContent = "Good Luck!";
+        h1.appendChild(span);
+
+        div.appendChild(h1);
+        div.appendChild(img);
+        div.appendChild(h2);
+
+        div.style.display = 'block';
+        div.style.position = 'relative';
+        div.style.marginBottom = '10px';
+        div.style.textAlign = 'center';
+        div.style.border = '1px solid black';
+        div.style.borderRadius = '12px';
+        div.style.width = '200px';
+        div.style.padding = '10px';
+        displayContainer.appendChild(div);
+    }
+}  
+
+function openPopUpBetAgain() {
+    document.getElementById("popUp-bet-again").style.display = "block";
+}
+
+function closePopUpBetAgain() {
+    document.getElementById("popUp-bet-again").style.display = "none";
+}
+
+function popUpBetWithOutAllIn (){
+    document.getElementById("popUp-bet-without-allin").style.display = "block";
+}
+
+function closePopUpBetWithOutAllIn (){
+    document.getElementById("popUp-bet-without-allin").style.display = "none";
+}
+
+
+function popUpColorWithOutAllIn (){
+    document.getElementById("popUp-dice-without-all-in").style.display = "block";
+}
+
+function closePopUpColorWithOutAllIn (){
+    document.getElementById("popUp-dice-without-all-in").style.display = "none";
 }
