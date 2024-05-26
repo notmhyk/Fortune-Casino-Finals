@@ -121,112 +121,134 @@
     </div>
     <div id="popUp" class="popup-game">
       <div class="popup-content-game">
-          <span class="close-game" onclick="closePopUpGame()">&times;</span>
+          <span class="close-game" onclick="onClickExit()">&times;</span>
           <h1 id="mechanics">Mechanics <br> <br></h1>
-          <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
-          <button id="play-the-game" onclick="closePopUpGame()">Okay!</button>
+          <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer's card <br> <br></p>
+          <button id="play-the-game" onclick="openPopUpBet()">Okay!</button>
       </div>
   </div>
 
   <div id="popUp-bet" class="popup-bet">
-    <div class="popup-content-bet">
-        <span class="close-bet" onclick="closePopUpBet()">&times;</span>
-        <h1 id="mechanics">Your bet</h1>
-        <div id="bet-wrapper" class="bet-wrapper">
-            <div class="bet-container">
-                <img src="static/images/30-bet.png" onclick="(onClickBet(30))" alt="">
-            </div> 
-            <div class="bet-container">
-                <img src="static/images/90-bet.png" onclick="(onClickBet(90))" alt="">
-            </div>
-            <div class="bet-container">
-                <img src="static/images/150-bet.png" onclick="(onClickBet(150))" alt="">
-            </div>
-            <div class="bet-container">
-                <img src="static/images/300-bet.png" onclick="(onClickBet(300))" alt="">
-            </div>
-            <div class="bet-container">
-                <img src="static/images/500-bet.png" onclick="(onClickBet(500))" alt="">
-            </div>
-            <div class="bet-container">
-                <img src="static/images/all-in-bet.png" onclick="(onClickBet('all-in'))" alt="">
-            </div>
-        </div>
-        <button id="play-the-game" onclick="closePopUpBet()">Play!</button>
-    </div>
-</div>
+      <div class="popup-content-bet">
+          <span class="close-bet" onclick="onClickExit()">&times;</span>
+          <h1 id="mechanics">YOUR BET!</h1>
+          <div id="bet-wrapper" class="bet-wrapper">
+              <div class="bet-container">
+                  <img src="static/images/30-bet.png" onclick="(onClickBet(30, this.src))" alt="">
+              </div>
+              <div class="bet-container">
+                  <img src="static/images/90-bet.png" onclick="(onClickBet(90, this.src))" alt="">
+              </div>
+              <div class="bet-container">
+                  <img src="static/images/150-bet.png" onclick="(onClickBet(150, this.src))" alt="">
+              </div>
+              <div class="bet-container">
+                  <img src="static/images/300-bet.png" onclick="(onClickBet(300, this.src))" alt="">
+              </div>
+              <div class="bet-container">
+                  <img src="static/images/500-bet.png" onclick="(onClickBet(500, this.src))" alt="">
+              </div>
+              <div class="bet-container">
+                  <img src="static/images/all-in-bet.png" onclick="(onClickBet('all-in', this.src))" alt="">
+              </div>
+          </div>
+          <!-- <button id="play-the-game" onclick="onClickBet()">Play!</button> -->
+      </div>
+  </div> 
 
-    <script>
-      window.onload = function() {
-            openPopUpGame();
-      }
-        const cards = document.querySelectorAll(".card"),
-timeTag = document.querySelector(".time b"),
-flipsTag = document.querySelector(".flips b"),
-refreshBtn = document.querySelector(".details button");
+  <div class="bet-user">
+      <h1>Your Bet: <span id="user-bet"></span></h1>
+      <img src="" alt="" id="bet-img">
+      <h2 id="change-bet">Good Luck!</h2>
+  </div>
+    <script src="static/script.js"></script>
+<script>
+  window.onload = function() {
+    openPopUpGame();
+  }
 
-let maxTime = 60;
-let timeLeft = maxTime;
-let flips = 0;
-let matchedCard = 0;
-let disableDeck = false;
-let isPlaying = false;
-let cardOne, cardTwo, timer;
+  const cards = document.querySelectorAll(".card"),
+    timeTag = document.querySelector(".time b"),
+    flipsTag = document.querySelector(".flips b"),
+    refreshBtn = document.querySelector(".details button");
 
-function initTimer() {
-    if(timeLeft <= 0) {
-        return clearInterval(timer);
+  let maxTime = 30;
+  let timeLeft = maxTime;
+  let flips = 0;
+  let matchedCard = 0;
+  let disableDeck = false;
+  let isPlaying = false;
+  let cardOne, cardTwo, timer;
+
+  function initTimer() {
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      checkGameResult();
+      return;
     }
     timeLeft--;
     timeTag.innerText = timeLeft;
-}
+  }
 
-function flipCard({target: clickedCard}) {
-    if(!isPlaying) {
-        isPlaying = true;
-        timer = setInterval(initTimer, 1000);
+  function flipCard({ target: clickedCard }) {
+    if (!isPlaying) {
+      isPlaying = true;
+      timer = setInterval(initTimer, 1000);
     }
-    if(clickedCard !== cardOne && !disableDeck && timeLeft > 0) {
-        flips++;
-        flipsTag.innerText = flips;
-        clickedCard.classList.add("flip");
-        if(!cardOne) {
-            return cardOne = clickedCard;
-        }
-        cardTwo = clickedCard;
-        disableDeck = true;
-        let cardOneImg = cardOne.querySelector(".back-view img").src,
+    if (clickedCard !== cardOne && !disableDeck && timeLeft > 0) {
+      flips++;
+      flipsTag.innerText = flips;
+      clickedCard.classList.add("flip");
+      if (!cardOne) {
+        cardOne = clickedCard;
+        return;
+      }
+      cardTwo = clickedCard;
+      disableDeck = true;
+      let cardOneImg = cardOne.querySelector(".back-view img").src,
         cardTwoImg = cardTwo.querySelector(".back-view img").src;
-        matchCards(cardOneImg, cardTwoImg);
+      matchCards(cardOneImg, cardTwoImg);
     }
-}
+  }
 
-function matchCards(img1, img2) {
-    if(img1 === img2) {
-        matchedCard++;
-        if(matchedCard == 6 && timeLeft > 0) {
-            return clearInterval(timer);
+  function matchCards(img1, img2) {
+    if (img1 === img2) {
+      matchedCard++;
+      cardOne.removeEventListener("click", flipCard);
+      cardTwo.removeEventListener("click", flipCard);
+      cardOne = cardTwo = "";
+      disableDeck = false;
+      if (matchedCard === 6) {
+        clearInterval(timer);
+        if (timeLeft > 0) {
+          addBetToBalance(amountBet);
+          setTimeout(() => {
+            location.reload()
+          }, 3000);
         }
-        cardOne.removeEventListener("click", flipCard);
-        cardTwo.removeEventListener("click", flipCard);
-        cardOne = cardTwo = "";
-        return disableDeck = false;
-    }
-
-    setTimeout(() => {
+      }
+    } else {
+      setTimeout(() => {
         cardOne.classList.add("shake");
         cardTwo.classList.add("shake");
-    }, 400);
+      }, 400);
 
-    setTimeout(() => {
+      setTimeout(() => {
         cardOne.classList.remove("shake", "flip");
         cardTwo.classList.remove("shake", "flip");
         cardOne = cardTwo = "";
         disableDeck = false;
-    }, 1200);
-}
+      }, 1200);
+    }
+  }
 
-function shuffleCard() {
+  function checkGameResult() {
+    if (matchedCard !== 6 && timeLeft === 0) {
+      deductBetFromBalance(amountBet);
+    }
+  }
+
+  function shuffleCard() {
     timeLeft = maxTime;
     flips = matchedCard = 0;
     cardOne = cardTwo = "";
@@ -239,23 +261,24 @@ function shuffleCard() {
     arr.sort(() => Math.random() > 0.5 ? 1 : -1);
 
     cards.forEach((card, index) => {
-        card.classList.remove("flip");
-        let imgTag = card.querySelector(".back-view img");
-        setTimeout(() => {
-            imgTag.src = `static/images/img-${arr[index]}.png`;
-        }, 500);
-        card.addEventListener("click", flipCard);
+      card.classList.remove("flip");
+      let imgTag = card.querySelector(".back-view img");
+      setTimeout(() => {
+        imgTag.src = `static/images/img-${arr[index]}.png`;
+      }, 500);
+      card.addEventListener("click", flipCard);
     });
-}
+  }
 
-shuffleCard();
+  shuffleCard();
 
-refreshBtn.addEventListener("click", shuffleCard);
+  refreshBtn.addEventListener("click", shuffleCard);
 
-cards.forEach(card => {
+  cards.forEach(card => {
     card.addEventListener("click", flipCard);
-});
-    </script>
+  });
+</script>
+
   </body>
-  <script src="static/script.js"></script>
+  
 {% endblock %}
