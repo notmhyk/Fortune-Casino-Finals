@@ -136,10 +136,11 @@
             (slot1 == slot3 && slot1 == "a7") ||
             (slot2 == slot3 && slot2 == "a7") ) && !(slot1 == slot2 && slot2 == slot3 && slot1=="a7")){
             status.innerHTML = "YOU WIN!";
-            
+            addBetToBalance(1000);
             win.play();
         }else{
             status.innerHTML = "YOU LOSE!"
+            deductBetFromBalance(200);
             lose.play();
         }
         doing = false;
