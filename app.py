@@ -263,6 +263,89 @@ def hang_the_dealer():
     user = User.query.get(user_data['id'])
     print(user_data)
     return render_template('games/hang-the-dealer.html', user=user.to_dict())
+
+@app.route("/game-guess-the-number")
+@login_required
+def guessTheNumber():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/guess-the-number.html', user=user.to_dict())
+
+
+@app.route("/game-hunger-maze")
+@login_required
+def hungerMaze():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/maze-game.html', user=user.to_dict())
+
+
+@app.route("/game-memory-game")
+@login_required
+def memoryGame():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/memory-game.html', user=user.to_dict())
+
+@app.route("/game-mine-sweeper")
+@login_required
+def mineSweeper():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/mine-sweeper.html', user=user.to_dict())
+
+@app.route("/game-ping-pong")
+@login_required
+def pingPong():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/ping-pong.html', user=user.to_dict())
+
+
+@app.route("/game-rock-paper-scissors")
+@login_required
+def rockPaperScissors():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/rock-paper-scissors.html', user=user.to_dict())
+
+@app.route("/game-scratch-it")
+@login_required
+def scratchIt():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/scratch-it.html', user=user.to_dict())
+
+@app.route("/game-bingo")
+@login_required
+def bingo():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/bingi.html', user=user.to_dict())
+
+@app.route("/game-whack-a-mole")
+@login_required
+def whackAMole():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/whack-a-mole.html', user=user.to_dict())
+
+@app.route("/game-brick-breaker")
+@login_required
+def brickBreaker():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('games/brick-breaker.html', user=user.to_dict())
     
 
 if __name__ == '__main__':
