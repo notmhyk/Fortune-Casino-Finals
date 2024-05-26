@@ -44,7 +44,7 @@
             <button id="play-the-game" onclick="closePopUpGame()">Play!</button>
         </div>
     </div>
-    
+    <script src="static/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
     <script>
@@ -55,13 +55,13 @@
         const spinBtn = document.getElementById("spin-btn");
         const finalValue = document.getElementById("final-value");
         const rotationValues = [
-        { minDegree: 0, maxDegree: 30, value: 2 },
-        { minDegree: 31, maxDegree: 90, value: 1 },
-        { minDegree: 91, maxDegree: 150, value: 6 },
-        { minDegree: 151, maxDegree: 210, value: 5 },
-        { minDegree: 211, maxDegree: 270, value: 4 },
-        { minDegree: 271, maxDegree: 330, value: 3 },
-        { minDegree: 331, maxDegree: 360, value: 2 },
+        { minDegree: 0, maxDegree: 30, value: 2},
+        { minDegree: 31, maxDegree: 90, value: 1},
+        { minDegree: 91, maxDegree: 150, value: 6},
+        { minDegree: 151, maxDegree: 210, value: 5},
+        { minDegree: 211, maxDegree: 270, value: 4},
+        { minDegree: 271, maxDegree: 330, value: 3},
+        { minDegree: 331, maxDegree: 360, value: 2}
         ];
        
         const data = [16, 16, 16, 16, 16, 16];
@@ -78,7 +78,7 @@
         plugins: [ChartDataLabels],
         type: "pie",
         data: {
-            labels: [1, 2, 3, 4, 5, 6],
+            labels: ["Sorry!", "$1", "Jackpot", "$100", "Bad", "Try Again"],
             datasets: [
             {
                 backgroundColor: pieColors,
@@ -106,6 +106,15 @@
         for (let i of rotationValues) {
             if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
             finalValue.innerHTML = `<p>Value: ${i.value}</p>`;
+            if (i.value == 2) {
+                addBetToBalance(1);
+            } else if (i.value == 3){
+                addBetToBalance(10000);
+            } else if(i.value == 4){
+                addBetToBalance(100);
+            } else if(i.value == 5) {
+                deductBetFromBalance(100);
+            }
             spinBtn.disabled = false;
             break;
             }
@@ -136,5 +145,5 @@
 
     </script>
 </body>
-<script src="static/script.js"></script>
+
 {% endblock %}

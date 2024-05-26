@@ -255,44 +255,31 @@ function animateDiceRollColor() {
         document.querySelector("#dice-one-side-one img").setAttribute("src", imagesColor[dieOneValue]);
         document.querySelector("#dice-two-side-one img").setAttribute("src", imagesColor[dieTwoValue]);
         document.querySelector("#dice-three-side-one img").setAttribute("src", imagesColor[dieThreeValue]);
-        // let diceResults = [imagesColor[dieOneValue], imagesColor[dieTwoValue], imagesColor[dieThreeValue]];
-        // for (let i = 0; i < colorBets.length; i += 2) {
-        //     let colorBet = colorBets[i];
-        //     let betAmount = colorBets[i + 1];
-
-        //     // Check if there is a match in any of the dice results
-        //     if (diceResults.includes(colorBet)) {
-        //         addBetToBalance(betAmount);
-        //     } else {
-        //         deductBetFromBalance(betAmount);
-        //     }
-        // }
-
         let diceResults = [imagesColor[dieOneValue], imagesColor[dieTwoValue], imagesColor[dieThreeValue]];
-        console.log('Dice Results:', diceResults);
-        console.log('Color Bets:', colorBets);
+        let betsToRemove = [];
+        let i = 0;
 
-        for (let i = 0; i < colorBets.length; i += 2) {
-            let colorBet = colorBets[i];
-            let betAmount = colorBets[i + 1];
-            let matchFound = false;
-
-            console.log(`Checking bet: ${colorBet} with amount: ${betAmount}`);
-
-            for (let result of diceResults) {
-                if (result === colorBet) {
-                    console.log(`Match found: ${colorBet}`);
-                    addBetToBalance(betAmount);
-                    matchFound = true;
-                    break; // Exit the loop once a match is found
+        while (i < colorBets.length) {
+            let matchCount = 0;
+            for (let j = 0; j < diceResults.length; j++) {
+                if (diceResults[j] === colorBets[i]) {
+                    matchCount++;
                 }
             }
-
-            if (!matchFound) {
-                console.log(`No match for: ${colorBet}`);
-                deductBetFromBalance(betAmount);
+            if (matchCount > 0) {
+                addBetToBalance(colorBets[i + 1] * matchCount);
+            } else {
+                deductBetFromBalance(colorBets[i + 1]);
             }
+            betsToRemove.push(i, i + 1);
+            i += 2;
         }
+
+        for (let i = betsToRemove.length - 1; i >= 0; i--) {
+            const indexToRemove = betsToRemove[i];
+            colorBets.splice(indexToRemove, 1);
+        }
+
     }, 1000); 
 }
 
@@ -320,6 +307,30 @@ function animateDiceRollSicBo() {
         document.querySelector("#dice-one-side-one img").setAttribute("src", images[dieOneValue]);
         document.querySelector("#dice-two-side-one img").setAttribute("src", images[dieTwoValue]);
         document.querySelector("#dice-three-side-one img").setAttribute("src", images[dieThreeValue]);
+        let diceResults = [images[dieOneValue], images[dieTwoValue], images[dieThreeValue]];
+        let betsToRemove = [];
+        let i = 0;
+
+        while (i < colorBets.length) {
+            let matchCount = 0;
+            for (let j = 0; j < diceResults.length; j++) {
+                if (diceResults[j] === colorBets[i]) {
+                    matchCount++;
+                }
+            }
+            if (matchCount > 0) {
+                addBetToBalance(colorBets[i + 1] * matchCount);
+            } else {
+                deductBetFromBalance(colorBets[i + 1]);
+            }
+            betsToRemove.push(i, i + 1);
+            i += 2;
+        }
+
+        for (let i = betsToRemove.length - 1; i >= 0; i--) {
+            const indexToRemove = betsToRemove[i];
+            colorBets.splice(indexToRemove, 1);
+        }
         }, 1000); 
         
 }
@@ -539,9 +550,9 @@ function saveBalanceToServer(balance) {
         if (data.status === 'success') {
             console.log('Balance saved successfully!');
             document.getElementById('balance').textContent = data.new_balance;
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
+            // setTimeout(() => {
+            //     location.reload();
+            // }, 2000);
         } else {
             console.error('Failed to save balance:', data.message);
         }
@@ -551,19 +562,19 @@ function saveBalanceToServer(balance) {
     });
 }
 
-function addBetToBalance(amount) {
-    console.log(amount);
+function addBetToBalance(newBalance) {
+    console.log(newBalance);
     fetch('/add_balance', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ new_balance: amount })
+        body: JSON.stringify({ added_points: newBalance })
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            console.log('Balance saved successfully!');
+            console.log('Balance saved successfully!', newBalance);
             document.getElementById('balance').textContent = data.new_balance;
             // setTimeout(() => {
             //     location.reload();
@@ -577,19 +588,19 @@ function addBetToBalance(amount) {
     });
 }
 
-function deductBetFromBalance(amount) {
-    console.log(amount);
+function deductBetFromBalance(newBalance) {
+    console.log(newBalance);
     fetch('/deduct_points', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ new_balance: amount })
+        body: JSON.stringify({ deducted_points: newBalance })
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            console.log('Balance saved successfully!');
+            console.log('Balance saved successfully!', newBalance);
             document.getElementById('balance').textContent = data.new_balance;
             // setTimeout(() => {
             //     location.reload();
@@ -602,6 +613,7 @@ function deductBetFromBalance(amount) {
         console.error('Error:', error);
     });
 }
+
 
 function openPopup(amountValue, img) {
     amount = amountValue;

@@ -70,42 +70,58 @@
               <img src="static/images/dice-06.svg" alt="dot-1">
           </div>
         </div> 
-     </div>
-       <div id='roll' class='roll-button'>
-        <button class="roll-btn-sic-bo" onclick="animateDiceRollSicBo()">Roll dice!</button>
-    </div>
+        </div>
+        <div id='roll' class='roll-button'>
+            <button class="roll-btn-sic-bo" onclick="animateDiceRollSicBo()">Roll dice!</button>
+        </div>
       </div> 
-      <div id="popUp" class="popup-game">
+
+    <div class="bet-and-color-display">
+
+    </div>
+
+    <div id="popUp-bet-again" class="popup-game-bet-again">
         <div class="popup-content-game">
-            <span class="close-game" onclick="closePopUpGame()">&times;</span>
+            <span class="close-game" onclick="onClickExit()">&times;</span>
+            <h1 id="mechanics">Do you want to add another bet? <br> <br></h1>
+            <!-- <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p> -->
+            <button id="play-the-game" onclick="openPopUpDice('no-all-in')">Yes!</button>
+            <button id="play-the-game" onclick="closePopUpBetAgain()">No!</button>
+        </div>
+    </div>
+
+    <div id="popUp" class="popup-game">
+        <div class="popup-content-game">
+            <span class="close-game" onclick="onClickExit()">&times;</span>
             <h1 id="mechanics">Mechanics <br> <br></h1>
             <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
             <button id="play-the-game" onclick="openPopUpDice()">Okay!</button>
         </div>
     </div>
-  
+
+
     <div id="popUp-dice" class="popup-dice">
         <div class="popup-content-dice">
             <span class="close-dice" onclick="closePopUpDice()">&times;</span>
             <h1 id="mechanics">Choose your Dice</h1>
             <div id="bet-wrapper-dice" class="bet-wrapper-dice">
                 <div class="bet-container-dice">
-                    <img src="static/images/dice-01.svg" onclick="(onclickDice('static/images/dice-01.svg'))" alt="">
+                    <img src="static/images/dice-01.svg" onclick="(getColor('static/images/dice-01.svg'))" alt="">
                 </div> 
                 <div class="bet-container-dice">
-                    <img src="static/images/dice-02.svg" onclick="(onclickDice('static/images/dice-02.svg'))" alt="">
+                    <img src="static/images/dice-02.svg" onclick="(getColor('static/images/dice-02.svg'))" alt="">
                 </div>
                 <div class="bet-container-dice">
-                    <img src="static/images/dice-03.svg" onclick="(onclickDice('static/images/dice-03.svg'))" alt="">
+                    <img src="static/images/dice-03.svg" onclick="(getColor('static/images/dice-03.svg'))" alt="">
                 </div>
                 <div class="bet-container-dice">
-                    <img src="static/images/dice-04.svg" onclick="(onclickDice('static/images/dice-04.svg'))" alt="">
+                    <img src="static/images/dice-04.svg" onclick="(getColor('static/images/dice-04.svg'))" alt="">
                 </div>
                 <div class="bet-container-dice">
-                    <img src="static/images/dice-05.svg" onclick="(onclickDice('static/images/dice-05.svg'))" alt="">
+                    <img src="static/images/dice-05.svg" onclick="(getColor('static/images/dice-05.svg'))" alt="">
                 </div>
                 <div class="bet-container-dice">
-                    <img src="static/images/dice-06.svg" onclick="(onclickDice('static/images/dice-06.svg'))" alt="">
+                    <img src="static/images/dice-06.svg" onclick="(getColor('static/images/dice-06.svg'))" alt="">
                 </div>
             </div>
             <button id="play-the-game" onclick="closePopUpBet()">Play!</button>
@@ -118,25 +134,78 @@
             <h1 id="mechanics">Choose your League</h1>
             <div id="bet-wrapper" class="bet-wrapper">
                 <div class="bet-container">
-                    <img src="static/images/100-bet.png" onclick="(onClickBetDice(100))" alt="">
+                    <img src="static/images/100-bet.png" onclick="(getBets(100))" alt="">
                 </div> 
                 <div class="bet-container">
-                    <img src="static/images/200-bet.png" onclick="(onClickBetDice(200))" alt="">
+                    <img src="static/images/200-bet.png" onclick="(getBets(200))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/300-bet.png" onclick="(onClickBetDice(300))" alt="">
+                    <img src="static/images/300-bet.png" onclick="(getBets(300))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/400-bet.png" onclick="(onClickBetDice(400))" alt="">
+                    <img src="static/images/400-bet.png" onclick="(getBets(400))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/500-bet.png" onclick="(onClickBetDice(500))" alt="">
+                    <img src="static/images/500-bet.png" onclick="(getBets(500))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/all-in-bet.png" onclick="(onClickBetDice('all-in'))" alt="">
+                    <img src="static/images/all-in-bet.png" onclick="(getBets('all-in'))" alt="" id="all-in-id">
                 </div>
             </div>
             <button id="play-the-game" onclick="closePopUpBet()">Play!</button>
+        </div>
+    </div>
+
+    <div id="popUp-dice-without-all-in" class="popup-dice">
+        <div class="popup-content-dice">
+            <span class="close-dice" onclick="closePopUpDice()">&times;</span>
+            <h1 id="mechanics">Choose your Color</h1>
+            <div id="bet-wrapper-dice" class="bet-wrapper-dice">
+                <div class="bet-container-dice">
+                    <img src="static/images/dice-01.svg" onclick="(getColorWithOutAllIn('static/images/dice-01.svg'))" alt="">
+                </div> 
+                <div class="bet-container-dice">
+                    <img src="static/images/dice-02.svg" onclick="(getColorWithOutAllIn('static/images/dice-02.svg'))" alt="">
+                </div>
+                <div class="bet-container-dice">
+                    <img src="static/images/dice-03.svg" onclick="(getColorWithOutAllIn('static/images/dice-03.svg'))" alt="">
+                </div>
+                <div class="bet-container-dice">
+                    <img src="static/images/dice-04.svg" onclick="(getColorWithOutAllIn('static/images/dice-04.svg'))" alt="">
+                </div>
+                <div class="bet-container-dice">
+                    <img src="static/images/dice-05.svg" onclick="(getColorWithOutAllIn('static/images/dice-05.svg'))" alt="">
+                </div>
+                <div class="bet-container-dice">
+                    <img src="static/images/dice-06.svg" onclick="(getColorWithOutAllIn('static/images/dice-06.svg'))" alt="">
+                </div>
+            </div>
+            <!-- <button id="play-the-game" onclick="closePopUpBet()">Play!</button> -->
+        </div>
+    </div>
+
+    <div id="popUp-bet-without-allin" class="popup-bet">
+        <div class="popup-content-bet">
+            <span class="close-bet" onclick="closePopUpBet()">&times;</span>
+            <h1 id="mechanics">Choose your League</h1>
+            <div id="bet-wrapper" class="bet-wrapper">
+                <div class="bet-container">
+                    <img src="static/images/100-bet.png" onclick="(getbetsWithoutAllIn(100))" alt="">
+                </div> 
+                <div class="bet-container">
+                    <img src="static/images/200-bet.png" onclick="(getbetsWithoutAllIn(200))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/300-bet.png" onclick="(getbetsWithoutAllIn(300))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/400-bet.png" onclick="(getbetsWithoutAllIn(400))" alt="">
+                </div>
+                <div class="bet-container">
+                    <img src="static/images/500-bet.png" onclick="(getbetsWithoutAllIn(500))" alt="">
+                </div>
+            </div>
+            <!-- <button id="play-the-game" onclick="closePopUpBetWithOutAllIn()">Play!</button> -->
         </div>
     </div>
 </body>

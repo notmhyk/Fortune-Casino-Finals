@@ -50,11 +50,11 @@ def update_balance():
 def add_balance():
     user_data = session['user']
     user_id = user_data['id']
-    points_to_add = request.json.get('new_balance')
-
+    points_to_add = request.json.get('added_points')
+    print("Points to add:", points_to_add)
     if points_to_add is None:
         return jsonify({"status": "error", "message": "No points provided"}), 400
-
+    points_to_add = int(points_to_add)
     user = User.query.get(user_id)
     if user:
         new_balance = user.balance + points_to_add
@@ -73,11 +73,13 @@ def add_balance():
 def deduct_points():
     user_data = session['user']
     user_id = user_data['id']
-    points_to_deduct = request.json.get('new_balance')
+    points_to_deduct = request.json.get('deducted_points')
+
+    print("Points to deduct:", points_to_deduct)
 
     if points_to_deduct is None:
         return jsonify({"status": "error", "message": "No points provided"}), 400
-
+    points_to_deduct = int(points_to_deduct)
     user = User.query.get(user_id)
     if user:
         new_balance = user.balance - points_to_deduct
