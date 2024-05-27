@@ -649,6 +649,21 @@ function openPopUpBet(game) {
         buildDeck();
         shuffleDeck();
         startGame();
+    } else if (game == 'brick') {
+        board = document.getElementById("board");
+        board.height = boardHeight;
+        board.width = boardWidth;
+        context = board.getContext("2d"); //used for drawing on the board
+
+        //draw initial player
+        context.fillStyle="skyblue";
+        context.fillRect(player.x, player.y, player.width, player.height);
+
+        requestAnimationFrame(update);
+        document.addEventListener("keydown", movePlayer);
+
+        //create blocks
+        createBlocks();
     }
     document.getElementById("popUp-bet").style.display = "block";
     document.getElementById("mechanics").style.display = "block";

@@ -7,49 +7,55 @@
     <canvas id="board"></canvas>
     <div id="popUp" class="popup-game">
         <div class="popup-content-game">
-            <span class="close-game" onclick="closePopUpGame()">&times;</span>
+            <span class="close-game" onclick="onClickExit()">&times;</span>
             <h1 id="mechanics">Mechanics <br> <br></h1>
-            <p id="instruction">The game is very simple. <br> Player must destroy all bricks to win the League Price <br>If the player failed to destroy all bricks, the player's balance will be deducted based on what Leauge they play on. <br> <br></p>
-            <button id="play-the-game" onclick="openPopUpBet()">Okay!</button>
+            <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer's card <br> <br></p>
+            <button id="play-the-game" onclick="openPopUpBet('brick')">Okay!</button>
         </div>
     </div>
-
+  
     <div id="popUp-bet" class="popup-bet">
         <div class="popup-content-bet">
-            <span class="close-bet" onclick="closePopUpBet()">&times;</span>
-            <h1 id="mechanics">Choose your League</h1>
+            <span class="close-bet" onclick="onClickExit()">&times;</span>
+            <h1 id="mechanics">YOUR BET!</h1>
             <div id="bet-wrapper" class="bet-wrapper">
                 <div class="bet-container">
-                    <img src="static/images/100-bet.png" onclick="(onClickBet(100))" alt="">
+                    <img src="static/images/100-bet.png" onclick="(onClickBet(100, this.src))" alt="">
                 </div> 
                 <div class="bet-container">
-                    <img src="static/images/200-bet.png" onclick="(onClickBet(200))" alt="">
+                    <img src="static/images/200-bet.png" onclick="(onClickBet(200, this.src))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/300-bet.png" onclick="(onClickBet(300))" alt="">
+                    <img src="static/images/300-bet.png" onclick="(onClickBet(300, this.src))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/400-bet.png" onclick="(onClickBet(400))" alt="">
+                    <img src="static/images/400-bet.png" onclick="(onClickBet(400, this.src))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/500-bet.png" onclick="(onClickBet(500))" alt="">
+                    <img src="static/images/500-bet.png" onclick="(onClickBet(500, this.src))" alt="">
                 </div>
                 <div class="bet-container">
-                    <img src="static/images/all-in-bet.png" onclick="(onClickBet('all-in'))" alt="">
+                    <img src="static/images/all-in-bet.png" onclick="(onClickBet('all-in', this.src))" alt="">
                 </div>
             </div>
-            <button id="play-the-game" onclick="closePopUpBet()">Play!</button>
+            <!-- <button id="play-the-game" onclick="onClickBet()">Play!</button> -->
         </div>
+    </div> 
+  
+    <div class="bet-user">
+        <h1>Your Bet: <span id="user-bet"></span></h1>
+        <img src="" alt="" id="bet-img">
+        <h2 id="change-bet">Good Luck!</h2>
     </div>
 </body>
 <script>
     let board;
     let boardWidth = 500;
-    let boardHeight = 500;
+    let boardHeight = 550;
     let context; 
 
     //players
-    let playerWidth = 40; //500 for testing, 80 normal
+    let playerWidth = 80; //500 for testing, 80 normal
     let playerHeight = 10;
     let playerVelocityX = 20; //move 10 pixels each time
 
@@ -62,10 +68,10 @@
     }
 
     //ball
-    let ballWidth = 10;
-    let ballHeight = 10;
-    let ballVelocityX = 5; //15 for testing, 3 normal
-    let ballVelocityY = 4; //10 for testing, 2 normal
+    let ballWidth = 5;
+    let ballHeight = 5;
+    let ballVelocityX = 3; //15 for testing, 3 normal
+    let ballVelocityY = 2; //10 for testing, 2 normal
 
     let ball = {
         x : boardWidth/2,
@@ -94,20 +100,7 @@
 
     window.onload = function() {
         openPopUpGame();
-        board = document.getElementById("board");
-        board.height = boardHeight;
-        board.width = boardWidth;
-        context = board.getContext("2d"); //used for drawing on the board
-
-        //draw initial player
-        context.fillStyle="skyblue";
-        context.fillRect(player.x, player.y, player.width, player.height);
-
-        requestAnimationFrame(update);
-        document.addEventListener("keydown", movePlayer);
-
-        //create blocks
-        createBlocks();
+        
     }
 
     function update() {
@@ -149,6 +142,7 @@
             context.font = "20px sans-serif";
             context.fillText("Game Over: Press 'Space' to Restart", 80, 400);
             gameOverBrick = true;
+            deductBetFromBalance(amountBet);
         }
 
         //blocks
@@ -176,7 +170,9 @@
         if (blockCount == 0) {
             score += 100*blockRows*blockColumns; //bonus points :)
             blockRows = Math.min(blockRows + 1, blockMaxRows);
-            createBlocks();
+            // createBlocks();
+            gameOverBrick = true;
+            addBetToBalance(amountBet);
         }
 
         //score
