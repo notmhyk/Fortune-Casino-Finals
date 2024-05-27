@@ -1992,146 +1992,7 @@ nav ul li a {
       background: #6563ff;
 }
 }
-  
-  
-  
-  /* <-------------------------- MAZE-GAME --------------------------> */
-  
-.html,
-.body-maze {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    padding: 0;
-    margin: 0;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color:#ee7752;
-}
-#mazeContainer {
-    transition-property: opacity;
-    transition-duration: 1s;
-    transition-timing-function: linear;
-    top: 75px;
-    opacity: 0;
-    display: inline-block;
-    background-color: rgba(0, 0, 0, 0.3);
-    margin: auto;
-}
-#mazeContainer #mazeCanvas {
-    margin: 0;
-    display: block;
-    border: solid 1px black;
-}
-input,
-select {
-    transition-property: background-color opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.3);
-    height: 45px;
-    width: 150px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    display: inline-block;
-    font-size: 15px;
-    text-align: center;
-    text-decoration: none;
-    appearance: none;
-}
-input:hover,
-select:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-}
-input:active,
-select:active {
-    background-color: black;
-}
-input:focus,
-select:focus {
-    outline: none;
-}
-.custom-select {
-    display: inline-block;
-}
-.custom-select select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url("data:image/png; base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC");
-    background-repeat: no-repeat;
-    background-position: 125px center;
-}
-#Message-Container {
-    visibility: hidden;
-    color: white;
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 1;
-}
-#Message-Container #message {
-    width: 300px;
-    height: 300px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-left: -150px;
-    margin-top: -150px;
-}
-#page {
-    font-family: "Segoe UI", Arial, sans-serif;
-    text-align: center;
-    height: auto;
-    width: auto;
-    margin: auto;
-}
-#page #menu {
-    margin: auto;
-    padding: 10px;
-    height: 65px;
-    box-sizing: border-box;
-}
-#page #menu h1 {
-    margin: 0;
-    margin-bottom: 10px;
-    font-weight: 600;
-    font-size: 3.2rem;
-}
-#page #view {
-    position: absolute;
-    top: 65px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: auto;
-}
-.border {
-    border: 1px black solid;
-    border-radius: 5px;
-}
-    
-    
-@media only screen and (max-width: 400px) {
-    input,
-    select {
-        width: 120px;
-    }
-}
-  
-  
+   
   /* <------------------- MINESWEEPER-GAME -------------------> */
 .body-mine {
     text-align: center;
@@ -2669,4 +2530,83 @@ input[type="number"]:focus {
 100% {
     transform: scale(1);
 }
+}
+
+/* <----------------------- MAZE --------------------------> */
+
+.body-maze {
+    background-color: #fbf9f9;
+  }
+  
+.maze {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#settings {
+    position: absolute;
+    padding: 1.5rem;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 30%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #fff;
+    font-size: 0.8rem;
+    z-index: 2;
+}
+
+.input {
+    margin-bottom: 1rem;
+    background-color: #fff;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    margin-top: 0.2rem;
+}
+
+#submit {
+    background-color: #161616;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    margin: 1rem;
+    color: #fff;
+}
+
+#submit:hover {
+    opacity: 0.7;
+}
+
+.complete {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 30%;
+    background: #000000;
+    z-index: 4;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 10px;
+}
+.complete h1 {
+    color: #fff;
+}
+
+.title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10%;
+    color: #000000;
+    font-family: "Bungee Inline", cursive;
 }
