@@ -5,98 +5,145 @@
 {% block body %}
 <body class="body-scratch">
     <div class="main-container">
-      <h2 class="main-heading">Scratch to view code</h2>
+        <h2 class="main-heading">Scratch to view code</h2>
 
-      <h3>Unlock Knowledge: 40% Off on All Courses!</h3>
-      <div class="scratch-container">
-        <div class="scratch-card">
-          <div class="code">D7DF9CFF0C</div>
+        <h3>This must be your lucky day!</h3>
+        <div class="scratch-container">
+            <div class="scratch-card">
+                <div class="code" id="code1"></div>
+            </div>
+            <canvas id="scratch-card1" width="300" height="100"></canvas>
         </div>
-        <canvas id="scratch-card1" width="300" height="100"></canvas>
-      </div>
 
-      <h3>Free Merchandise on Orders Over $50</h3>
-      <div class="scratch-container">
-        <div class="scratch-card">
-          <div class="code">8DDIECIW3</div>
+        <h3>This must be your lucky day!</h3>
+        <div class="scratch-container">
+            <div class="scratch-card">
+                <div class="code" id="code2"></div>
+            </div>
+            <canvas id="scratch-card2" width="300" height="100"></canvas>
         </div>
-        <canvas id="scratch-card2" width="300" height="100"></canvas>
-      </div>
 
-      <h3>Double the Delight: Buy One, Get One Free!</h3>
-      <div class="scratch-container">
-        <div class="scratch-card">
-          <div class="code">38CUDCJS93</div>
+        <h3>This must be your lucky day!</h3>
+        <div class="scratch-container">
+            <div class="scratch-card">
+                <div class="code" id="code3"></div>
+            </div>
+            <canvas id="scratch-card3" width="300" height="100"></canvas>
         </div>
-        <canvas id="scratch-card3" width="300" height="100"></canvas>
-      </div>
     </div>
-    <div id="popUp" class="popup-game">
-      <div class="popup-content-game">
-          <span class="close-game" onclick="closePopUpGame()">&times;</span>
-          <h1 id="mechanics">Mechanics <br> <br></h1>
-          <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
-          <button id="play-the-game" onclick="closePopUpGame()">Okay!</button>
-      </div>
-  </div>
-
-  <div id="popUp-bet" class="popup-bet">
-      <div class="popup-content-bet">
-          <span class="close-bet" onclick="closePopUpGame()">&times;</span>
-          <h1 id="mechanics">Your bet <br> <br></h1>
-          <button id="play-the-game" onclick="closePopUpGame()">Play!</button>
-      </div>
-  </div>
 
     <script>
-      window.onload = function() {
-            openPopUpGame();
+        let scratchState = {card1: false, card2: false, card3: false};
+
+        window.onload = function() {
+            generateCodes();
         }
-        const createScratchCard = (canvasId, color) => {
-  let canvas = document.getElementById(canvasId);
-  let context = canvas.getContext("2d");
 
-  const init = () => {
-    context.fillStyle = color;
-    context.fillRect(0, 0, 300, 100);
-  };
+        const createScratchCard = (canvasId, color, codeId, cardId) => {
+            let canvas = document.getElementById(canvasId);
+            let context = canvas.getContext("2d");
+            let codeElement = document.getElementById(codeId);
 
-  let isDragging = false;
+            const init = () => {
+                context.fillStyle = color;
+                context.fillRect(0, 0, 300, 100);
+            };
 
-  const scratch = (x, y) => {
-    context.globalCompositeOperation = "destination-out";
-    context.beginPath();
-    context.arc(x, y, 24, 0, 2 * Math.PI);
-    context.fill();
-  };
+            let isDragging = false;
 
-  canvas.addEventListener("mousedown", (event) => {
-    isDragging = true;
-    scratch(event.offsetX, event.offsetY);
-  });
+            const scratch = (x, y) => {
+                context.globalCompositeOperation = "destination-out";
+                context.beginPath();
+                context.arc(x, y, 80, 0, 2 * Math.PI);
+                context.fill();
 
-  canvas.addEventListener("mousemove", (event) => {
-    if (isDragging) {
-      scratch(event.offsetX, event.offsetY);
-    }
-  });
+                checkScratchCompletion(canvas, codeElement.innerText, cardId);
+            };
 
-  canvas.addEventListener("mouseup", () => {
-    isDragging = false;
-  });
+            canvas.addEventListener("mousedown", (event) => {
+                isDragging = true;
+                scratch(event.offsetX, event.offsetY);
+            });
 
-  canvas.addEventListener("mouseleave", () => {
-    isDragging = false;
-  });
+            canvas.addEventListener("mousemove", (event) => {
+                if (isDragging) {
+                    scratch(event.offsetX, event.offsetY);
+                }
+            });
 
-  init();
-};
+            canvas.addEventListener("mouseup", () => {
+                isDragging = false;
+            });
 
-createScratchCard("scratch-card1", "#006d77");
-createScratchCard("scratch-card2", "#83c5be");
-createScratchCard("scratch-card3", "#8338ec");
+            canvas.addEventListener("mouseleave", () => {
+                isDragging = false;
+            });
+
+            init();
+        };
+
+        const checkScratchCompletion = (canvas, code, cardId) => {
+            const pixels = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height).data;
+            const scratchedPixels = pixels.filter((pixel, index) => index % 4 === 3 && pixel === 0).length;
+            const totalPixels = canvas.width * canvas.height;
+
+            if (scratchedPixels > totalPixels * 0.5) { // Assume scratch is complete if more than 50% is scratched
+                if (!scratchState[cardId]) {
+                    scratchState[cardId] = true; // Mark the card as scratched
+                    if (code === 'WINNER!') {
+                      addBetToBalance(10000);
+                      setTimeout(() => {
+                          location.reload();
+                      }, 100);
+                        alert('You are a WINNER!');
+                    }
+                    checkAllScratched();
+                }
+            }
+        };
+
+        const generateCodes = () => {
+            const generateCode = () => {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                let code = '';
+                for (let i = 0; i < 8; i++) {
+                    code += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                // Randomly insert WINNER! message
+                if (Math.random() < 0.1) {  // 10% chance to be a winner
+                    code = 'WINNER!';
+                }
+                return code;
+            };
+
+            document.getElementById('code1').innerText = generateCode();
+            document.getElementById('code2').innerText = generateCode();
+            document.getElementById('code3').innerText = generateCode();
+        };
+
+        const checkAllScratched = () => {
+            if (Object.values(scratchState).every(state => state)) {
+                const codes = [
+                    document.getElementById('code1').innerText,
+                    document.getElementById('code2').innerText,
+                    document.getElementById('code3').innerText
+                ];
+
+                if (codes.every(code => code !== 'WINNER!')) {
+                    alert('No WINNER! codes. 1000 will be deducted from your balance.');
+                    deductBetFromBalance(1000);
+                    setTimeout(() => {
+                          location.reload();
+                      }, 100);
+                }
+            }
+        };
+
+        createScratchCard("scratch-card1", "#006d77", "code1", "card1");
+        createScratchCard("scratch-card2", "#83c5be", "code2", "card2");
+        createScratchCard("scratch-card3", "#8338ec", "code3", "card3");
 
     </script>
-  </body>
-  <script src="static/script.js"></script>
+</body>
+<script src="static/script.js"></script>
 {% endblock %}
