@@ -219,6 +219,14 @@ def dashboard():
     print(user_data)
     return render_template('dashboard/dashboard.html', user=user.to_dict())
 
+@app.route("/lottery")
+@login_required
+def lottery():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('dashboard/lottery.html', user=user.to_dict())
+
 @app.route("/coins")
 @login_required
 def coins():

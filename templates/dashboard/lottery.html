@@ -1,0 +1,150 @@
+
+{% extends "base-dashboard.html" %}
+
+{% block title %}- Lottery{% endblock %}
+
+{% block body %}
+<body class="body-lottery">
+<div class="container-lottery">
+    <h1>Lottery Game</h1>
+    <div class="number-inputs">
+        <input type="number" id="guess1" min="1" max="99" maxlength="2" placeholder="#1">
+        <input type="number" id="guess2" min="1" max="99" maxlength="2" placeholder="#2">
+        <input type="number" id="guess3" min="1" max="99" maxlength="2" placeholder="#3">
+        <input type="number" id="guess4" min="1" max="99" maxlength="2" placeholder="#4">
+        <input type="number" id="guess5" min="1" max="99" maxlength="2" placeholder="#5">
+        <input type="number" id="guess6" min="1" max="99" maxlength="2" placeholder="#6">
+    </div>
+    <button id="submitGuess" class="lottery-button">Submit Guess</button>
+    <div id="result">
+        <p>Matches: <span id="matches"></span></p>
+        <p>Prize: <span id="prize"></span></p>
+    </div>
+    <div class="cards-lottery">
+        <div class="card-lottery" id="card1"><img src="static/images/facedowncard.png" alt="Card 1"><span class="number"></span></div>
+        <div class="card-lottery" id="card2"><img src="static/images/facedowncard.png" alt="Card 2"><span class="number"></span></div>
+        <div class="card-lottery" id="card3"><img src="static/images/facedowncard.png" alt="Card 3"><span class="number"></span></div>
+        <div class="card-lottery" id="card4"><img src="static/images/facedowncard.png" alt="Card 4"><span class="number"></span></div>
+        <div class="card-lottery" id="card5"><img src="static/images/facedowncard.png" alt="Card 5"><span class="number"></span></div>
+        <div class="card-lottery" id="card6"><img src="static/images/facedowncard.png" alt="Card 6"><span class="number"></span></div>
+    </div>
+</div>
+</body>
+<script src="static/script.js"></script>
+<script>
+    document.getElementById('submitGuess').addEventListener('click', function() {
+    const userGuesses = [
+        parseInt(document.getElementById('guess1').value),
+        parseInt(document.getElementById('guess2').value),
+        parseInt(document.getElementById('guess3').value),
+        parseInt(document.getElementById('guess4').value),
+        parseInt(document.getElementById('guess5').value),
+        parseInt(document.getElementById('guess6').value)
+    ];
+
+    if (!validateInputs(userGuesses)) {
+        return;
+    }
+
+    const randomNumbers = generateRandomNumbers();
+
+    const matches = countMatches(userGuesses, randomNumbers);
+    document.getElementById('matches').textContent = matches;
+
+    const prize = calculatePrize(matches);
+    document.getElementById('prize').textContent = `$${prize}`;
+    addBetToBalance(prize);
+    revealCards(randomNumbers);
+
+    document.getElementById('submitGuess').disabled = true;
+
+    setTimeout(resetGame, 5000); 
+});
+
+function validateInputs(guesses) {
+    const uniqueGuesses = new Set(guesses);
+
+    if (guesses.length !== 6 || uniqueGuesses.size !== 6) {
+        alert("All guesses must be unique and exactly 6 numbers.");
+        return false;
+    }
+
+    for (let guess of guesses) {
+        if (isNaN(guess) || guess < 1 || guess > 99) {
+            alert("Each guess must be a number between 1 and 99.");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function generateRandomNumbers() {
+    const numbers = [];
+    while (numbers.length < 6) {
+        const num = Math.floor(Math.random() * 99) + 1;
+        if (!numbers.includes(num)) {
+            numbers.push(num);
+        }
+    }
+    return numbers;
+}
+
+function countMatches(guesses, randomNumbers) {
+    return guesses.filter(num => randomNumbers.includes(num)).length;
+}
+
+function calculatePrize(matches) {
+    switch (matches) {
+        case 1: return 10;
+        case 2: return 50;
+        case 3: return 150;
+        case 4: return 250;
+        case 5: return 500;
+        case 6: return 5000;
+        default: return 0;
+    }
+}
+
+document.querySelectorAll('input[type="number"]').forEach(input => {
+    input.addEventListener('input', function() {
+        if (this.value.length > 2) {
+            this.value = this.value.slice(0, 2);
+        }
+        if (this.value < 1) {
+            this.value = 1;
+        }
+        if (this.value > 99) {
+            this.value = 99;
+        }
+    });
+});
+
+function revealCards(numbers) {
+    for (let i = 0; i < numbers.length; i++) {
+        const card = document.getElementById(`card${i + 1}`);
+        card.querySelector('img').src = 'static/images/faceupcard.jpg'; 
+        card.querySelector('.number').textContent = numbers[i];
+    }
+}
+
+function resetGame() {
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.value = '';
+    });
+
+    for (let i = 1; i <= 6; i++) {
+        const card = document.getElementById(`card${i}`);
+        card.querySelector('img').src = 'static/images/facedowncard.png';
+        card.querySelector('.number').textContent = '';
+    }
+
+    document.getElementById('matches').textContent = '';
+    document.getElementById('prize').textContent = '';
+
+    document.getElementById('submitGuess').disabled = false;
+}
+
+</script>
+
+{% endblock %}
