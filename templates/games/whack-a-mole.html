@@ -96,10 +96,12 @@
     if (this == currMoleTile) {
         score += 10;
         document.getElementById("score").innerText = score.toString(); 
+        addBetToBalance(10);
     }
     else if (this == currPlantTile) {
         document.getElementById("score").innerText = "GAME OVER: " + score.toString(); 
         gameOver = true;
+        deductBetFromBalance(score + 50);
     }
     }
 </script>

@@ -329,7 +329,7 @@ def bingo():
     user_data = session['user']
     user = User.query.get(user_data['id'])
     print(user_data)
-    return render_template('games/bingi.html', user=user.to_dict())
+    return render_template('games/bingo.html', user=user.to_dict())
 
 @app.route("/game-whack-a-mole")
 @login_required

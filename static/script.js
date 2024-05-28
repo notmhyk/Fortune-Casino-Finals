@@ -667,6 +667,8 @@ function openPopUpBet(game) {
 
         //create blocks
         createBlocks();
+    } else if (game == 'bingo') {
+        startTimer();
     }
     document.getElementById("popUp-bet").style.display = "block";
     document.getElementById("mechanics").style.display = "block";
