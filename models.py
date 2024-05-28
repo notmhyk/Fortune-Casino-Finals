@@ -13,7 +13,8 @@ class User(db.Model):
     password = db.Column(db.String(100), nullable=False)
     balance = db.Column(db.Integer, nullable=False)
     image = db.Column(db.LargeBinary)
-    def __init__(self, first_name, last_name, age, birthday, email, username, password, balance, image):
+    vip = db.Column(db.String(10), nullable=False)
+    def __init__(self, first_name, last_name, age, birthday, email, username, password, balance, image, vip):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
@@ -23,6 +24,7 @@ class User(db.Model):
         self.password =  password
         self.balance = balance
         self.image = image
+        self.vip = vip
 
     def to_dict(self):
         return {
@@ -34,5 +36,6 @@ class User(db.Model):
             'email': self.email,
             'username': self.username,
             'balance': self.balance,
-            'image': self.image
+            'image': self.image,
+            'vip': self.vip
         }

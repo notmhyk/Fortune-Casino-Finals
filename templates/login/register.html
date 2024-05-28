@@ -1,38 +1,57 @@
 {% extends "base.html" %}
 
-{% block title %}Sign up {% endblock %}
-
+{% block title %}Sign up{% endblock %}
 
 {% block body %}
 <body>
-  <section>
+  
+
+<section>
     <div id="CreateAccContainer">
-      <h1>Create Account </h1>
-      <form id="createaccForm" action="#" method="post">
-        <input type="text" placeholder="First Name" name="firstName" required>
-        <input type="text" placeholder="Last Name" name="lastName" required>
-        <input type="number" placeholder="Age" name="age" required>
-        <input type="date" placeholder="Birthday" name="birthday" required>
-        <input type="email" placeholder="Email" name="email" required>
-        {% with messages = get_flashed_messages() %}
+        <h1>Create Account</h1>
+        <form id="createaccForm" action="#" method="post">
+          {% with messages = get_flashed_messages() %}
             {% if messages %}
-                    {% for message in messages %}
-                        <p style="color: red;">{{ message }}</p>
-                    {% endfor %}
+              <p style="color: red;">{{ messages[0] }}</p>
             {% endif %}
-        {% endwith %}
-        <div class="otp-create">
-        <input type="text" placeholder="Email Verification Code" name="otp" required>
-        <button type="button" onclick="sendOTP()">Send OTP</button>
-        </div>
-        <input type="text" placeholder="Username" name="username" required>
-        <input type="password" placeholder="Password" name="password" required>
-        <input type="password" placeholder="Confirm Password" name="confirmPassword" required>
-        <input type="checkbox" id="terms" required> I agree to the terms and conditions<br>
-        <button type="submit">Sign Up</button>
-      </form>
+          {% endwith %}
+            <input type="text" placeholder="First Name" name="firstName" required>
+            <input type="text" placeholder="Last Name" name="lastName" required>
+            <input type="number" placeholder="Age" name="age" required>
+            <input type="date" placeholder="Birthday" name="birthday" required>
+            <input type="email" placeholder="Email" name="email" id="email" required>
+            <div class="otp-create">
+                <input type="text" placeholder="Email Verification Code" name="otp" required>
+                <button type="button" id="sendOtpBtn">Send OTP</button>
+            </div>
+            <input type="text" placeholder="Username" name="username" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <input type="password" placeholder="Confirm Password" name="confirmPassword" required>
+            <input type="checkbox" id="terms" required> I agree to the terms and conditions<br>
+            <button type="submit">Sign Up</button>
+        </form>
     </div>
-  </section>
+</section>
+
+<script>
+document.getElementById('sendOtpBtn').addEventListener('click', function() {
+    var email = document.getElementById('email').value;
+    fetch('/send-otp', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            alert(data.message);
+        } else {
+            alert(data.error);
+        }
+    });
+});
+</script>
 </body>
 {% endblock %}
-

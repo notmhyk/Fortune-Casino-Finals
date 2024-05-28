@@ -3,6 +3,8 @@ from datetime import timedelta, datetime
 from functools import wraps 
 from models import db, User
 from db_handler import DBHandler
+import secrets
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -10,9 +12,58 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.permanent_session_lifetime = timedelta(hours=24)
 
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'stupx04@gmail.com'
+app.config['MAIL_PASSWORD'] = 'vqhgrfqhtvpzqhaj'
+
+mail = Mail(app)
 db.init_app(app)
 
 db_handler = DBHandler(app)
+
+def send_verification_code(email):
+    verification_code = secrets.token_hex(4)
+    session['verification_code'] = verification_code
+    msg = Message('Verification Code', sender=app.config['MAIL_USERNAME'], recipients=[email])
+    msg.body = f'Your verification code is: {verification_code}'
+    mail.send(msg)
+
+@app.route("/check-email", methods=['POST'])
+def check_email():
+    data = request.get_json()
+    email = data.get('email')
+    user = User.query.filter_by(email=email).first()
+    if user:
+        return jsonify({'exists': True}), 200
+    else:
+        return jsonify({'exists': False}), 200
+
+@app.route("/send-otp", methods=['POST'])
+def send_otp():
+    data = request.get_json()
+    email = data.get('email')
+    if email:
+        send_verification_code(email)
+        return jsonify({'message': 'OTP has been sent to your email.'}), 200
+    return jsonify({'error': 'Email is required.'}), 400
+
+@app.route("/reset-password", methods=['POST'])
+def reset_password():
+    data = request.get_json()
+    email = data.get('email')
+    new_password = data.get('newPassword')
+    otp = data.get('otp')
+
+    if otp != session.get('verification_code'):
+        return jsonify({'error': 'Invalid OTP.'}), 400
+
+    success = db_handler.reset_password_by_email(email, new_password)  
+    if success:
+        session.pop('verification_code', None)
+        return jsonify({'message': 'Password has been reset successfully.'}), 200
+    return jsonify({'message': 'Failed to reset password.'}), 200
 
 def login_required(f):
     @wraps(f)
@@ -109,6 +160,9 @@ def login():
             session.permanent = True
             session['user'] = user.to_dict()
             return redirect(url_for('dashboard'))
+        else:
+            flash('Invalid Username or password', 'error')  # Flashing error message
+            return redirect(url_for('login'))
     return render_template('login/login.html')
 
 @app.route("/register", methods = ["POST", "GET"])
@@ -119,12 +173,18 @@ def register():
         age = request.form['age']
         birthday = datetime.strptime(request.form['birthday'], '%Y-%m-%d').date()
         email = request.form['email']
+        otp = request.form['otp']
         username = request.form['username']
         password = request.form['password']
         confirm_password = request.form['confirmPassword']
 
-        if password != confirm_password:
+        if confirm_password != password:
             flash('Passwords do not match!', 'error')
+            return redirect(url_for('register'))
+
+
+        if otp != session.get('verification_code'):
+            flash('Otp does not match!', 'error')
             return redirect(url_for('register'))
 
         new_user = User(
@@ -136,7 +196,8 @@ def register():
             username=username,
             password=password,
             balance=0,  
-            image=None  
+            image=None,
+            vip="Non-VIP"
         )
         success = db_handler.insert_account(new_user)
         if success:
@@ -149,10 +210,6 @@ def register():
 @app.route("/forgot-password")
 def forgot_password():
     return render_template('login/forgot-password.html')
-
-@app.route("/reset-password")
-def reset_password():
-    return render_template('login/reset-password.html')
 
 @app.route("/dashboard")
 @login_required

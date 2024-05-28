@@ -8,6 +8,11 @@
   <section>
     <div id="SigninContainer">
       <h1>Log in </h1>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <p style="color: red;">{{ messages[0] }}</p>
+        {% endif %}
+      {% endwith %}
       <form id="signinForm" action="#" method="post">
         <input type="text" placeholder="Username" name="loginUsername" required>
         <input type="password" placeholder="Password" name="loginPassword" required>
