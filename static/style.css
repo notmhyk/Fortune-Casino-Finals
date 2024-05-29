@@ -949,6 +949,87 @@ nav ul li a {
 } 
   
 
+/* <------------- VIP GAMES --------------> */
+#vip-games {
+    display: none;
+    max-width: 100%;
+    padding: 1rem;
+    height: auto;
+    background-color: #fff;
+    flex-wrap: wrap;
+    
+}
+
+.first-vip-container,
+.second-vip-container {
+    position: relative;
+    width: 500px; 
+    height: 250px; 
+    margin-bottom: -1rem;
+}
+  
+.first-vip-container,
+.third-vip-container,
+.fifth-vip-container,
+.seventh-vip-container,
+.nineth-vip-container {
+    left: 1rem;
+}
+  
+ .second-vip-container,
+ .fourth-vip-container,
+ .sixth-vip-container,
+ .eighth-vip-container,
+ .tenth-vip-container {
+    left: 1.5rem;
+}
+  
+.third-vip-container,
+.fourth-vip-container,
+.fifth-vip-container,
+.sixth-vip-container,
+.seventh-vip-container,
+.eighth-vip-container,
+.nineth-vip-container,
+.tenth-vip-container {
+    position: relative;
+    width: 500px; 
+    height: 250px; 
+    border-radius: 20px;
+    /* border: solid; */
+}
+
+.first-vip-container img,
+.second-vip-container img,
+.third-vip-container img,
+.fourth-vip-container img,
+.fifth-vip-container img,
+.sixth-vip-container img,
+.seventh-vip-container img,
+.eighth-vip-container img,
+.nineth-vip-container img,
+.tenth-vip-container img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.first-vip-container img:hover,
+.second-vip-container img:hover,
+.third-vip-container img:hover,
+.fourth-vip-container img:hover,
+.fifth-vip-container img:hover,
+.sixth-vip-container img:hover,
+.seventh-vip-container img:hover,
+.eighth-vip-container img:hover,
+.nineth-vip-container img:hover,
+.tenth-vip-container img:hover {
+    transform: scale(1.01); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1); 
+}
+
 
 
 

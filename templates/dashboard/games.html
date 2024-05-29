@@ -2,6 +2,8 @@
 
 {% block title %}- Games{% endblock %}
 
+{% block paypal %}<script src="https://www.paypal.com/sdk/js?client-id=AaczSdgM6Pj831BtvWB6NOxlohFK8msrRaDOfCWecSXS-Bc3xt93vyvrGqQd7HTuchz7OxbUd9z88HsD"></script>{% endblock %}
+
 {% block body %}
 <section id="play-game-section">
     <div class="games-container">
@@ -53,8 +55,123 @@
             <img src="static/images/dont-let-them-hang-the-dealer-poster.png" alt="Don't Let Them Hang The Dealer Image" onclick="window.location.href='/game-hang-the-dealer'">
         </div>
         <div class="vip-games-container">
-            <img src="static/images/vip-10-games-poster.png" alt="VIP Image">
+            <img src="static/images/vip-10-games-poster.png" onclick="openPopupVIP('250','unlock10games')" alt="VIP Image">
+        </div>
+
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopupVIP()">&times;</span>
+                <img src="" alt="" id="pop-up-img">
+                <div id="amount"></div>
+                <div id="paypal"></div>
+            </div>
+        </div>
+
+    </div>
+    <!-- <h1>{{ user['vip']}}</h1> -->
+</section>
+
+<section id="vip-games">
+    <div class="other-game-top-container"><span class="text">VIP GAMES</span></div>
+    <div class="other-games-wrapper">
+        <div class="first-vip-container">
+            <img src="static/images/guess-poster.png" alt="Guess The Number Image" onclick="window.location.href='/'">
+        </div>
+        <div class="second-vip-container">
+            <img src="static/images/minesweeper-poster.png" alt="Minesweeper Image" onclick="window.location.href='/'">
+        </div>
+        <div class="third-vip-container">
+            <img src="static/images/memory-poster.png" alt="Memory Game Image" onclick="window.location.href='/'">
+        </div>
+        <div class="fourth-vip-container">
+            <img src="static/images/bingo-poster.png" alt="Bingo Image" onclick="window.location.href='/'">
+        </div>
+        <div class="fifth-vip-container">
+            <img src="static/images/whack-poster.png" alt="Whack A Mole Image" onclick="window.location.href='/'">
+        </div>
+        <div class="sixth-vip-container">
+            <img src="static/images/scratch-poster.png" alt="Scratch It Image" onclick="window.location.href='/'">
+        </div>
+        <div class="seventh-vip-container">
+            <img src="static/images/ping-poster.png" alt="Ping-pong Image" onclick="window.location.href='/'">
+        </div>
+        <div class="eighth-vip-container">
+            <img src="static/images/hunger-poster.png" alt="Hunger Maze Image" onclick="window.location.href='/'">
+        </div>
+        <div class="nineth-vip-container">
+            <img src="static/images/brick-poster.png" alt="Brick Breaker Image" onclick="window.location.href='/'">
+        </div>
+        <div class="tenth-vip-container">
+            <img src="static/images/rock-paper-poster.png" alt="Rock Paper Scissors Image" onclick="window.location.href='/'">
         </div>
     </div>
 </section>
+
+<h1 style="display: none;" id="get-vip">{{ user['vip'] }}</h1>
+
+<script>
+    const vip = document.getElementById("get-vip").textContent;
+    if (vip == "Non-VIP") {
+        document.getElementById("vip-games").style.display = "none";
+    } else {
+        document.getElementById("vip-games").style.display = "block";
+        document.querySelector(".vip-games-container").style.display = "none";
+    }
+
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: amount
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                alert("Transaction completed by " + details.payer.name.given_name);
+                // let currentBalance = parseInt(document.getElementById('balance').textContent, 10) - parseInt(amount, 10);
+                saveBalanceAndVipToServer("VIP");
+                closePopupVIP();
+            });
+        },
+    }).render("#paypal");
+
+function saveBalanceAndVipToServer(vipStatus) {
+        fetch('/update_balance_vip', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ new_vip: vipStatus })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                console.log('VIP status saved successfully!');
+                document.getElementById('get-vip').textContent = data.new_vip;
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            } else {
+                console.error('Failed to save VIP status:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    
+function openPopupVIP(amountValue, img) {
+    amount = amountValue;
+    document.getElementById("pop-up-img").src = "static/images/" + img + ".png";
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("amount").innerText ="Amount: $" + amountValue + ".00"
+}
+
+function closePopupVIP() {
+    document.getElementById("popup").style.display = "none";
+}
+</script>
 {% endblock %}

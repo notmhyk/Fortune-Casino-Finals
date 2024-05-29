@@ -95,7 +95,27 @@ def update_balance():
         return jsonify({"status": "success", "new_balance": new_balance})
     else:
         return jsonify({"status": "error", "message": "User not found"}), 404
+    
+@app.route("/update_balance_vip", methods=["POST"])
+@login_required
+def update_balance_vip():
+    user_data = session['user']
+    user_id = user_data['id']
+    new_vip = request.json.get('new_vip')
 
+    if new_vip is None:
+        return jsonify({"status": "error", "message": "Insufficient data provided"}), 400
+
+    user = User.query.get(user_id)
+    if user:
+        user.vip = new_vip
+        db.session.commit()
+        session['user']['vip'] = new_vip
+        session.modified = True
+        return jsonify({"status": "success", "new_vip": new_vip})
+    else:
+        return jsonify({"status": "error", "message": "User not found"}), 404
+    
 @app.route("/add_balance", methods=["POST"])
 @login_required
 def add_balance():

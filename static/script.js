@@ -501,46 +501,28 @@ let amount = null;
 // <-------------- PAYPAL POP-UP CLOSE-UP ------------->
 
 
-paypal.Buttons({
-    createOrder: function(data, actions) {
-        return actions.order.create({
-            purchase_units: [{
-                amount: {
-                    value: amount
-                }
-            }]
-        });
-    },
-    onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-            alert("Transaction completed by " + details.payer.name.given_name);
-            let currentBalance = newBalanceCoins + parseInt(amount, 10);
-            saveBalanceToServer(balanceElement.textContent = currentBalance);
-            closePopup();
-        });
-    },
-}).render("#paypal");
+// paypal.Buttons({
+//     createOrder: function(data, actions) {
+//         return actions.order.create({
+//             purchase_units: [{
+//                 amount: {
+//                     value: amount
+//                 }
+//             }]
+//         });
+//     },
+//     onApprove: function(data, actions) {
+//         return actions.order.capture().then(function(details) {
+//             alert("Transaction completed by " + details.payer.name.given_name);
+//             let currentBalance = newBalanceCoins + parseInt(amount, 10);
+//             saveBalanceToServer(balanceElement.textContent = currentBalance);
+//             closePopup();
+//         });
+//     },
+// }).render("#paypal");
 
 function saveBalanceToServer(balance) {
     console.log(balance);
-    // fetch('/update_balance', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({ new_balance: balance })
-    // })
-    // .then(response => {
-    //     if (response.ok) {
-    //         console.log('Balance saved successfully!');
-    //         // return response.json();
-    //     } else {
-    //         console.error('Failed to save balance');
-    //     }
-    // })
-    // .catch(error => {
-    //     console.error('Error:', error);
-    // });
     fetch('/update_balance', {
         method: 'POST',
         headers: {
@@ -553,9 +535,9 @@ function saveBalanceToServer(balance) {
         if (data.status === 'success') {
             console.log('Balance saved successfully!');
             document.getElementById('balance').textContent = data.new_balance;
-            // setTimeout(() => {
-            //     location.reload();
-            // }, 2000);
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         } else {
             console.error('Failed to save balance:', data.message);
         }
