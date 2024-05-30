@@ -37,13 +37,12 @@
                             <img src="static/images/chip.png" alt="Chip">
                             <h3>$ <span id="balance"> {{ user['balance'] }} </span></h3>
                         </div>
-                        <!-- <div class="notification-container">
-                            <img src="static/images/bell.png" alt="Bell">
-                            <h3> 100</h3>
-                        </div> -->
-                        <div class="profile-container" onclick="goTo('/logout')">
-                            <!-- <img src="static/images/profile.png" alt="Profile"> -->
+                        <div class="profile-container">
                             <h1><span>{{ user['first_name'] }}</span></h1>
+                            <div class="dropdown-content">
+                                <a href="#">View Profile</a>
+                                <a href="#" onclick="goTo('/logout')">Logout</a>
+                            </div>
                         </div>
                         
                     </div>

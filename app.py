@@ -181,7 +181,7 @@ def login():
             session['user'] = user.to_dict()
             return redirect(url_for('dashboard'))
         else:
-            flash('Invalid Username or password', 'error')  # Flashing error message
+            flash('Invalid Username or password', 'error')
             return redirect(url_for('login'))
     return render_template('login/login.html')
 
