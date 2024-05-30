@@ -1,0 +1,52 @@
+{% extends "base-dashboard.html" %}
+
+{% block title %}- Promotion{% endblock %}
+
+{% block body %}
+<body class="body-promotion">
+    <div class="promotion-section">
+        <img src="static/images/PROMOTION.webp" alt="Promotion Background" class="promotion-bg">
+        <div class="promotion-container">
+            <div class="promotion-slider">
+                <div class="promotion-card active">
+                    <img src="static/images/PROMOS-1.webp" alt="PROMOS 1">
+                </div>
+                <div class="promotion-card">
+                    <img src="static/images/PROMOS-2.png" alt="PROMOS 2">
+                </div>
+                <div class="promotion-card">
+                    <img src="static/images/PROMOS-3.webp" alt="PROMOS 3">
+                </div>
+            </div>
+            <button class="slider-btn prev" onclick="prevSlide()">&#10094;</button>
+            <button class="slider-btn next" onclick="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+
+<script>
+    let currentSlide = 0;
+        const slides = document.querySelectorAll('.promotion-card');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide > 0) ? currentSlide - 1 : totalSlides - 1;
+            showSlide(currentSlide);
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide < totalSlides - 1) ? currentSlide + 1 : 0;
+            showSlide(currentSlide);
+        }
+</script>
+{% endblock %}

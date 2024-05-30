@@ -239,6 +239,14 @@ def dashboard():
     print(user_data)
     return render_template('dashboard/dashboard.html', user=user.to_dict())
 
+@app.route("/promotion")
+@login_required
+def promotion():
+    user_data = session['user']
+    user = User.query.get(user_data['id'])
+    print(user_data)
+    return render_template('dashboard/promotion.html', user=user.to_dict())
+
 @app.route("/lottery")
 @login_required
 def lottery():
