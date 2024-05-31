@@ -159,10 +159,16 @@
         if (yourSumHigher > dealerSumHigher) {
             message = "You Lose!";
             deductBetFromBalance(amountBet);
+            setTimeout(() => {
+                    location.reload();
+                }, 2000);
         }
         else if (dealerSumHigher > yourSumHigher) {
             message = "You win!";
             addBetToBalance(amountBet);
+            setTimeout(() => {
+                    location.reload();
+                }, 2000);
         }
         else if (yourSumHigher == dealerSumHigher) {
             message = "Tie!";
@@ -187,10 +193,16 @@
         if (yourSumHigher > dealerSumHigher) {
             message = "You win!";
             addBetToBalance(amountBet);
+            setTimeout(() => {
+                    location.reload();
+                }, 2000);
         }
         else if (dealerSumHigher > yourSumHigher) {
             message = "You lose!";
             deductBetFromBalance(amountBet);
+            setTimeout(() => {
+                    location.reload();
+                }, 2000);
         }
         else if (yourSumHigher == dealerSumHigher) {
             message = "Tie!";

@@ -77,10 +77,16 @@ function lowerBeatTheDealer() {
     if (yourSumBeatTheDealer > dealerSumBeatTheDealer) {
         messageBeatTheDealer = "You Lose!";
         deductBetFromBalance(amountBet);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     else if (dealerSumBeatTheDealer > yourSumBeatTheDealer) {
         messageBeatTheDealer = "You win!";
         addBetToBalance(amountBet);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     
     else if (yourSumBeatTheDealer == dealerSumBeatTheDealer) {
@@ -215,10 +221,16 @@ function animateDiceRoll() {
         if (total == guessAddNumberRollEmDice) {
             result = "You Win!";
             addBetToBalance(amountBet);
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
         else {
             result = "You Lose!";
             deductBetFromBalance(amountBet);
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
         document.querySelector(".dice-1-dice-2-addnumber").textContent = result;
         }, 1000); 
@@ -268,8 +280,14 @@ function animateDiceRollColor() {
             }
             if (matchCount > 0) {
                 addBetToBalance(colorBets[i + 1] * matchCount);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             } else {
                 deductBetFromBalance(colorBets[i + 1]);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }
             betsToRemove.push(i, i + 1);
             i += 2;
@@ -320,8 +338,14 @@ function animateDiceRollSicBo() {
             }
             if (matchCount > 0) {
                 addBetToBalance(colorBets[i + 1] * matchCount);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             } else {
                 deductBetFromBalance(colorBets[i + 1]);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }
             betsToRemove.push(i, i + 1);
             i += 2;
@@ -432,10 +456,16 @@ function stay() {
     if (yourSum > 21) {
         message = "You Lose!";
         deductBetFromBalance(amountBet);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     else if (dealerSum > 21) {
         message = "You win!";
         addBetToBalance(amountBet);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     else if (yourSum == dealerSum) {
         message = "Tie!";
@@ -446,10 +476,16 @@ function stay() {
     else if (yourSum > dealerSum) {
         message = "You Win!";
         addBetToBalance(amountBet);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     else if (yourSum < dealerSum) {
         message = "You Lose!";
         deductBetFromBalance(amountBet);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
 
     document.getElementById("dealer-sum").innerText = dealerSum;

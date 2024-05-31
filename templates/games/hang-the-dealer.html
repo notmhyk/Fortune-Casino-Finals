@@ -9,7 +9,7 @@
             <img src="#" alt="gif">
             <h4>Game Over!</h4>
             <p>The correct word was: <b>rainbow</b></p>
-            <button class="play-again">Play Again</button>
+            <!-- <button class="play-again">Play Again</button> -->
         </div>
     </div>
     <div class="container-hang-dealer">
@@ -28,7 +28,7 @@
         <div class="popup-content-game">
             <span class="close-game" onclick="onClickExit()">&times;</span>
             <h1 id="mechanics">Mechanics <br> <br></h1>
-            <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
+            <p id="instruction">Every Question has an Answer.<br> Your play is to guess what is the word. If correct then bet will be added to balance, if not then deduct. <br> <br></p>
             <button id="play-the-game" onclick="openPopUpBet()">Okay!</button>
         </div>
     </div>
@@ -371,9 +371,15 @@
 
         if (isVictory) {
             addBetToBalance(amountBet);
+            setTimeout(() => {
+                    location.reload();
+                }, 2000);
         } 
         else {
             deductBetFromBalance(amountBet);
+            setTimeout(() => {
+                    location.reload();
+                }, 2000);
         }
     }
 
@@ -408,57 +414,57 @@
     getRandomWord();
     playAgainBtn.addEventListener("click", getRandomWord);
 
-    function addBetToBalance(amount) {
-        console.log(amount);
-        fetch('/add_balance', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ new_balance: amount })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                console.log('Balance saved successfully!');
-                document.getElementById('balance').textContent = data.new_balance;
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
-            } else {
-                console.error('Failed to save balance:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
+    // function addBetToBalance(amount) {
+    //     console.log(amount);
+    //     fetch('/add_balance', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ new_balance: amount })
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         if (data.status === 'success') {
+    //             console.log('Balance saved successfully!');
+    //             document.getElementById('balance').textContent = data.new_balance;
+    //             setTimeout(() => {
+    //                 location.reload();
+    //             }, 2000);
+    //         } else {
+    //             console.error('Failed to save balance:', data.message);
+    //         }
+    //     })
+    //     .catch(error => {
+    //         console.error('Error:', error);
+    //     });
+    // }
 
-    function deductBetFromBalance(amount) {
-        console.log(amount);
-        fetch('/deduct_points', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ new_balance: amount })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                console.log('Balance saved successfully!');
-                document.getElementById('balance').textContent = data.new_balance;
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
-            } else {
-                console.error('Failed to save balance:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
+    // function deductBetFromBalance(amount) {
+    //     console.log(amount);
+    //     fetch('/deduct_points', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ new_balance: amount })
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         if (data.status === 'success') {
+    //             console.log('Balance saved successfully!');
+    //             document.getElementById('balance').textContent = data.new_balance;
+    //             setTimeout(() => {
+    //                 location.reload();
+    //             }, 2000);
+    //         } else {
+    //             console.error('Failed to save balance:', data.message);
+    //         }
+    //     })
+    //     .catch(error => {
+    //         console.error('Error:', error);
+    //     });
+    // }
 </script>
 
 {% endblock %}

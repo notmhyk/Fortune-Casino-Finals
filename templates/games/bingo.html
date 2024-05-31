@@ -29,7 +29,7 @@
         <div class="popup-content-game">
             <span class="close-game" onclick="onClickExit()">&times;</span>
             <h1 id="mechanics">Mechanics <br> <br></h1>
-            <p id="instruction">The two players will be given 1 card each. <br> Your play is to guess whether your card will be higher or lower than the dealer <br> <br></p>
+            <p id="instruction">Game is very simple.<br> Your play is to finish the word B I N G O by keeping track for the picked random numbers. This game has a time limit of 1min & 30sec<br> <br></p>
             <button id="play-the-game" onclick="openPopUpBet('bingo')">Okay!</button>
         </div>
     </div>
@@ -162,8 +162,7 @@
             }
         });
     });
-    // Timer function
-    const timeLimit = 120000; // 1 minute in milliseconds
+    const timeLimit = 90000;
     let timer;
 
     function startTimer() {
@@ -173,12 +172,9 @@
             setTimeout(() => {
                 location.reload();
             },1000);
-            // Add your if statement here
         }, timeLimit);
     }
 
-    // Call the startTimer function when the page loads
-    // window.onload = startTimer;
 
     function matchWin() {
         const cell = document.querySelectorAll(".main-table-cell");

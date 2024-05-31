@@ -132,10 +132,16 @@
             if (headsOrTails == resultGuess) {
                 result.textContent = "Your guess is Correct!";
                 addBetToBalance(amountBet);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
                 }
             else {
                 result.textContent = "Your guess is Wrong!";
                 deductBetFromBalance(amountBet);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }
             }
 

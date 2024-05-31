@@ -527,6 +527,7 @@ def brickBreaker():
 
 @app.route("/admin-login", methods=["POST", "GET"])
 def admin_login():
+    session.pop('user_id', None)
     if request.method == "POST":
         username = request.form['usernameAdmin']
         password = request.form['passwordAdmin']
@@ -541,6 +542,7 @@ def admin_login():
 
 @app.route("/admin-dashboard")
 def admin_dashboard():
+    session.pop('user_id', None)
     if 'admin_id' not in session:
         return redirect(url_for('admin_login'))
     logs = db_handler.get_all_logs()
