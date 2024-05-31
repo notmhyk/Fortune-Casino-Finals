@@ -1,6 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 from flask import flash, redirect, url_for, render_template
-from models import User, db
+from models import User, Admin, Log, db
 from werkzeug.security import check_password_hash, generate_password_hash
 
 class DBHandler:
@@ -58,6 +58,38 @@ class DBHandler:
         hashed_password = generate_password_hash(new_password)
         if user:
             user.password = hashed_password  
+            self.db.session.commit()
+            return True
+        else:
+            flash('Email not found. Password update failed.', 'error')
+            return False
+        
+    def admin_login(self, username, password):
+        try:
+            existing_admin = Admin.query.filter_by(username=username).first()
+            if existing_admin:
+                return existing_admin
+            else:
+                flash('Incorrect username or password', 'error')
+                return None
+        except IntegrityError:
+            flash('An error occurred while logging in the admin.', 'error')
+            return None
+
+    def log_action(self, user_id, action):
+        new_log = Log(user_id=user_id, action=action)
+        with self.app.app_context():
+            self.db.session.add(new_log)
+            self.db.session.commit()
+
+    def get_all_logs(self):
+        return Log.query.order_by(Log.timestamp.desc()).all()
+
+    def reset_password_by_email(self, email, new_password):
+        user = User.query.filter_by(email=email).first()
+        hashed_password = generate_password_hash(new_password)
+        if user:
+            user.password = hashed_password
             self.db.session.commit()
             return True
         else:

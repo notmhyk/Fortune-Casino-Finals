@@ -63,18 +63,18 @@
 <!-- <script src="static/script.js"></script> -->
     <script>
         
-        let dealerSum = 0;
-        let yourSum = 0;
+        let dealerSumHigher = 0;
+        let yourSumHigher = 0;
 
-        let dealerAceCount = 0;
-        let yourAceCount = 0; 
+        let dealerAceCountHigher = 0;
+        let yourAceCountHigher = 0; 
 
-        let hidden;
-        let deck;
+        let hiddenHigher;
+        let deckHigher;
 
-        let canHit = true;
-        const balanceElement = document.getElementById("balance");
-        let amountBet = 0;
+        let canHitHigher = true;
+        const balanceElementHigher = document.getElementById("balance");
+        // let amountBet = 0;
         window.onload = function() {
             openPopUpGame();
         }
@@ -82,125 +82,125 @@
     function buildDeck() {
         let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
         let types = ["C", "D", "H", "S"];
-        deck = [];
+        deckHigher = [];
 
         for (let i = 0; i < types.length; i++) {
             for (let j = 0; j < values.length; j++) {
-                deck.push(values[j] + "-" + types[i]); 
+                deckHigher.push(values[j] + "-" + types[i]); 
             }
         }
-        console.log(deck);
+        console.log(deckHigher);
     }
 
     function shuffleDeck() {
-        for (let i = 0; i < deck.length; i++) {
-            let j = Math.floor(Math.random() * deck.length); 
-            let temp = deck[i];
-            deck[i] = deck[j];
-            deck[j] = temp;
+        for (let i = 0; i < deckHigher.length; i++) {
+            let j = Math.floor(Math.random() * deckHigher.length); 
+            let temp = deckHigher[i];
+            deckHigher[i] = deckHigher[j];
+            deckHigher[j] = temp;
         }
-        console.log(deck);
+        console.log(deckHigher);
     }
 
     function startGame() {
-        hidden = deck.pop();
-        dealerSum += getValue(hidden);
-        dealerAceCount += checkAce(hidden);
-        while (dealerSum < 1) { 
+        hiddenHigher = deckHigher.pop();
+        dealerSumHigher += getValue(hiddenHigher);
+        dealerAceCountHigher += checkAce(hiddenHigher);
+        while (dealerSumHigher < 1) { 
             let cardImg = document.createElement("img");
-            let card = deck.pop();
+            let card = deckHigher.pop();
             cardImg.src = "static/images/" + card + ".png";
-            dealerSum += getValue(card);
-            dealerAceCount += checkAce(card);
+            dealerSumHigher += getValue(card);
+            dealerAceCountHigher += checkAce(card);
             document.getElementById("dealer-cards").append(cardImg);
         }
-        console.log(dealerSum);
+        console.log(dealerSumHigher);
 
         for (let i = 0; i < 1; i++) {
             let cardImg = document.createElement("img");
-            let card = deck.pop();
+            let card = deckHigher.pop();
             cardImg.src = "static/images/" + card + ".png";
-            yourSum += getValue(card);
-            yourAceCount += checkAce(card);
+            yourSumHigher += getValue(card);
+            yourAceCountHigher += checkAce(card);
             document.getElementById("your-cards").append(cardImg);
         }
 
-        console.log(yourSum);
+        console.log(yourSumHigher);
         document.getElementById("higher").addEventListener("click", higher);
         document.getElementById("lower").addEventListener("click", lower);
 
     }
 
     function hit() {
-        if (!canHit) {
+        if (!canHitHigher) {
             return;
         }
 
         let cardImg = document.createElement("img");
-        let card = deck.pop();
+        let card = deckHigher.pop();
         cardImg.src = "static/images/" + card + ".png";
-        yourSum += getValue(card);
-        yourAceCount += checkAce(card);
+        yourSumHigher += getValue(card);
+        yourAceCountHigher += checkAce(card);
         document.getElementById("your-cards").append(cardImg);
 
-        if (reduceAce(yourSum, yourAceCount) > 21) { 
-            canHit = false;
+        if (reduceAce(yourSumHigher, yourAceCountHigher) > 21) { 
+            canHitHigher = false;
         }
 
     }
     function lower() {
-        dealerSum = reduceAce(dealerSum, dealerAceCount);
-        yourSum = reduceAce(yourSum, yourAceCount);
+        dealerSumHigher = reduceAce(dealerSumHigher, dealerAceCountHigher);
+        yourSumHigher = reduceAce(yourSumHigher, yourAceCountHigher);
 
-        canHit = false;
-        document.getElementById("hidden").src = "static/images/" + hidden + ".png";
+        canHitHigher = false;
+        document.getElementById("hidden").src = "static/images/" + hiddenHigher + ".png";
 
         let message = "";
-        if (yourSum > dealerSum) {
+        if (yourSumHigher > dealerSumHigher) {
             message = "You Lose!";
             deductBetFromBalance(amountBet);
         }
-        else if (dealerSum > yourSum) {
+        else if (dealerSumHigher > yourSumHigher) {
             message = "You win!";
             addBetToBalance(amountBet);
         }
-        else if (yourSum == dealerSum) {
+        else if (yourSumHigher == dealerSumHigher) {
             message = "Tie!";
             setTimeout(() => {
                 location.reload();
             }, 2000);
         }
 
-        document.getElementById("dealer-sum").innerText = dealerSum;
-        document.getElementById("your-sum").innerText = yourSum;
+        document.getElementById("dealer-sum").innerText = dealerSumHigher;
+        document.getElementById("your-sum").innerText = yourSumHigher;
         document.getElementById("results").innerText = message;
     }
 
     function higher() {
-        dealerSum = reduceAce(dealerSum, dealerAceCount);
-        yourSum = reduceAce(yourSum, yourAceCount);
+        dealerSumHigher = reduceAce(dealerSumHigher, dealerAceCountHigher);
+        yourSumHigher = reduceAce(yourSumHigher, yourAceCountHigher);
 
-        canHit = false;
-        document.getElementById("hidden").src = "static/images/" + hidden + ".png";
+        canHitHigher = false;
+        document.getElementById("hidden").src = "static/images/" + hiddenHigher + ".png";
 
         let message = "";
-        if (yourSum > dealerSum) {
+        if (yourSumHigher > dealerSumHigher) {
             message = "You win!";
             addBetToBalance(amountBet);
         }
-        else if (dealerSum > yourSum) {
+        else if (dealerSumHigher > yourSumHigher) {
             message = "You lose!";
             deductBetFromBalance(amountBet);
         }
-        else if (yourSum == dealerSum) {
+        else if (yourSumHigher == dealerSumHigher) {
             message = "Tie!";
             setTimeout(() => {
                 location.reload();
             }, 2000);
         }
 
-        document.getElementById("dealer-sum").innerText = dealerSum;
-        document.getElementById("your-sum").innerText = yourSum;
+        document.getElementById("dealer-sum").innerText = dealerSumHigher;
+        document.getElementById("your-sum").innerText = yourSumHigher;
         document.getElementById("results").innerText = message;
     }
 
@@ -278,7 +278,7 @@
     }
 
     function onClickBet(amount, imgsrc) {
-        let balance = parseInt(balanceElement.textContent, 10);
+        let balance = parseInt(balanceElementHigher.textContent, 10);
         if (balance >= amount) {
             amountBet = amount;
             document.querySelector(".bet-user").style.display = "block";
@@ -298,125 +298,6 @@
         }
         console.log(amount, balance);
     }
-    
-
-    function onClickExit() {
-        window.location.href='/games'
-    }
-
-    function checkBalanceIfNotNull(url) {
-        if (amountBet != 0) {
-            let result = confirm("Your bet will be deducted to your balance. Are you sure you want to leave this page?");
-            if (result) {
-                let newBalance = parseInt(document.getElementById('balance').textContent, 10) - amountBet;
-                document.getElementById('balance').textContent = newBalance
-                saveBalanceToServerThenExit(newBalance, url);
-            }
-        }
-        else {
-            window.location.href= url;
-        }
-    }
-
-    function goTo(url){
-        checkBalanceIfNotNull(url);
-    }
-
-    function saveBalanceToServerThenExit(balance, url) {
-        console.log(balance);
-        fetch('/update_balance', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ new_balance: balance })
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Balance saved successfully!');
-                window.location.href=url;
-            } else {
-                console.error('Failed to save balance');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-    function saveBalanceToServer(balance) {
-        console.log(balance);
-        fetch('/update_balance', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ new_balance: balance })
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Balance saved successfully!');
-            } else {
-                console.error('Failed to save balance');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-    function betAmountSet() {
-        amountBet = 0;
-    }
-    function addBetToBalance(amount) {
-        console.log(amount);
-        fetch('/add_balance', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ new_balance: amount })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                console.log('Balance saved successfully!');
-                document.getElementById('balance').textContent = data.new_balance;
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
-            } else {
-                console.error('Failed to save balance:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-
-    function deductBetFromBalance(amount) {
-        console.log(amount);
-        fetch('/deduct_points', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ new_balance: amount })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                console.log('Balance saved successfully!');
-                document.getElementById('balance').textContent = data.new_balance;
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
-            } else {
-                console.error('Failed to save balance:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
     </script>
     
 {% endblock %}

@@ -100,10 +100,12 @@ def update_balance():
     try:
         user.balance = float(new_balance)
         db.session.commit()
+        db_handler.log_action(user_id, f'Updated balance to {new_balance}')
         return jsonify({"status": "success", "new_balance": user.balance})
     except Exception as e:
         db.session.rollback()
         return jsonify({"status": "error", "message": str(e)}), 500
+
 
 @app.route("/update_balance_vip", methods=["POST"])
 @login_required
@@ -122,6 +124,7 @@ def update_balance_vip():
     try:
         user.vip = new_vip
         db.session.commit()
+        db_handler.log_action(user_id, f'User Avails to {new_vip}')
         session['user']['vip'] = new_vip
         session.modified = True
         return jsonify({"status": "success", "new_vip": user.vip})
@@ -147,6 +150,7 @@ def add_balance():
         points_to_add = int(points_to_add)
         user.balance += points_to_add
         db.session.commit()
+        db_handler.log_action(user_id, f'User wins {points_to_add}')
         return jsonify({"status": "success", "new_balance": user.balance})
     except Exception as e:
         db.session.rollback()
@@ -174,6 +178,7 @@ def deduct_points():
         
         user.balance = new_balance
         db.session.commit()
+        db_handler.log_action(user_id, f'User losses {points_to_deduct}')
         session['user']['balance'] = new_balance
         session.modified = True
         return jsonify({"status": "success", "new_balance": user.balance})
@@ -334,7 +339,7 @@ def upload():
 
 @app.route("/logout")
 def logout():
-    session.pop('user', None)
+    session.pop('user_id', None)
     return redirect(url_for('login'))
 
 @app.route("/game-roll-em-die")
@@ -519,7 +524,32 @@ def brickBreaker():
     if not user:
         return redirect(url_for('login'))
     return render_template('games/brick-breaker.html', user=user.to_dict())
-    
+
+@app.route("/admin-login", methods=["POST", "GET"])
+def admin_login():
+    if request.method == "POST":
+        username = request.form['usernameAdmin']
+        password = request.form['passwordAdmin']
+        admin = db_handler.admin_login(username, password)
+        if admin:
+            session['admin_id'] = admin.id
+            return redirect(url_for('admin_dashboard'))
+        else:
+            flash('Invalid username or password', 'error')
+            return redirect(url_for('admin_login'))
+    return render_template('login/admin-login.html')
+
+@app.route("/admin-dashboard")
+def admin_dashboard():
+    if 'admin_id' not in session:
+        return redirect(url_for('admin_login'))
+    logs = db_handler.get_all_logs()
+    return render_template('dashboard/admin-dashboard.html', logs=logs)
+
+@app.route("/admin-logout")
+def admin_logout():
+    session.pop('admin_id', None)
+    return redirect(url_for('admin_login'))
 
 if __name__ == '__main__':
     app.run(debug=True)
