@@ -1,0 +1,46 @@
+{% extends "base-dashboard.html" %}
+
+{% block title %}- Dashboard{% endblock %}
+
+{% block body %}
+<div class="view-container">
+    <div class="user-wrapper">
+        <h1>Profile</h1>
+        <div class="info-user-image">
+            {% if user['image'] %}
+                <img id="user-profile-img" src="data:image/jpeg;base64,{{ user['image'] | b64encode }}" alt="User Profile" width="200">
+            {% else %}
+                <img id="user-profile-img" src="" alt="User Profile" width="200">
+            {% endif %}
+        </div>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" id="image-input">
+            <button type="submit">Upload</button>
+        </form>
+        
+        <div class="info-user"><span>{{ user['first_name'] }} {{ user['last_name'] }}</span></div>
+        <div class="info-user"><span>{{ user['age'] }}</span></div>
+        <div class="info-user"><span>{{ user['birthday'] }}</span></div>
+        <div class="info-user"><span>{{ user['email'] }}</span></div>
+        <div class="info-user"><span>{{ user['vip'] }}</span></div>
+        <div class="info-user"><span>$ {{ user['balance'] }}</span></div>
+    </div>
+</div>
+<script>
+    document.getElementById('image-input').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const imgElement = document.getElementById('user-profile-img');
+            imgElement.src = e.target.result;
+            imgElement.width = 200;
+        };
+        
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+{% endblock %}

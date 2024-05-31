@@ -870,3 +870,12 @@ function popUpColorWithOutAllIn (){
 function closePopUpColorWithOutAllIn (){
     document.getElementById("popUp-dice-without-all-in").style.display = "none";
 }
+
+function goToGames(vip, url){
+    if (vip == 'Non-VIP') {
+        alert("You are not a VIP user. Please upgrade to VIP to play this game!");
+        return;
+    } else {
+        window.location.href=url;
+    }
+}
