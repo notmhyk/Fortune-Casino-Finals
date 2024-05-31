@@ -188,6 +188,7 @@ def deduct_points():
 
 @app.route('/')
 def index():
+    session.pop('user_id', None)
     return render_template('index.html')
 
 @app.route("/sign-in", methods=["POST", "GET"])

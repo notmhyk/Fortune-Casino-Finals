@@ -281,12 +281,18 @@ flex: 1;
 
 
 /* <------------------------- NAVBAR-DASHBOARD ---------------------------> */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
 .navbar {
     display: flex;
     padding: 3px;
     align-items: center;
     background-color: #15181b;
     font-size: 12px;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
   
@@ -295,17 +301,17 @@ nav {
     position: relative;
     text-align: left;
     margin-top: 0.5rem;
-    flex-wrap: wrap;
 }
   
 nav ul {
-    display: inline-block;
+    display: flex;
     list-style-type: none;
-    margin-left: -3rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
   
 nav ul li {
-    display: inline-block;
     margin-right: 40px;
     margin-left: 1rem;
     cursor: pointer;
@@ -317,107 +323,64 @@ nav ul li a {
 }
   
 .logo {
-    /* padding: 5px 0 0 100px; */
-    position: relative;
     cursor: pointer;
-    left: 1rem;
     text-align: center;
 }
   
 .logo img {
     width: 25%;
-    position: relative;
 }
   
 .user-container {
-    position: absolute;
-    padding: 0.5rem;
-    display: inline-flex;
-    bottom: -1.2rem;
-    right: 0%;
+    position: relative;;
+    display: flex;
+    align-items: center;
+    left: 14rem;
 }
   
 .coins-container {
-    position: relative;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     background-color: #fff;
-    padding: 0.1rem 0 0 0.5rem;
+    padding: 0.1rem 0.2rem;
     border-radius: 25px;
-    min-width: 9rem;
-    max-width: calc(100% - 4rem);
-    min-height: 2.8rem;
-    max-height: calc(100% - 1rem);
     cursor: pointer;
-}
-  
-/* .notification-container {
-    position: relative;
-    display: inline-block;
-    background-color: #fff;
-    padding: 0.5rem 0 0 0.5rem;
-    border-radius: 30px;
-    width: 3rem;
-    height: 2.8rem;
-    cursor: pointer;
-} */
-  
-.profile-container {
-    position: relative;
-    display: inline-block;
-    /* background-color: #fff; */
-    padding: 0.8rem 1rem;
-    /* border-radius: 30px; */
-    width: 15rem;
-    height: 2.8rem;
-    cursor: pointer;
-    /* border: solid; */
-}
-  
-.coins-container,
-.profile-container {
     margin-right: 1rem;
+    /* border: solid; */
+    width: 10rem;
 }
   
-/* .notification-container img {
-    margin: -2px 0 0 0;
-    width: 80%;
-} */
+.profile-container {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+}
   
 .profile-container h1 {
-    /* margin: -2px 0 0 0;
-    width: 80%; */
     color: #fff;
     text-align: center;
 }
   
 .coins-container img {
-    padding: 2px;
     width: 20%;
+    margin-right: 10px;
 }
   
 .coins-container h3 {
-    text-align: center;
-    margin: -2rem 3rem;
+    margin: 0;
 }
   
-/* .notification-container h3 {
-    color: red;
-    font-weight: bold;
-    font-size: large;
-    text-align: center;
-    margin: -2.5rem 0 0 1rem; 
-} */
-/* .menu-img {
-    margin-right: 2rem;
-} */
-  /* Dropdown menu styles */
+/* Dropdown menu styles */
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
+    right: 0;
+    top: 100%;
 }
 
 .dropdown-content a {
@@ -434,6 +397,38 @@ nav ul li a {
 .profile-container:hover .dropdown-content {
     display: block;
 }
+
+/* Menu icon styles */
+.menu-icon {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    right: 0;
+    top: -1rem;
+}
+
+@media screen and (max-width: 1268px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    nav ul li {
+        text-align: center;
+        margin: 10px 0;
+    }
+    
+    .menu-icon {
+        display: block;
+    }
+    .user-container {
+        left: 0;
+    }
+}
+
 
 /* <-------------------------- DASHBOARD-MENU ------------------> */
 .dashboard-section {
@@ -469,17 +464,17 @@ nav ul li a {
 }
 
 
-.menu-item {
+.menu-item-dashboard {
     margin: 0.5rem 0;
 }
 
-.menu-icon {
+.menu-icon-dashboard{
     width: 40px;
     height: 40px; 
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.menu-icon:hover {
+.menu-icon-dashboard:hover {
     transform: scale(1.1);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
