@@ -319,12 +319,12 @@ def resize_image(image, base_width):
 @login_required
 def upload():
     if 'image' not in request.files:
-        flash('No file part', 'error')
+        # flash('No file part', 'error')
         return redirect(url_for('view_profile'))
     
     file = request.files['image']
     if file.filename == '':
-        flash('No selected file', 'error')
+        # flash('No selected file', 'error')
         return redirect(url_for('view_profile'))
     
     if file:
@@ -335,7 +335,7 @@ def upload():
         user.image = resized_image
         db.session.commit()
         
-        flash('Image successfully uploaded', 'success')
+        # flash('Image successfully uploaded', 'success')
         return redirect(url_for('view_profile'))
 
 @app.route("/logout")
@@ -537,7 +537,7 @@ def admin_login():
             session['admin_id'] = admin.id
             return redirect(url_for('admin_dashboard'))
         else:
-            flash('Invalid username or password', 'error')
+            # flash('Invalid username or password', 'error')
             return redirect(url_for('admin_login'))
     return render_template('login/admin-login.html')
 

@@ -121,10 +121,16 @@ function higherBeatTheDealer() {
     if (yourSumBeatTheDealer > dealerSumBeatTheDealer) {
         messageBeatTheDealer = "You win!";
         addBetToBalance(amountBet);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     else if (dealerSumBeatTheDealer > yourSumBeatTheDealer) {
         messageBeatTheDealer = "You lose!";
         deductBetFromBalance(amountBet);
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     
     else if (yourSumBeatTheDealer == dealerSumBeatTheDealer) {
